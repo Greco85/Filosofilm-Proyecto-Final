@@ -1,0 +1,72 @@
+
+/* Esto es solo para delimitar un espacio de la navbar que pondremos despues */
+.pendiente1{
+
+    background: red;
+    width: 100%;
+    height: 60px;
+}
+
+/* Fondo provisional, igual y puede quedar mejor un bg image segun vayamos viendo la tematica general de la pagina */
+.fondo{
+
+    background: wheat;
+    width: 100%;
+    height: 800px;
+}
+
+/* Tuve que poner ids porque si ponia una clase no jala no c pq*/
+
+#Greco{
+    margin: 30px 10px;
+    background: cyan;
+    padding-top: 15px;
+    border-radius: 15px;
+}
+
+#Carlos{
+    margin: 30px 10px;
+    background: cyan;
+    padding-top: 15px;
+    border-radius: 15px;
+}
+
+#Karol{
+    margin: 30px 10px;
+    background: cyan;
+    padding-top: 15px;
+    border-radius: 15px;
+}
+
+
+
+.fotos{
+    width: 80%;
+    height: auto;
+    margin: 30px 0 30px 0;
+    border-radius: 15px;
+}
+
+h1{
+    text-align: center;
+}
+
+p{
+    text-align: justify;
+    margin: 25px;
+}
+
+/*Este controla que las imagenes tengan el mismo espacio dentro de las 3 columnas, para que el texto no se vea disparejo*/
+
+.ZonaF{
+    height: 350px;
+}
+
+/*Este va en el acordion, para que tenga algo de espacio y no se vea muy sofocado dentro del div */
+#Nose{
+    padding: 20px 0 20px 0;
+}
+
+body{
+    background-color: black;
+}
