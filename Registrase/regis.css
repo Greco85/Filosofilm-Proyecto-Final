@@ -1,0 +1,13 @@
+body{
+    background-color: wheat;
+    margin-left: 100px;
+}
+
+body h1{
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+.button{
+    text-align: center;
+}
