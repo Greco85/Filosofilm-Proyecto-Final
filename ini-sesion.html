@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/ini-sesion.css">
+    
+    <!-- Iconos de Login -->
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+    <style>
+
+        body{
+            background:#84f368;
+            background: linear-gradient(to right, #76ca61, #5c944e );
+        }
+        .bg{
+            background-image: url(img/B.jpg);
+            background-position: center center ;
+        }
+    </style>
+</head>
+<body>
+
+
+<!-- Inicio de formulario de ini-sesion -->
+
+    <!-- Primera capa(medidas de los break points) -->
+
+    <div class="container w-75 bg-primary mt-5 rounded shadow">
+        <div class="row align-items-stretch">
+            <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded">    
+            </div>
+   
+    <!-- Segunda capa(imagen de izquierda, login) -->
+
+            <div class="col bg-white p-5 rounded-end">
+                <div class="text-end">
+                    <img src="img/A.jpg">
+                </div>
+
+                <h2 class="fw-bold text-center py-5">Bienvenido</h2>
+
+    <!-- Login -->
+
+                <form action="#">
+        <!-- Base de nuestros inputs(correo) -->
+                    <div class="mb-4">
+                        <label for="email"  class="form-label"><i class='bx bx-envelope' ></i> Correo electronico</label>
+                        <input type="email"  class="form-control" name="email" placeholder="e.g email@addres.com">
+                    </div>
+        <!-- Base de nuestros inputs(Contraseña) -->
+                    <div class="mb-4">
+                        <label for="password" class="form-label"><i class='bx bx-lock-alt' ></i> Contraseña</label>
+                        <input type="password" class="form-control" name="password" placeholder="*******">
+                    </div>
+        <!-- Base de nuestros inputs(checkbox) -->
+                    <div class="mb-4 form-check">
+                        <input type="checkbox" name="connected" class="form-check-input">
+                        <label for="connected" class="form-check-label">Mantenerte conectado</label>
+                    </div>
+                <!-- Boton(Iniciar sesión)  -->
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                    </div>
+
+                    <div class="my-3">
+                        <span>¿No tienes cuenta?<a href="#">Registrate</a></span>
+                        <br>
+                        <span><a href="#">Recuperar contraseña</a></span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="js/ini-sesion.js"></script>
+</body>
+</html>
