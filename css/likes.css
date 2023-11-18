@@ -8,6 +8,7 @@
     display: inline-block;
 }
 
+
 .div1{
     display: inline-flex;
     width: 100%;
@@ -92,7 +93,7 @@ body{
 */
 
 .BotonLike {
-    background-color: #007bff;
+    background-color: #ff0000;
     color: #fff;
     border: none;
     padding: 10px 15px;
@@ -125,12 +126,26 @@ body{
   }
 
   @media (max-width: 575px) {
-    .ReseñaImagen {
-        text-align: right;
-        margin-left:0;
-    }
     .div2 a{
         font-size: 20px;
-     }
+    }
+
 }
 
+.ImagenReseña img {
+    width: 150px; 
+    height: auto; 
+    margin-right: 10px;
+}
+
+@media (min-width: 575px) and (max-width: 768px)  {
+    .containerReseña{
+        margin-right: 450px;
+
+    }
+
+    .ContornoReseña{
+        width: 430px;
+    }
+    
+}
