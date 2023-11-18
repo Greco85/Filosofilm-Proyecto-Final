@@ -1,0 +1,98 @@
+.boton-con-fondo {
+    background-image: url('../img/conf.png'); 
+    background-size: cover; 
+    width: 80px;
+    height: 80px; 
+    background-color: #333;
+    border: none;
+    display: inline-block;
+}
+
+.div1{
+    display: inline-flex;
+    width: 100%;
+    background-color: #333;
+    color:aliceblue;
+}
+
+.div2 a{
+    font-size: 25px;
+}
+
+.div2{
+    margin-bottom: 20px;
+}
+
+h5{
+    font-weight: bold;
+}
+.div1 h3{
+    margin:15px 10px 15px 10px;
+}
+
+.foto{
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+}
+
+body{
+    background-color: black;
+    margin: 0;
+    font-family: TiemposTextWeb-Regular,Georgia,serif;
+}
+
+.imgpelicula{
+    height: 500px;
+    object-fit: cover;
+}
+
+.card-body{
+    height: 100px;
+    object-fit: cover;
+}
+
+h3{
+    font-size: 2em;
+}
+
+#carouselExampleIndicators1, #carouselExampleIndicators2, #carouselExampleIndicators3{
+    height: 670px;  
+}
+
+.carousel-control-prev {
+    
+    border: 1px solid ;
+    border-image: linear-gradient(45deg, red, lime, blue) 1;
+    margin-left: -60px;
+    position: absolute;
+    width: 4em;
+    top: 50%; 
+    transform: translateY(-50%);
+}
+.carousel-control-next {
+    margin-right: -60px;
+    border: 1px solid ;
+    border-image: linear-gradient(45deg, red, lime, blue) 1;
+    position: absolute;
+    width: 4em;
+    top: 50%; 
+    transform: translateY(-50%);
+}
+.carousel-indicators {
+    margin-top: 75px;
+  }
+
+  @media (max-width: 991px) {
+    #carouselExampleIndicators1, #carouselExampleIndicators2, #carouselExampleIndicators3 {
+        height: 1320px; 
+    }
+}
+
+@media (max-width: 575px) {
+    #carouselExampleIndicators1, #carouselExampleIndicators2, #carouselExampleIndicators3 {
+        height: 2600px; 
+    }
+}
+
+

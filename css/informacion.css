@@ -1,0 +1,101 @@
+.boton-con-fondo {
+    background-image: url('../img/conf.png'); 
+    background-size: cover; 
+    width: 80px;
+    height: 80px; 
+    background-color: #333;
+    border: none;
+    display: inline-block;
+}
+
+.div1{
+    display: inline-flex;
+    width: 100%;
+    background-color: #333;
+    color:aliceblue;
+}
+
+.div2 a{
+    font-size: 25px;
+}
+
+.div2{
+    margin-bottom: 20px;
+}
+
+.div1 h3{
+    margin:15px 10px 15px 10px;
+}
+
+.div2 a{
+    font-size: 25px;
+}
+
+.div2{
+    margin-bottom: 20px;
+}
+
+.div1 h3{
+    margin:15px 10px 15px 10px;
+}
+
+.foto{
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+}
+
+body{
+    background-color: black;
+    margin: 0;
+    font-family: TiemposTextWeb-Regular,Georgia,serif;
+}
+
+@media (max-width: 575px) {
+    .div2 a{
+       font-size: 20px;
+    }
+}
+
+#r{
+    background-color: black;
+    border-radius: 5px;
+    width: 100px;
+    color: aliceblue;
+    font-size: 25px;
+    margin-left: 5%;
+    text-align: center;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 60px 60px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color:#4e4d4d;
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.gen{
+    display: inline-block;
+}

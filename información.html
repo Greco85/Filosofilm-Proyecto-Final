@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/informacion.css">
+    <title>Información</title>
+</head>
+<body>
+    <div class="div1">
+        <button class="boton-con-fondo"></button>
+        <h3>Ajustes</h3>
+        <img class="foto" src="img/foto.png"/>
+        <h3>@usuario</h3>
+    </div>
+    <div class="div2">
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+              <a class="nav-link" href="actividad.html">Actividad</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="reseñas.html">Reseñas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="likes.html">Likes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="información.html">Información</a>
+            </li>
+          </ul>
+    </div>
+
+
+
+    <form id="configForm">
+        <div class="mt-3">
+            <a href="#" id="mostrarInformacion">Información</a>
+          </div>
+ 
+            <label for="nombreVisualizacion">Nombre de Visualización:</label>
+            <input type="text" id="nombreVisualizacion" name="nombreVisualizacion" placeholder="" required>
+        
+            <label for="fechacreacion">Fecha de creación:</label>
+            <input type="date" id="fechacreacion" name="fechacreacion" placeholder="" required>
+
+            <label for="campoTexto">Descripción (máx. 200 caracteres)</label>
+            <input type="text" id="campoTexto" name="campoTexto" maxlength="200" placeholder="Introduzca una descripción.." required >
+            <br/><br/>
+
+            <p>Personal</p>
+            <label>Fecha de nacimiento:<input type="date" name="nacimiento"></label>
+
+            <p>Genero:</p>
+            <label class="gen">
+                <input type="radio" name="gender" value="male"> Hombre
+              </label>
+          
+              <label class="gen">
+                <input type="radio" name="gender" value="female"> Mujer
+              </label>
+        
+         <br/><br/>
+
+        <button type="button">Guardar Configuración</button>
+      </form>
+
+</div>
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="js/informacion.js"></script>
+</body>
+</html>
