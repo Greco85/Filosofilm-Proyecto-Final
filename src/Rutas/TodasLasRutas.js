@@ -6,10 +6,10 @@ import {getActor , createNewActor, getActorbyid, deleteActor, UpdateActorbyID,
         getAviso, createNewAviso, getAvisobyid, deleteAviso, UpdateAvisobyID,
         getError, createNewError, getErrorbyid, deleteError, UpdateErrorbyID,
         getPelicula, createNewPelicula, getPeliculabyid, deletePelicula, UpdatePeliculabyID
-,  getUsuarioByCorreo, getUsuarioByTel, getUsuarioByNickname, getUsuarioByContraseña, LoginUsuario} from '../Controladores/TodosLosControladores'
+,  getUsuarioByCorreo, getUsuarioByTel, getUsuarioByNickname, getUsuarioByContraseña, LoginUsuario} from '../Controladores/TodosLosControladores.js'
 
 const router = Router()
-
+ 
         
 //Controladores Usuario
 
@@ -37,6 +37,7 @@ router.post('/Actor', createNewActor);
 router.get('/Actor/:ID', getActorbyid );
 router.delete('/Actor/:ID', deleteActor);
 router.put('/Actor/:ID', UpdateActorbyID);
+
 
 //Controladores Director
 router.get('/Director', getDirectors);

@@ -1,10 +1,16 @@
 //Para configurar la aplicacion de express
-
+import jsonwebtoken from "jsonwebtoken";
 import express from 'express'; // Importa el framework Express
 import config from './config'; // Importa el archivo de config para obtener las variables de entorno
 import Rutas from './Rutas/TodasLasRutas.js'; // Importa todas las rutas de la aplicación CHECA
 import {Metodos as Metodoss} from './Middlewares/Autorizaciones.js';
+import cookieParser from 'cookie-parser';
+
+const secret = process.env.JWT_SECRET
+
+
 const app = express(); // Inicializa una instancia de Express
+app.use(cookieParser());
 
 // Middlewares para el análisis de solicitudes con datos JSON y codificación de URL
 app.use(express.json());
@@ -14,13 +20,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(Rutas); 
 
 //RUTAS PARA TODAS LAS PAGINAS
-app.get("/",Metodoss.SoloPublico, (req, res) => res.sendFile(__dirname + "/Paginas/index.html"));
-app.get("/registrarse", (req, res) => res.sendFile(__dirname + "/Paginas/registrarse.html"));
-app.get("/Inicio", (req, res) => res.sendFile(__dirname + "/Paginas/InicioDelUsuario.html"));
+app.get("/",Metodoss.redireccionInicio,(req, res) => res.sendFile(__dirname + "/Paginas/index.html"));
+app.get("/registrarse",  (req, res) => res.sendFile(__dirname + "/Paginas/registrarse.html"));
 
-/*
+app.get("/Inicio", Metodoss.SoloLoggeado, (req, res) => res.sendFile(__dirname + "/Paginas/InicioDelUsuario.html"));
+
+
 app.get("/registrarse", (req, res) => res.sendFile(__dirname + "/Paginas/registrarse.html")); //ADMIN
-*/
+
  
 
 

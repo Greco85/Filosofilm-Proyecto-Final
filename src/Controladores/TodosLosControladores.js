@@ -1,6 +1,6 @@
 import { getConnection, sql, queries } from "../BasedeDatos/"
-import jsonwebtoken from "jsonwebtoken";
-import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
+import dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -228,31 +228,76 @@ export const getUsuarioByCorreo = async (req, res) => {
 
 };
 
+
+
+
+
+
+
+
 export const LoginUsuario = async (req, res) => {
     const { Correo_Electronico } = req.params;
-    const { Contraseña } = req.body; // Obtén la contraseña desde la solicitud POST
+    const { Contraseña } = req.body;
 
     try {
         const pool = await getConnection();
-        const result = await pool
-            .request()
-            .input('Correo_Electronico', Correo_Electronico)
-            .input('Contraseña', Contraseña)
-            .query(queries.Login);
+        const request = pool.request();
 
-        if (result.recordset.length > 0) {
-            res.status(200).json(result.recordset);
-            const token = jsonwebtoken.sign({user: UsuarioaRevisar.user},
-                process.env.JWT_SECRET,
-                {expiresIn:process.env.JWT_EXPIRATION}) //TERMINAR MAÑANA
+        const result = await request
+            .input('Correo_Electronico', sql.VarChar, Correo_Electronico)
+            .input('Contraseña', sql.VarChar, Contraseña)
+            .query('SELECT * FROM Usuario WHERE Correo_Electronico = @Correo_Electronico AND Contraseña = @Contraseña');
+
+        if (result.recordset.length > 0) { //Si hay algo entonces
+            const Datos = result.recordset[0];
+            const Nickname = Datos.Nickname; //Agarra el nickname del usuario
+
+
+            // Aquí, si las credenciales son correctas, puedes devolver un token como respuesta
+            const payload = {
+                ID_Usuario: Datos.ID_Usuario, // Suponiendo que tengas un ID de usuario
+                ID_Rol: Datos.ID_Rol, // Si tienes información de si es admin
+                // ...otros datos que desees incluir
+            };
+
+        
+            const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRATION});
+            
+            const cookieOption = {
+                expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
+                path: "/"
+            }
+
+            res.cookie("jwt", token, cookieOption);
+            res.send({status: "ok", message: "Usuario Loggeado"})
+            console.log(token);
+
         } else {
-            res.status(401).json({ message: 'Algo incorrecto' }); // Envía un mensaje de error
+            res.status(401).json({ message: 'Datos incorrectos' });
         }
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Error en la verificación del inicio de sesión' }); // Manejo de errores
+        res.status(500).json({ message: 'Error en la verificación del inicio de sesión' });
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//FIN DE LA FUNCION
+
+
 
 export const getUsuarioByTel = async (req, res) => {
     const {Telefono} = req.params;
