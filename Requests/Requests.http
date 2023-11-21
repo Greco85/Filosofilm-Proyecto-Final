@@ -1,0 +1,290 @@
+@Actor = http://localhost:3000/Actor
+@Director = http://localhost:3000/Director
+@Usuario = http://localhost:3000/Usuario
+@Resena = http://localhost:3000/Resena
+@Aviso = http://localhost:3000/Aviso
+@Error = http://localhost:3000/Error
+@Pelicula = http://localhost:3000/Pelicula
+
+
+
+//TODO LO DE CRUD ACTOR
+GET {{Actor}}
+###
+POST {{Actor}}
+Content-Type: application/json 
+
+{
+    "Nombre": "Diana Valeria Ovalle Valdes",
+    "Fecha_Nacimiento": "2005-02-13",
+    "Pais_Nacimiento": 1,
+    "Biografia": "Soy Diana",
+    "Foto_Actor": "Diana.jpg"
+}
+
+###
+GET {{Actor}}/20
+
+###
+
+DELETE {{Actor}}/18
+
+###
+
+PUT {{Actor}}/8
+Content-Type: application/json 
+
+{
+    "Nombre": "Diana Valeria AJAJJAJAA Valdes",
+    "Fecha_Nacimiento": "2005-02-13",
+    "Pais_Nacimiento": 1,
+    "Biografia": "Soy Diana",
+    "Foto_Actor": "Diana.jpg"
+}
+
+//FIN DEL CRUD ACTOR
+
+//TODO LO DE CRUD ACTOR
+
+###
+GET {{Director}}
+###
+POST {{Director}}
+Content-Type: application/json 
+
+{
+    "Nombre": "Diana Valeria Ovalle Valdes",
+    "Fecha_Nacimiento": "2005-02-13",
+    "Pais_Nacimiento": 1,
+    "Biografia": "Soy Diana",
+    "Foto_Director": "Diana.jpg"
+}
+
+###
+GET {{Director}}/3
+
+###
+
+DELETE {{Director}}/2
+
+###
+
+PUT {{Director}}/3
+Content-Type: application/json 
+
+{
+    "Nombre": "Diana Valeria AJAJJAJAA Valdes",
+    "Fecha_Nacimiento": "2005-02-13",
+    "Pais_Nacimiento": 1,
+    "Biografia": "Soy Diana",
+    "Foto_Director": "Diana.jpg"
+}
+
+
+//FIN DEL CRUD Usuario
+
+###
+GET {{Usuario}}
+###
+POST {{Usuario}}
+Content-Type: application/json 
+
+{
+    "Nickname": "DianaValeria",
+    "ID_Rol": "1",
+    "Correo_Electronico": "grecoj.0110@gmail.com",
+    "Contraseña": "12345",
+    "Nombre": "Diana Valeria",
+    "Apellido": "Ovalle Valdes",
+    "Foto_Perfil": "A",
+    "Fecha_Registro": "2005-02-13",
+    "Fecha_Nacimiento": "2005-02-13",
+    "Sexo": "F",
+    "Telefono": "8113164477",
+    "Descripcion": "Soy Diana"
+}
+
+###
+GET {{Usuario}}/10
+
+###
+
+DELETE {{Usuario}}/4
+
+###
+
+PUT {{Usuario}}/1
+Content-Type: application/json 
+
+{
+    "Nickname": "grecooooooo",
+    "ID_Rol": "1",
+    "Correo_Electronico": "grecoj.0110@gmail.com",
+    "Contraseña": "12345",
+    "Nombre": "Diana Valeria",
+    "Apellido": "Ovalle Valdes",
+    "Foto_Perfil": "Diana.jpg",
+    "Fecha_Registro": "2005-02-13",
+    "Fecha_Nacimiento": "2005-02-13",
+    "Sexo": "F",
+    "Telefono": "8113164477",
+    "Descripcion": "Soy Diana"
+}
+
+//FIN CRUD Usuarioo
+
+//INICIO CRUD RESEÑA
+
+###
+GET {{Resena}}
+###
+POST {{Resena}}
+Content-Type: application/json 
+
+{
+    "Contenido": "DianaValeria",
+    "Fecha_Publicacion": "2005-05-05",
+    "Calificacion": "4.5",
+    "ID_Usuario": "1",
+    "ID_Pelicula": "1"
+}
+
+###
+GET {{Resena}}/9
+
+###
+
+DELETE {{Resena}}/9
+
+###
+
+PUT {{Resena}}/10
+Content-Type: application/json 
+
+{
+    "Contenido": "GRECOOOOOO",
+    "Fecha_Publicacion": "2005-05-05",
+    "Calificacion": "4.5",
+    "ID_Usuario": "1",
+    "ID_Pelicula": "1"
+}
+
+
+//FIN CRUD RESEÑA
+
+//INICIO ERROR
+
+  
+###
+GET {{Error}}
+###
+POST {{Error}}
+Content-Type: application/json 
+
+{
+    "Mensaje": "DianaValeria",
+    "ID_Experto": "1",
+    "ID_Pelicula": "1",
+    "Estatus": "1"
+}
+
+###
+GET {{Error}}/7
+
+###
+
+DELETE {{Error}}/9
+
+###
+
+PUT {{Error}}/10
+Content-Type: application/json 
+
+{
+    "Mensaje": "DianaValeria",
+    "ID_Experto": "1",
+    "ID_Pelicula": "1",
+    "Estatus": "1"
+}
+
+//FIN ERROR
+
+//INICIO AVISO
+    
+###
+GET {{Aviso}}
+###
+POST {{Aviso}}
+Content-Type: application/json 
+
+{
+    "Mensaje": "DianaValeria",
+    "ID_Usuario_Receptor": "1",
+    "ID_Moderador": "6",
+    "Estatus": "false"
+}
+
+###
+GET {{Aviso}}/7
+
+###
+
+DELETE {{Aviso}}/9
+
+###
+
+PUT {{Aviso}}/10
+Content-Type: application/json 
+
+{
+    "Mensaje": "DianaValeria",
+    "ID_Usuario_Receptor": "15",
+    "ID_Moderador": "12",
+    "Estatus": "1"
+}
+
+//FIN AVISO
+
+//INICIO PELICULA
+    
+###
+GET {{Pelicula}}
+###
+POST {{Pelicula}}
+Content-Type: application/json 
+
+{
+    "Titulo": "DianaValeria",
+    "Sinopsis": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+    "Fecha_Lanzamiento": "2005-05-15",
+    "Duracion": "10",
+    "Presupuesto": 123451253,
+    "imagen": "Ruta de la imagen",
+    "Recaudacion": 12,
+    "ID_Pais_Origen": "1"
+}
+
+###
+GET {{Pelicula}}/12
+
+###
+
+DELETE {{Pelicula}}/11
+
+###
+
+PUT {{Pelicula}}/12
+Content-Type: application/json 
+
+{
+    "Titulo": "DianaValeria",
+    "Sinopsis": "CAMBIO",
+    "Fecha_Lanzamiento": "2005-05-15",
+    "Duracion": "10",
+    "Presupuesto": 123451253,
+    "imagen": "Ruta de la imagen",
+    "Recaudacion": 12,
+    "ID_Pais_Origen": "1"
+}
+
+//FIN PELICULA
