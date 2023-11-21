@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <title>Iniciar Sesión - Filosofilm</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -11,52 +12,108 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/ini-sesion.css">
 </head>
+
 <body>
+
+    <div class="bg-secondary">
+
+        <ul class="nav justify-content-end">
+
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/Registrarse"><strong>Registrarse</strong></a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/Nosotros"><strong>Nosotros</strong></a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/QueEsFF"><strong>Sobre Filosofilm</strong></a>
+            </li>
+
+        </ul>
+
+    </div>
 
 
 <!-- Inicio de formulario de ini-sesion -->
 
-    <!-- Primera capa(medidas de los break points) -->
-    <div class="container w-75 bg-primary mt-3 rounded shadow">
-        <div class="row align-items-stretch text-center">
-            <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded">    
-            </div>
-   
-    <!-- Segunda capa(imagen de izquierda, login) -->
+    <!-- Container principal -->
+    <div class="container">
 
-            <div class="col bg-white p-5 rounded-end">
-                <div class="text-end p-2">
+        <!-- Fila que contiene la imagen del logo  -->
+
+        <div class="row text-center">
+
+            <div class="col p-5">
+
+                <div class="p-2">
                     <img id="LogoFilosofilm" src="img/logo.png"  class="img-fluid" >
                 </div>
 
-                <h2 class="fw-bold text-center py-3">Bienvenido a FilosoFilm</h2>
+            </div>
+
+        </div>
+
+        <!-- Fila que contiene una frase de filosofilm  -->
+
+        <div class="row text-center">
+
+            <div class="col p-5 bg-secondary"> 
+
+                <h1>Analizando peliculas, inspirando pensamientos</h1>
+
+            </div>
+
+        </div>
+
+        <br><br><br>
+
+        <!-- Fila que contiene el inicio de sesion -->
+        
+        <div class="row text-center" class="cont">
+
+            <div class="col-md-10 col-lg-8 foto">
+
+
+            </div>
+            
+            <div class="col-lg-4 bg-warning p-5">
+                
+                <h2 class="fw-bold text-center py-5">Bienvenido a Filosofilm</h2>
 
     <!-- Login -->
 
-                <form action="" method="POST" id="UsuarioForm">
-        <!-- Base de nuestros inputs(correo) -->
+                <form action="" method="" id="UsuarioForm">
+
+                    <!-- Base de nuestros inputs(correo) -->
                     <div class="mb-4">
                         <label for="email"  class="form-label"><i class='bx bx-envelope' ></i> Correo electronico</label>
                         <input id="email" type="email"  class="form-control" name="email" placeholder="e.g email@addres.com">
                     </div>
-        <!-- Base de nuestros inputs(Contraseña) -->
+                    <!-- Base de nuestros inputs(Contraseña) -->
                     <div class="mb-4">
                         <label for="password" class="form-label"><i class='bx bx-lock-alt' ></i> Contraseña</label>
                         <input id="password" type="password" class="form-control" name="password" placeholder="*******">
                     </div>
         
-                <!-- Boton(Iniciar sesión)  -->
+                    <!-- Boton(Iniciar sesión)  -->
                     <div class="d-grid">
-                        <button type="submit" class="btn btn-primary" id="BotonInicioSesion">Iniciar sesión</button>
+                        <button type="submit" class="btn btn-dark" id="BotonInicioSesion">Iniciar sesión</button>
                     </div>
 
+                    <!-- Enlace para el registro del usuario  -->
                     <div class="my-3">
-                        <span>¿No tienes cuenta?<a href="/registrarse">Registrate</a></span>
+                        <span>¿No tienes cuenta?<a href="/registrarse"><strong>Registrate</strong></a></span>
                         <br>
                     </div>
+
                 </form>
             </div>
         </div>
+
+        <br><br><br>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>

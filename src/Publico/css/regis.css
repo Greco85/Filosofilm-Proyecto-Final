@@ -1,16 +1,26 @@
 body{
-    background-color: black;
-    margin: 0;
+    background-image: url(../img/fondoLogo.png);
     font-family: 'Montserrat', sans-serif;
     color: rgb(255, 255, 255);
-
 }
 
-body h1{
+h1{
     margin-bottom: 30px;
     margin-top: 20px;
 }
 
-.button{
-    text-align: center;
+/*Navbar*/
+
+a{
+    margin: 20px 25px;
+}
+
+a strong{
+    color: #333;
+    margin: 20px 25px;
+    font-size: 20px;
+}
+
+strong:hover, h1:hover{
+    color: rgb(219, 200, 23);
 }

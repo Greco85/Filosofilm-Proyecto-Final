@@ -1,79 +1,221 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="css/regis.css">
+
     <title>Registrarse - Filosofilm</title>
+
 </head>
+
 <body>
-    <div class="container">
-        <h1>Registrarse</h1>
-        <form id="FormRegistrarse">
-            <div class="row mb-3">
-                <div class="col-lg-4">
-                    <label for="InputName" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="InputName" required>
-                </div>
-                <div class="col-lg-4">
-                    <label for="InputApellidos" class="form-label">Apellidos</label>
-                    <input type="text" class="form-control" id="InputApellidos" required>
-                </div>
-                <div class="col-lg-4">
-                    <label for="InputNickname" class="form-label">Nickname</label>
-                    <input type="text" class="form-control" id="InputNickname" required>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-lg-6">
-                    <label for="InputEmail" class="form-label">Correo Electrónico</label>
-                    <input type="email" class="form-control" id="InputEmail" required>
-                </div>
-                <div class="col-lg-6">
-                    <label for="InputPhone" class="form-label">Teléfono</label>
-                    <input type="tel" class="form-control" id="InputPhone">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-lg-6">
-                    <label for="InputPassword" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" id="InputPassword" required>
-                </div>
-                <div class="col-lg-6">
-                    <label for="InputConfirmPassword" class="form-label">Confirmar Contraseña</label>
-                    <input type="password" class="form-control" id="InputConfirmPassword" required>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-lg-6">
-                    <label for="InputBirthDate" class="form-label">Fecha de Nacimiento</label>
-                    <input type="date" class="form-control" id="InputBirthDate" required>
-                </div>
-                <div class="col-lg-6">
-                    <label class="form-label">Género</label>
-                    <div>
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="gender" value="male"> Hombre
-                        </label>
-                    </div>
-                    <div>
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="gender" value="female"> Mujer
-                        </label>
-                    </div>
-                    <div>
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="gender" value="other"> Otro
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Registrarse</button>
-        </form>
+
+    <div class="bg-secondary">
+
+        <ul class="nav justify-content-end">
+
+            <li class="nav-item">
+              <a class="nav-link" href="/"><strong>Inicio</strong></a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/Nosotros"><strong>Nosotros</strong></a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/QueEsFF"><strong>Sobre Filosofilm</strong></a>
+            </li>
+
+        </ul>
+
     </div>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <div class="container">
+
+        <!-- Fila que contiene la imagen del logo  -->
+
+        <div class="row text-center">
+
+            <div class="col p-5">
+
+                <div class="p-2">
+                    <img id="LogoFilosofilm" src="img/logo.png"  class="img-fluid" >
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Fila que contiene el formulario -->
+
+        <div class="row">
+
+            <!-- Columna con funcion de generar espacio -->
+            <div class="col-sm-1 col-md-1 col-lg-3"></div>
+            
+            <div class="col-sm-10 col-md-10 col-lg-6">
+
+                <div class="text-center">
+                    <h1>Registrarse</h1>
+                </div>
+
+            <!-- Formulario-->
+    
+            <form id="FormRegistrarse">
+
+                <div class="row mb-3">
+
+                    <!-- Columna para ingresar nombres -->
+    
+                    <div class="col-6">
+                        <label for="InputName" class="form-label">Nombres</label>
+                        <input type="text" class="form-control" id="InputName" required>
+                    </div>
+
+                    <!-- Columna para ingresar apellidos -->
+    
+                    <div class="col-6">
+                        <label for="InputApellidos" class="form-label">Apellidos</label>
+                        <input type="text" class="form-control" id="InputApellidos" required>
+                    </div>
+    
+                </div>
+    
+                <div class="row mb-3">
+
+                    <!-- Columna para ingresar nickname -->
+    
+                    <div class="col-12">
+                        <label for="InputNickname" class="form-label">Nickname</label>
+                        <input type="text" class="form-control" id="InputNickname" required>
+                    </div>
+    
+                </div>
+    
+                <div class="row mb-3">
+
+                    <!-- Columna para ingresar correo electronico -->
+    
+                    <div class="col-lg-6">
+                        <label for="InputEmail" class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-control" id="InputEmail" required>
+                    </div>
+
+                    <!-- Columna para ingresar telefono -->
+    
+                    <div class="col-lg-6">
+                        <label for="InputPhone" class="form-label">Teléfono</label>
+                        <input type="tel" class="form-control" id="InputPhone">
+                    </div>
+    
+    
+                </div>
+    
+                <div class="row mb-3">
+
+                    <!-- Columna para ingresar contraseña -->
+    
+                    <div class="col-lg-6">
+                        <label for="InputPassword" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="InputPassword" required>
+                    </div>
+
+                    <!-- Columna para confirmar contraseña -->
+    
+                    <div class="col-lg-6">
+                        <label for="InputConfirmPassword" class="form-label">Confirmar Contraseña</label>
+                        <input type="password" class="form-control" id="InputConfirmPassword" required>
+                    </div>
+    
+                </div>
+    
+                <div class="row mb-3">
+
+                    <!-- Columna para ingresar fecha de nacimiento -->
+    
+                    <div class="col-8">
+                        <label for="InputBirthDate" class="form-label">Fecha de Nacimiento</label>
+                        <input type="date" class="form-control" id="InputBirthDate" required>
+                    </div>
+
+                    <!-- Columna con funcion de generar un espacio entre las otras dos -->
+
+                    <div class="col-1"></div>
+
+                    <!-- Columna que contiene los botones selectores de género -->
+    
+                    <div class="col-3">
+    
+                        <label class="form-label">Género</label>
+    
+                        <div>
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="gender" value="male"> Hombre
+                            </label>
+                        </div>
+    
+                        <div>
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="gender" value="female"> Mujer
+                            </label>
+                        </div>
+    
+                        <div>
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="gender" value="other"> Otro
+                            </label>
+                        </div>
+    
+                    </div>
+                </div>
+
+                <!-- Fila que contiene el boton de registro -->
+
+                <div class="row text-center">
+
+                    <!-- Columna con funcion de generar espacio -->
+
+                    <div class="col-4"></div>
+
+                    <!-- Columna que contiene el boton de registro -->
+
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-warning">Registrarse</button>
+                    </div>
+
+                    <!-- Columna con funcion de generar espacio -->
+
+                    <div class="col-4"></div>
+
+                </div>
+
+            </form>
+
+            </div>
+
+            <!-- Columna con funcion de generar espacio -->
+            <div class="col-sm-1 col-md-1 col-lg-3"></div>
+
+        </div>
+
+    </div>
+
+    <br><br><br>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/Registro.js"></script>
+
 </body>
 </html>

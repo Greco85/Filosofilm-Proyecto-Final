@@ -25,8 +25,8 @@ app.get("/registrarse",  (req, res) => res.sendFile(__dirname + "/Paginas/regist
 
 app.get("/Inicio", Metodoss.SoloLoggeado, (req, res) => res.sendFile(__dirname + "/Paginas/InicioDelUsuario.html"));
 
-
-app.get("/registrarse", (req, res) => res.sendFile(__dirname + "/Paginas/registrarse.html")); //ADMIN
+app.get("/Nosotros", (req, res) => res.sendFile(__dirname + "/Paginas/Nosotros.html"));
+app.get("/QueEsFF", (req, res) => res.sendFile(__dirname + "/Paginas/QueEsFF.html"));
 
  
 
