@@ -12,37 +12,22 @@ body{
 
 /*Esta parte del css controla la navbar */
 
-.navbar {
-    background-color: #333;
-    overflow: hidden;
-    padding-right: 30px;
-}
-
-.navbar a{
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 15px 20px;
-    text-decoration: none;
-}
-
-.nav-links {
-    margin: 0;
-    font-family: TiemposTextWeb-Regular,Georgia,serif;
+li a{
+    color: rgb(255, 255, 255);
+    margin: 5px 25px 0;
     font-size: 20px;
 }
 
-li{
-    display: inline-block;
-}
-
-.nav-links a:hover{
+h1:hover, strong:hover{
     color: rgb(219, 200, 23);
 }
 
+#navbg{
+    background-image: url(../img/fondoLogo.png);
+}
+
 #logo{
-    width: 250px;
-    height: auto;
+    margin: 5px 0 0 -340px;
 }
 
 /*--------------------------------------------------------------*/
@@ -51,43 +36,54 @@ li{
 
 #Greco{
     margin: 30px 10px;
-    background: yellow;
+    background: rgb(219, 200, 23);
     padding-top: 15px;
     border-radius: 15px;
 }
 
 #Carlos{
     margin: 30px 10px;
-    background: yellow;
+    background: rgb(219, 200, 23);
     padding-top: 15px;
     border-radius: 15px;
 }
 
 #Karol{
     margin: 30px 10px;
-    background: yellow;
+    background: rgb(219, 200, 23);
     padding-top: 15px;
     border-radius: 15px;
 }
 
 #Alex{
     margin: 30px 10px;
-    background: yellow;
+    background: rgb(219, 200, 23);
     padding-top: 15px;
     border-radius: 15px;
 }
 
 .fotos{
-    width: 80%;
-    height: auto;
+    width: auto;
+    height: 80%;
     margin: 30px 0 30px 0;
+    padding: 10px 10px 0;
     border-radius: 15px;
+}
+
+#sortie{
+
+    width: 400px;
+    margin-top: 60px;
+    border-radius: 3px;
+    border-style: double;
+    border-width: 5px;
+    border-color: rgb(219, 200, 23);
 }
 
 /*Este controla que las imagenes tengan el mismo espacio dentro de las 3 columnas, para que el texto no se vea disparejo*/
 
 .ZonaF{
-    height: 350px;
+    height: 250px;
 }
 /*--------------------------------------------------------------*/
 
@@ -108,6 +104,4 @@ p{
 }
 
 /*--------------------------------------------------------------*/
-
-/*Este va en el acordion, para que tenga algo de espacio y no se vea muy sofocado dentro del div */
 

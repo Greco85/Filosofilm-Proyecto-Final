@@ -1,0 +1,5 @@
+/* Estilo general del cuerpo */
+body {
+    background-image: url(../img/fondoLogo.png);
+    font-family: 'Montserrat', sans-serif;
+}

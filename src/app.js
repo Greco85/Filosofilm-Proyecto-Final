@@ -51,18 +51,6 @@ app.get("/CRUDPaises", (req, res) => res.sendFile(__dirname + "/Paginas/CRUDPais
 app.get("/Nosotros", (req, res) => res.sendFile(__dirname + "/Paginas/Nosotros.html"));
 app.get("/QueEsFF", (req, res) => res.sendFile(__dirname + "/Paginas/QueEsFF.html"));
 
-
-
-<<<<<<< HEAD
-
-=======
-app.get("/Nosotros", (req, res) => res.sendFile(__dirname + "/Paginas/Nosotros.html"));
-app.get("/QueEsFF", (req, res) => res.sendFile(__dirname + "/Paginas/QueEsFF.html"));
->>>>>>> d1a7da7ef64623b6e87fcd7c8f2449610fa0397c
-
- 
-
-
 //Archivos Estaticos Para que lo de arriba pueda agarrar los js y css etcc
 
 app.use(express.static(__dirname + '/Publico'));

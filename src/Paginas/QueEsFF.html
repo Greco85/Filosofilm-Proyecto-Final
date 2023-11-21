@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/Que.css">
     <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/Que.css">
 
     <title>Que es Filosofilm</title>
 
@@ -17,28 +17,44 @@
 
 <body>
 
-    <nav class="navbar">
-        <div>
-            <a href="#">
-                <img id="logo" src="img/logo.png">
-            </a>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Registrarse</a></li>
-            <li><a href="#">Iniciar sesión</a></li>
-            <li><a href="ExplorarPeliculas.html">Explorar películas</a></li>
-            <li><a href="Nosotros.html">Equipo</a></li>
-            
-        </ul>
+    <!--Aqui es donde va la navbar-->
+
+  <nav class="navbar" id="navbg">
+
+    <div class="container">
+
+      <a class="navbar-brand" href="/QueEsFF">
+        <img src="img/logo.png" alt="Bootstrap" width="250">
+      </a>
+
+      <ul class="nav justify-content-end">
+
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/registrarse"><strong>Registrarse</strong></a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/"><strong>Login</strong></a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/Nosotros"><strong>Nosotros</strong></a>
+          </li>
+
+      </ul>
+
+    </div>
+
     </nav>
+
+
     
     <div class="container">
         <h1 id="frase">"Una ventana a la reflexión cinematografica"</h1>
     </div>
 
     <div class="container">
-        <img src="img/cine.jpg">
+        <img src="img/cine.jpg" id="cine">
     </div>
 
     <div class="container text-center">
@@ -66,8 +82,20 @@
 
                 <div class="container" id="SobreLogo">
                     <h1>Nuestro Logo</h1>
+
+                    <br><br>
+
                     <img src="img/logo.png" class="Logo">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi beatae culpa, suscipit quas voluptatem debitis praesentium impedit, amet qui, mollitia incidunt nisi explicabo sed ab itaque ea minima. Unde magnam ipsa provident ex, vitae quis alias nihil porro, molestias debitis sapiente laborum perspiciatis, quibusdam officiis libero! Voluptatem voluptates doloribus possimus.</p>
+
+                    <p>
+                        La génesis de nuestro distintivo logo fue un viaje en busca de la síntesis perfecta entre la representacion de una reseña y el cine. La inspiración llegó en forma 
+                        de una mano elegante, pluma en mano, trazando con gracia la palabra "Filosofilm" en cursiva. Las curvas y líneas de esta mano narrativa fueron seleccionadas 
+                        para encapsular la pasión y profundidad que Filosofilm aporta a cada reseña cinematográfica. Este logo, con su cursiva distintiva, simboliza la conexión entre la 
+                        escritura y el cine, recordándonos que cada película es una historia escrita y analizada con profundidad. La mano de Filosofilm es más que un símbolo; es la firma 
+                        de una comunidad apasionada dedicada a explorar las capas más profundas de cada historia cinematográfica. Nuestro logo no solo representa el arte de la elaboracion de reseñas,
+                        sino también la promesa de sumergirse en un mundo donde la crítica se entrelaza con la admiración, y donde cada película es una oportunidad para expandir horizontes.
+                    </p>
+
                 </div>
 
             </div>
