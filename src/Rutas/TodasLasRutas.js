@@ -5,7 +5,8 @@ import {getActor , createNewActor, getActorbyid, deleteActor, UpdateActorbyID,
         getReseñas, createNewReseña, getReseñabyid, deleteReseña, UpdateReseñabyID, 
         getAviso, createNewAviso, getAvisobyid, deleteAviso, UpdateAvisobyID,
         getError, createNewError, getErrorbyid, deleteError, UpdateErrorbyID,
-        getPelicula, createNewPelicula, getPeliculabyid, deletePelicula, UpdatePeliculabyID} from '../Controladores/TodosLosControladores'
+        getPelicula, createNewPelicula, getPeliculabyid, deletePelicula, UpdatePeliculabyID
+,  getUsuarioByCorreo, getUsuarioByTel, getUsuarioByNickname, getUsuarioByContraseña, LoginUsuario} from '../Controladores/TodosLosControladores'
 
 const router = Router()
 
@@ -13,11 +14,21 @@ const router = Router()
 //Controladores Usuario
 
 router.get('/Usuario', getUsuarios);
+
+//USANDO PARA REGISTRAR USUARIOS
 router.post('/Usuario', createNewUsuario);
 router.get('/Usuario/:ID', getUsuariobyid );
 router.delete('/Usuario/:ID', deleteUsuario);
 router.put('/Usuario/:ID', UpdateUsuariobyID);
 
+//COMPROBACION PARA EL LOGIN
+router.post('/Usuario/Verificacion/Correo/:Correo_Electronico', LoginUsuario);
+
+//PRUEBA PARA COMPROBACION DE USUARIO EN EL REGISTRO
+router.get('/Usuario/Verificacion/Correo/:Correo_Electronico', getUsuarioByCorreo);
+router.get('/Usuario/Verificacion/Telefono/:Telefono', getUsuarioByTel);
+router.get('/Usuario/Verificacion/Nickname/:Nickname', getUsuarioByNickname);
+router.get('/Usuario/Verificacion/Contrasenas/:Contrasena', getUsuarioByContraseña);
 
 //Controladores Actor
 

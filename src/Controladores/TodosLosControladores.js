@@ -1,43 +1,8 @@
 import { getConnection, sql, queries } from "../BasedeDatos/"
+import jsonwebtoken from "jsonwebtoken";
+import dotenv from "dotenv";
 
-/*
-export const RegistrarUsuario = async (req, res) => {
-    const {Nickname, ID_Rol, Correo_Electronico, Contraseña, Nombre,Apellido,Foto_Perfil, Fecha_Registro,Fecha_Nacimiento, Sexo, Telefono, Descripcion} = req.body;
-    
-    if(Nickname == null || ID_Rol == null || Correo_Electronico == null || Contraseña == null || Apellido == null || Sexo == null || Telefono == null || Fecha_Registro == null ||Nombre == null || Fecha_Nacimiento == null ||  Descripcion == null ){
-        return res.status(400).json({msg: 'Bad request. Porfavor llena todos los campos'})
-    }
-    
-    try {
-        const pool = await getConnection();
-        const result = await  pool.request()
-        .input("Nickname", sql.NVarChar, Nickname)
-        .input("ID_Rol", sql.Int, 1)
-        .input("Correo_Electronico", sql.NVarChar, Correo_Electronico) //MEXICO
-        .input("Contraseña", sql.NVarChar, Contraseña)
-        .input("Nombre", sql.NVarChar, Nombre)
-        .input("Apellido", sql.NVarChar, Apellido)
-        .input("Foto_Perfil", sql.NVarChar, "1111")
-        .input("Fecha_Registro", sql.Date, Fecha_Registro) //MEXICO
-        .input("Fecha_Nacimiento", sql.Date, Fecha_Nacimiento)
-        .input("Sexo", sql.NVarChar, Sexo)
-        .input("Telefono", sql.NVarChar, Telefono)
-        .input("Descripcion", sql.Text, "Hola")
-    
-        .query(queries.createNewUsuario) //Nombre que queramos
-        console.log(result);
-        res.json({Nickname, ID_Rol, Correo_Electronico, Contraseña, Nombre,Apellido,Foto_Perfil, Fecha_Registro,Fecha_Nacimiento, Sexo, Telefono, Descripcion}); // Objeto JSON como respuesta
-    
-    } catch (error) {
-        res.status(500)
-        res.send(error.message)
-    }
-};
-
-
-*/
-
-
+dotenv.config();
 
 export const  getActor = async(req, res) => {
     try {
@@ -252,56 +217,82 @@ export const getUsuariobyid = async (req, res) => {
     res.send(result.recordset[0])
 };
 
+//INICIO DE LOS CONTROLADORES DE LAS COMPROBACIONES
 
-export const getUsuarioByCorreoAndPassword = async (req, res) => {
-    const { Correo_Electronico, password } = req.params;
+export const getUsuarioByCorreo = async (req, res) => {
+    const {Correo_Electronico} = req.params;
+    const pool = await getConnection();
+    const result = await pool.request().input('Correo_Electronico', Correo_Electronico).query(queries.getUsaurioByemail);
+
+    res.send(result.recordset)
+
+};
+
+export const LoginUsuario = async (req, res) => {
+    const { Correo_Electronico } = req.params;
+    const { Contraseña } = req.body; // Obtén la contraseña desde la solicitud POST
 
     try {
         const pool = await getConnection();
-        const result = await pool.request()
+        const result = await pool
+            .request()
             .input('Correo_Electronico', Correo_Electronico)
-            .query('SELECT * FROM Usuarios WHERE Correo_Electronico = @Correo_Electronico');
+            .input('Contraseña', Contraseña)
+            .query(queries.Login);
 
         if (result.recordset.length > 0) {
-            const usuario = result.recordset[0];
-            // Verificar la contraseña - Aquí se debe usar una lógica segura de verificación de contraseñas
-            if (usuario.Contraseña === password) {
-                // Contraseña coincide - Inicio de sesión exitoso
-                res.json({ message: 'Inicio de sesión exitoso', usuario });
-            } else {
-                // Contraseña incorrecta
-                res.status(401).json({ message: 'Contraseña incorrecta' });
-            }
+            res.status(200).json(result.recordset);
+            const token = jsonwebtoken.sign({user: UsuarioaRevisar.user},
+                process.env.JWT_SECRET,
+                {expiresIn:process.env.JWT_EXPIRATION}) //TERMINAR MAÑANA
         } else {
-            // No se encontró el usuario
-            res.status(404).json({ message: 'Usuario no encontrado' });
+            res.status(401).json({ message: 'Algo incorrecto' }); // Envía un mensaje de error
         }
     } catch (error) {
-        res.status(500).send(error.message);
+        console.error(error);
+        res.status(500).json({ message: 'Error en la verificación del inicio de sesión' }); // Manejo de errores
     }
 };
 
-export const getUsuariobyemailandPass = async (req, res) => {
-    const { Correo_Electronico, password } = req.body;
+export const getUsuarioByTel = async (req, res) => {
+    const {Telefono} = req.params;
+    const pool = await getConnection();
+    const result = await pool.request().input('Telefono', Telefono).query(queries.getUsaurioByTel);
 
-    try {
-        const pool = await getConnection();
-        const result = await pool.request()
-            .input('Correo_Electronico', Correo_Electronico)
-            .input('Contraseña', password)
-            .query(queries.getUsaurioByemailandpass);
+    res.send(result.recordset)
 
-        if (result.recordset.length > 0) {
-            // Si se encontró un usuario con el correo y contraseña proporcionados
-            res.json({ message: 'Inicio de sesión exitoso' });
-        } else {
-            // Si no se encontró ningún usuario con esas credenciales
-            res.status(401).json({ message: 'Correo electrónico o contraseña incorrectos' });
-        }
-    } catch (error) {
-        res.status(500).send(error.message);
-    }
 };
+
+export const getUsuarioByNickname = async (req, res) => {
+    const {Nickname} = req.params;
+    const pool = await getConnection();
+    const result = await pool.request().input('Nickname', Nickname).query(queries.getUsaurioByNickname);
+
+   
+    
+
+    res.send(result.recordset)
+
+   // res.send(`Número de usuarios encontrados: ${numeroUsuarios}`);
+
+};
+
+export const getUsuarioByContraseña= async (req, res) => {
+    const {Contrasena} = req.params;
+    const pool = await getConnection();
+    const result = await pool.request().input('Contrasena', Contrasena).query(queries.getUsaurioByContraseña);
+
+   
+    
+
+    res.send(result.recordset)
+
+   // res.send(`Número de usuarios encontrados: ${numeroUsuarios}`);
+
+};
+
+//FIN DE LOS CONTROLADORES DE LAS COMPROBACIONES
+
 
 export const deleteUsuario = async (req, res) => {
     const {ID} = req.params;

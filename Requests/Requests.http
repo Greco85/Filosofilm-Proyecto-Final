@@ -105,7 +105,10 @@ Content-Type: application/json
 }
 
 ###
-GET {{Usuario}}/10
+GET {{Usuario}}/grecoj.0110@gmail.com
+
+###
+GET {{Usuario}}/2
 
 ###
 

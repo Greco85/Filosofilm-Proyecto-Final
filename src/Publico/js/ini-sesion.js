@@ -5,29 +5,32 @@ $(document).ready(function() {
         const correo = $("#email").val();
         const contraseña = $("#password").val();
 
-        const data = {
-            correo: correo,
-            contraseña: contraseña
-        };
-
         $.ajax({
-            type: "POST",
-            url: "/Usuario",
-            data: data,
+            url: `/Usuario/Verificacion/Correo/${correo}`, 
+            method: 'POST', //
+            data: {
+                Contraseña: contraseña // Enviar la contraseña como parte de los datos
+            },
             success: function(response) {
-                if (response === "Credenciales válidas") {
-                    alert("SIUUUUU");
-                } else {
-                    alert("Credenciales inválidas. Inténtalo de nuevo.");
+                if (response.length > 0) {
+                    const JSONContraseña = response[0].Contraseña;
+                    const JSONCorreo = response[0].Correo_Electronico;
+
+                    if(JSONContraseña == contraseña && JSONCorreo == correo) { 
+                        alert("Inicio de sesión exitoso");
+                        window.location.href = "/Inicio"; 
+                    } else {
+                        alert("El Correo o la Contraseña son incorrectos");
+                    }
                 }
             },
-            error: function(error) {
-                console.log("Error en la solicitud AJAX:", error);
+            error: function(xhr, status, error) {
+                console.error(error);
+                alert("El Correo o la Contraseña son incorrectos");
             }
         });
     });
 });
-
 
 
 

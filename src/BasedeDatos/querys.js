@@ -17,13 +17,23 @@ export const queries = {
     //Usuarios
     getallUsuarios: 'SELECT * FROM [DIAGRAMA].[dbo].[Usuario]',
     createNewUsuario: 'INSERT INTO Usuario (Nickname, ID_Rol, Correo_Electronico, Contraseña, Nombre,Apellido,Foto_Perfil, Fecha_Registro,Fecha_Nacimiento, Sexo, Telefono, Descripcion) VALUES (@Nickname,@ID_Rol,@Correo_Electronico,@Contraseña,@Nombre,@Apellido,@Foto_Perfil, @Fecha_Registro,@Fecha_Nacimiento,@Sexo,@Telefono,@Descripcion)',
-    getUsaurioByID: 'SELECT * FROM [DIAGRAMA].[dbo].[Usuario] WHERE ID_Usuario = @ID',
-
-    getUsaurioByemailandpass: 'SELECT * FROM [DIAGRAMA].[dbo].[Usuario] WHERE Correo_Electronico = @Correo_Electronico AND Contraseña = @Contraseña',
-
-
+    getUsaurioByID: "SELECT * FROM [DIAGRAMA].[dbo].[Usuario] WHERE ID_Usuario = @ID",
     deleteUsuario: 'DELETE FROM [DIAGRAMA].[dbo].[Usuario] WHERE ID_Usuario = @ID',
     UpdateUsuario: 'UPDATE [DIAGRAMA].[dbo].[Usuario] SET Nickname = @Nickname, ID_Rol = @ID_Rol, Correo_Electronico = @Correo_Electronico, Contraseña = @Contraseña, Nombre = @Nombre, Apellido = @Apellido, Foto_Perfil = @Foto_Perfil, Fecha_Registro = @Fecha_Registro, Fecha_Nacimiento = @Fecha_Nacimiento, Sexo = @Sexo, Telefono = @Telefono, Descripcion = @Descripcion WHERE ID_Usuario = @ID;',
+
+
+    //COMPROBACIONES DE EMAIL, NICKNAME Y TELEFONO
+    getUsaurioByemail: "SELECT * FROM [DIAGRAMA].[dbo].[Usuario] WHERE Correo_Electronico = @Correo_Electronico",
+    getUsaurioByTel: "SELECT * FROM [DIAGRAMA].[dbo].[Usuario] WHERE Telefono = @Telefono",
+    getUsaurioByNickname: "SELECT * FROM [DIAGRAMA].[dbo].[Usuario] WHERE Nickname = @Nickname",
+    getUsaurioByContraseña: "SELECT * FROM [DIAGRAMA].[dbo].[Usuario] WHERE Contraseña = @Contrasena",
+    Login: "SELECT * FROM Usuario WHERE Correo_Electronico = @Correo_Electronico AND Contraseña = @Contraseña ",
+    
+    
+    
+    
+    
+    
 
      //Reseña
      getAllResenas: 'SELECT * FROM [DIAGRAMA].[dbo].[Reseña]',
