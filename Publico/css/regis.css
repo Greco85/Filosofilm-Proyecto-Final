@@ -1,0 +1,16 @@
+body{
+    background-color: black;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    color: rgb(255, 255, 255);
+
+}
+
+body h1{
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+.button{
+    text-align: center;
+}

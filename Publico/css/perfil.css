@@ -3,7 +3,7 @@
     background-size: cover; 
     width: 80px;
     height: 80px; 
-    background-color: #333;
+    background-color: cyan;
     border: none;
     display: inline-block;
 }
@@ -12,8 +12,7 @@
 .div1{
     display: inline-flex;
     width: 100%;
-    background-color: #333;
-    color:aliceblue;
+    background-color: cyan;
 }
 
 img{
@@ -28,11 +27,15 @@ h3{
 
 body {
     text-align: center;
-    background-color: black;
-    font-family: TiemposTextWeb-Regular,Georgia,serif;
-}
+    background-color: wheat;
+  }
 
-.imgpelicula{
+  .nav-item {
+    margin-top: 0;
+    border: 2px solid black;
+  }
+
+  .imgpelicula{
     height: 500px;
     object-fit: cover;
 }
@@ -45,20 +48,3 @@ body {
 h3{
     font-size: 2em;
 }
-
-.div2 a{
-    font-size: 25px;
-}
-
-.div2 {
-    background-color: #333;
-}
-
-@media (max-width: 575px) {
-    .div2 a{
-       font-size: 20px;
-    }
-}
-
-
-

@@ -1,7 +1,6 @@
 /* Estilo general del cuerpo */
 body {
-    background: #84f368;
-    background: linear-gradient(to right, #76ca61, #5c944e);
+    background: #000000;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -55,4 +54,17 @@ a {
     text-decoration: none;
     color: #007bff;
     margin: 0 0.5rem;
+}
+
+.bg {
+    background-image: url(../img/CineGato.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+}
+
+#LogoFilosofilm{
+    width: 250px;
+    height: auto;
 }
