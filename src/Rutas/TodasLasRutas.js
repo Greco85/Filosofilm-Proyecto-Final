@@ -83,6 +83,9 @@ router.post('/Pelicula', createNewPelicula);
 router.get('/Pelicula/:ID', getPeliculabyid );
 router.delete('/Pelicula/:ID', deletePelicula);
 
+//DETALLES DE LA PELICULA
+
+
 
 router.get('/Pais_Origen', getPaises);
 router.post('/Pais_Origen', postPaises);

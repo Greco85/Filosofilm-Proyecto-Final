@@ -1,39 +1,15 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD de Películas</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/CRUDS.css">
-
 </head>
-
 <body>
-    
-    <div class="container">
-        <div class="row text-center">
-
-            <div class="col p-5">
-    
-                <div class="p-2">
-                    <img id="LogoFilosofilm" src="img/logo.png"  class="img-fluid" >
-                </div>
-    
-            </div>
-    
-        </div>
-    </div>
-
-    <div class="container my-5 bg-warning">
-        <h1 class="text-center mb-4"><strong>CRUD de Películas</strong></h1>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">CRUD de Películas</h1>
         <form id="formAgregarPelicula">
             <div class="form-group">
                 <label for="TituloPelicula" class="form-label">Título de la Película</label>
@@ -67,19 +43,15 @@
             </div> 
 
 
-            <div class="form-group text-center">
-                <button type="submit" class="btn btn-secondary mr-2" id="addMovieBtn">Agregar</button>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary mr-2" id="addMovieBtn">Agregar</button>
                 <button type="button" class="btn btn-warning mr-2" id="updateMovieBtn" style="display: none;">Actualizar</button>
                 <button type="button" class="btn btn-danger" id="deleteMovieBtn" style="display: none;">Eliminar</button>
             </div>
         </form>
         
         <hr>
-        
-        <div class="text-center">
-            <h2>Películas</h2> <!--AQUI SALDRAN LAS LISTAS DE PELICULAS-->
-        </div>
-
+        <h2>Películas</h2> <!--AQUI SALDRAN LAS LISTAS DE PELICULAS-->
         <ul id="ListadePeliculas" class="list-group"></ul>
     </div>
 
@@ -189,11 +161,14 @@
     </div>
 </div>
 
+<div class="d-flex justify-content-center align-items-center">
+    <a href="/Admin" class="btn btn-primary mb-3">Ir a Pantalla Admin</a>
+</div>
+
 
     <!-- jQuery and Bootstrap JS --> 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="js/CRUDPeliculas.js"></script>
 </body>
 </html>

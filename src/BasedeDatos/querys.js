@@ -75,6 +75,6 @@ export const queries = {
       deletePais: 'DELETE FROM [DIAGRAMA].[dbo].[Pais_Origen] WHERE ID_Pais = @ID',
 
       //ROLESS
-      getAllPaises: 'SELECT * FROM [DIAGRAMA].[dbo].[Rol]',
+      getAllRoles: 'SELECT * FROM [DIAGRAMA].[dbo].[Rol]',
 
 }

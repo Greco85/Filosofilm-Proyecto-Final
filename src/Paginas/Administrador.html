@@ -6,43 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Enlace a Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/CRUDS.css">
-    
+    <style>
+        /* Estilos adicionales si los necesitas */
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .list-group-item {
+            border-radius: 0;
+        }
+    </style>
 </head>
-
 <body>
 
     <div class="container">
-        <div class="row text-center">
-
-            <div class="col p-5">
-    
-                <div class="p-2">
-                    <img id="LogoFilosofilm" src="img/logo.png"  class="img-fluid" >
-                </div>
-    
-            </div>
-    
-        </div>
-    </div>
-
-
-    <div class="container bg-warning">
-
-        <br><br><br>
-
-        <h1 class="text-center mb-4"><strong>Panel de Administración</strong></h1>
+        <h1 class="text-center mb-4">Panel de Administración</h1>
         
         <div class="row justify-content-center">
-
             <div class="col-md-6">
-
                 <div class="list-group">
-
                     <div class="row">
                         <div class="col-6">
                             <a href="/CRUDUsuarios" class="list-group-item list-group-item-action mb-3">CRUD Usuarios</a>
@@ -51,7 +35,6 @@
                             <a href="/CRUDActores" class="list-group-item list-group-item-action mb-3">CRUD Actores</a>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-6">
                             <a href="/CRUDPaises" class="list-group-item list-group-item-action mb-3">CRUD Países</a>
@@ -60,7 +43,6 @@
                             <a href="/CRUDDirectores" class="list-group-item list-group-item-action mb-3">CRUD Directores</a>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-6">
                             <a href="/PropuestasDeCambio" class="list-group-item list-group-item-action mb-3">Propuestas de Cambio</a>
@@ -70,13 +52,10 @@
                             <a href="/CRUDPeliculas" class="list-group-item list-group-item-action mb-3">CRUD Películas</a>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
-
-    <br><br><br>
 
     <!-- Scripts de Bootstrap y jQuery -->
     <script src="jquery-3.7.1.min.js"></script>

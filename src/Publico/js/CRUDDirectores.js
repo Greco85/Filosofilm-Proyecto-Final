@@ -222,8 +222,7 @@ $('.eliminar-director').click(function(event) {
             success: function(response) {
                 // Manejar la respuesta del servidor si es necesario
                 console.log('Director eliminado:', response);
-                // Volver a cargar la lista de directores después de eliminar
-                obtenerDirectores(); // Asegúrate de tener una función similar a obtenerActores para cargar los directores
+                obtenerDirectores(); 
             },
             error: function(xhr, status, error) {
                 console.error('Error al eliminar el director:', error);

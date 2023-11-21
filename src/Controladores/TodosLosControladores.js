@@ -811,7 +811,7 @@ export const postPaises = async (req, res) => {
 export const  getRoles = async(req, res) => {
     try {
         const pool = await getConnection(); 
-        const result = await  pool.request().query(queries.getAllPaises)
+        const result = await  pool.request().query(queries.getAllRoles)
         res.json(result.recordset)
     } catch (error) {
         res.status(500)

@@ -34,7 +34,7 @@ $(document).ready(function() {
                 method: 'GET',
                 success: function(response) {
                     var idPais = response[0].ID_Pais;
-    
+                
                     const peliculaData = {
                         Titulo: titulo,
                         Sinopsis: sinopsis,
@@ -45,7 +45,7 @@ $(document).ready(function() {
                         Recaudacion: recaudacion,
                         ID_Pais_Origen: idPais 
                     };
-    
+                    console.log(peliculaData)
                     // AJAX para enviar los datos de la película
                     $.ajax({
                         url: 'http://localhost:3000/Pelicula',
@@ -54,7 +54,6 @@ $(document).ready(function() {
                         data: JSON.stringify(peliculaData),
                         success: function(response) {
                             console.log('Película agregada:', response);
-                            obtenerPeliculas();
                         },
                         error: function(xhr, status, error) {
                             console.error('Error al agregar la película:', error);
@@ -65,8 +64,9 @@ $(document).ready(function() {
                     console.error('Error al obtener el ID del país:', error);
                 }
             });
-    
         });
+
+        
 
         $.ajax({
             url: 'http://localhost:3000/Pelicula', 
@@ -74,13 +74,13 @@ $(document).ready(function() {
             success: function(response) {
                 const listaPeliculas = $('#ListadePeliculas');
                 listaPeliculas.empty(); // Limpiar la lista antes de agregar las películas
-    
+                
                 const row = $('<div>').addClass('row'); // Crea una fila Bootstrap
     
                 response.forEach(function(pelicula) {
                     const divCol = $('<div>').addClass('col-xs-12 col-sm-6 col-lg-3 mb-3');
                     const divCard = $('<div>').addClass('card');
-                    const imagen = $('<img>').addClass('imgpelicula card-img-top').attr('src', 'img/FNAF.jpg').attr('alt', '...');
+                    const imagen = $('<img>').addClass('imgpelicula card-img-top').attr('src', pelicula.imagen).attr('alt', '...');
                     const divCardBody = $('<div>').addClass('card-body');
                     const titulo = $('<h5>').addClass('card-title text-center').text(pelicula.Titulo);
                     const idPelicula = $('<h5>').addClass('card-subtitle text-center mb-2').text('ID: ' + pelicula.ID_Pelicula);

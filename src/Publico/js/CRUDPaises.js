@@ -13,7 +13,7 @@ $(document).ready(function() {
                 response.forEach(function(pais) {
                     const divCol = $('<div>').addClass('col-xs-12 col-sm-6 col-lg-3 mb-3');
                     const divCard = $('<div>').addClass('card');
-                    const imagen = $('<img>').addClass('imgpelicula card-img-top').attr('src', `img/${pais.Pais_Imagen}.jpg`).attr('alt', pais.Nombre);
+                    const imagen = $('<img>').addClass('imgpelicula card-img-top').attr('src', pais.Pais_Imagen).attr('alt', pais.Nombre);
                     const divCardBody = $('<div>').addClass('card-body');
                     const nombrePais = $('<h5>').addClass('card-title text-center').text(pais.Nombre);
                     const idPais = $('<h5>').addClass('card-subtitle text-center mb-2').text('ID: ' + pais.ID_Pais);

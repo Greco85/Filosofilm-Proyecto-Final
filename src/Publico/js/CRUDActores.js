@@ -23,7 +23,7 @@ $(document).ready(function() {
             const fechaNacimiento = $('#fechaNacimiento').val();
             const selectPais = $('#selectPais').val();
             const biografia = $('#biografia').val();
-            const imagenURL = `./img/${nombre}.jpg`;
+            const imagenURL = `img/${nombre}.jpg`;
         
             console.log(selectPais);
 
@@ -202,7 +202,7 @@ $('#formEditarActor').submit(function(event) {
                 success: function(response) {
                     console.log('Actor actualizado:', response);
                     $('#modalDetallesEditarActor').modal('hide');
-                    obtenerActores()
+                   
                 },
                 error: function(xhr, status, error) {
                     console.error(error);

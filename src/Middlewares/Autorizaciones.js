@@ -38,11 +38,6 @@ export const SoloLoggeado = async (req, res, next) => {
     }
 };
 
-
-function SoloPublico(req, res, next){
-     
-}
-
 export const ExtraerID = async (req, res, next) => {
     try {
         const token = req.cookies.jwt;
@@ -52,8 +47,8 @@ export const ExtraerID = async (req, res, next) => {
       }
   
       const Decodificado = jwt.verify(token, process.env.JWT_SECRET);
-      req.ID_Usuario = Decodificado.ID_Usuario; // Suponiendo que el Nickname está en el token
-      console.log(req.ID_Usuario)
+      req.ID_Rol = Decodificado.ID_Rol; // Suponiendo que el Nickname está en el token
+      console.log(req.ID_Rol)
 
       next();
     } catch (err) {
@@ -64,7 +59,6 @@ export const ExtraerID = async (req, res, next) => {
 
 export const Metodos = {
     SoloLoggeado,
-    SoloPublico,
     redireccionInicio,
     ExtraerID,
 }   

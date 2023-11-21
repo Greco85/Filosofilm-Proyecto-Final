@@ -1,9 +1,4 @@
 
-
-async function login(req,res){
-
-}
-
 export const  RegistrarUsuario = async(req, res) => {
         try {
             const pool = await getConnection(); 
