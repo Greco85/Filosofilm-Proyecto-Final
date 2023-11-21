@@ -43,9 +43,28 @@ function SoloPublico(req, res, next){
      
 }
 
+export const ExtraerID = async (req, res, next) => {
+    try {
+        const token = req.cookies.jwt;
+  
+      if (!token) {
+        throw new Error('Inicia Sesion para continuar');
+      }
+  
+      const Decodificado = jwt.verify(token, process.env.JWT_SECRET);
+      req.ID_Usuario = Decodificado.ID_Usuario; // Suponiendo que el Nickname está en el token
+      console.log(req.ID_Usuario)
+
+      next();
+    } catch (err) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+  }
+
 
 export const Metodos = {
     SoloLoggeado,
     SoloPublico,
     redireccionInicio,
+    ExtraerID,
 }   

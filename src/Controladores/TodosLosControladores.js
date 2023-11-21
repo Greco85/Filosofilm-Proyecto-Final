@@ -217,6 +217,18 @@ export const getUsuariobyid = async (req, res) => {
     res.send(result.recordset[0])
 };
 
+//PERFIL DEL USUARIO
+
+export const ObtenerPerfilUsuario = async (req, res) => {
+    const {Nickname} = req.params;
+    const pool = await getConnection();
+    const result = await pool.request().input('Nickname', Nickname).query(queries.getPerfilUsuarioLog);
+
+    res.send(result.recordset[0])
+};
+
+//FIN DEL PERFIL DEL USUARIO
+
 //INICIO DE LOS CONTROLADORES DE LAS COMPROBACIONES
 
 export const getUsuarioByCorreo = async (req, res) => {
@@ -250,15 +262,17 @@ export const LoginUsuario = async (req, res) => {
 
         if (result.recordset.length > 0) { //Si hay algo entonces
             const Datos = result.recordset[0];
-            const Nickname = Datos.Nickname; //Agarra el nickname del usuario
-
 
             // Aquí, si las credenciales son correctas, puedes devolver un token como respuesta
             const payload = {
                 ID_Usuario: Datos.ID_Usuario, // Suponiendo que tengas un ID de usuario
-                ID_Rol: Datos.ID_Rol, // Si tienes información de si es admin
+                ID_Rol: Datos.ID_Rol,
+                Nickname: Datos.Nickname // Si tienes información de si es admin
                 // ...otros datos que desees incluir
+              
             };
+
+            console.log(payload)
 
         
             const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRATION});
@@ -327,9 +341,6 @@ export const getUsuarioByContraseña= async (req, res) => {
     const pool = await getConnection();
     const result = await pool.request().input('Contrasena', Contrasena).query(queries.getUsaurioByContraseña);
 
-   
-    
-
     res.send(result.recordset)
 
    // res.send(`Número de usuarios encontrados: ${numeroUsuarios}`);
@@ -345,6 +356,25 @@ export const deleteUsuario = async (req, res) => {
     await pool.request().input('ID', ID).query(queries.deleteUsuario);
 
     res.sendStatus(204);
+};
+
+
+
+
+
+export const UpdateUsuarioRol  = async (req, res) => {
+
+    const {ID_Rol} = req.body;
+    const {ID} = req.params;
+
+
+    const pool = await getConnection();
+        await  pool.request()
+        .input("ID_Rol", sql.Int, ID_Rol)
+    .input("ID", sql.Int, ID)
+    .query(queries.UpdateRolUsuario);
+
+    res.json({ID_Rol});
 };
 
 export const UpdateUsuariobyID  = async (req, res) => {
@@ -706,3 +736,85 @@ export const UpdatePeliculabyID  = async (req, res) => {
 };
 
 //FIN PELICULA
+
+
+export const  getPaises = async(req, res) => {
+    try {
+        const pool = await getConnection(); 
+        const result = await  pool.request().query(queries.getAllPaises)
+        res.json(result.recordset)
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+};
+
+export const  getPaisesIDbyNombre = async(req, res) => {
+    
+    const {Nombre} = req.params;
+     
+    try {
+        const pool = await getConnection(); 
+        const result = await  pool.request().input('Nombre', sql.VarChar, Nombre).query(queries.getIDPaisbyNombre)
+        res.json(result.recordset)
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+};
+
+export const  getNombrePaisesbyID = async(req, res) => {
+    
+    const {ID} = req.params;
+     
+    try {
+        const pool = await getConnection(); 
+        const result = await  pool.request().input('ID',sql.Int, ID).query(queries.getNombrePaisesbyID)
+        res.json(result.recordset)
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+};
+
+export const deletePais = async (req, res) => {
+    const {ID} = req.params;
+    const pool = await getConnection();
+    await pool.request().input('ID', ID).query(queries.deletePais);
+
+    res.sendStatus(204);
+};
+
+
+export const postPaises = async (req, res) => {
+    const {Nombre, Pais_Imagen} = req.body;
+    
+    if(Nombre == null || Pais_Imagen == null){
+        return res.status(400).json({msg: 'Bad request. Porfavor llena todos los campos'})
+    }
+    
+    try {
+        const pool = await getConnection();
+        const result = await  pool.request()
+        .input("Nombre", sql.VarChar, Nombre)
+        .input("Pais_Imagen", sql.NVarChar, Pais_Imagen)
+        .query(queries.createNewPais) //Nombre que queramos
+        console.log(result);
+        res.json({Nombre, Pais_Imagen}); // Objeto JSON como respuesta
+    
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+};
+
+export const  getRoles = async(req, res) => {
+    try {
+        const pool = await getConnection(); 
+        const result = await  pool.request().query(queries.getAllPaises)
+        res.json(result.recordset)
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+};

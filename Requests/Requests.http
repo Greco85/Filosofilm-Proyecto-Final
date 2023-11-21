@@ -6,9 +6,26 @@
 @Error = http://localhost:3000/Error
 @Pelicula = http://localhost:3000/Pelicula
 
+@Paises = http://localhost:3000/Pais_Origen
+
 ###
-GET http://localhost:3000/Inicio
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJRF9Vc3VhcmlvIjoxLCJJRF9Sb2wiOjEsImlhdCI6MTcwMDQ3MTkxNSwiZXhwIjoxNzAwNDc1NTE1fQ.ix4Op8ToFzFqTGqWAA-FNE7A--xoanRU_TUEACb-W9o
+GET {{Paises}}
+
+###
+
+POST {{Paises}}
+Content-Type: application/json 
+
+{
+    "Nombre": "Cuba",
+    "Pais_Imagen": "Cuba.jpg"
+}
+
+###
+
+DELETE http://localhost:3000/Pais_Origen/ID/:ID
+
+
 
 ###
 
@@ -27,7 +44,8 @@ Content-Type: application/json
 }
 
 ###
-GET {{Actor}}/20
+GET {{Actor}}/1000
+
 
 ###
 
@@ -295,3 +313,6 @@ Content-Type: application/json
 }
 
 //FIN PELICULA
+
+###
+GET http://localhost:3000/Pais_Origen/1

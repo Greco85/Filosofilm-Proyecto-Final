@@ -5,7 +5,7 @@ import config from './config'; // Importa el archivo de config para obtener las 
 import Rutas from './Rutas/TodasLasRutas.js'; // Importa todas las rutas de la aplicación CHECA
 import {Metodos as Metodoss} from './Middlewares/Autorizaciones.js';
 import cookieParser from 'cookie-parser';
-
+import {ObtenerPerfilUsuario} from './Controladores/TodosLosControladores.js'
 const secret = process.env.JWT_SECRET
 
 
@@ -22,11 +22,43 @@ app.use(Rutas);
 //RUTAS PARA TODAS LAS PAGINAS
 app.get("/",Metodoss.redireccionInicio,(req, res) => res.sendFile(__dirname + "/Paginas/index.html"));
 app.get("/registrarse",  (req, res) => res.sendFile(__dirname + "/Paginas/registrarse.html"));
+app.get("/Inicio", Metodoss.SoloLoggeado, Metodoss.ExtraerID, (req, res) => res.sendFile(__dirname + "/Paginas/InicioDelUsuario.html"));
+app.get("/Perfil", Metodoss.SoloLoggeado, Metodoss.ExtraerID , (req, res) => res.sendFile(__dirname + "/Paginas/perfil.html"));
 
-app.get("/Inicio", Metodoss.SoloLoggeado, (req, res) => res.sendFile(__dirname + "/Paginas/InicioDelUsuario.html"));
+app.get('/IDusuarioLog', Metodoss.SoloLoggeado, Metodoss.ExtraerID, (req, res) => { //UTIL PARA SACAR EL ID DEL USUARIO
+    res.json({ ID_Usuario: req.ID_Usuario});
+});
 
+//EXPLORACION DE PELICULAS
+app.get("/ExploracionPeliculas", (req, res) => res.sendFile(__dirname + ""));
+
+
+//MODERADOR
+app.get("/Moderador", (req, res) => res.sendFile(__dirname + "/Paginas/Moderador.html"));
+
+//ADMINISTRADOR
+app.get("/Admin", (req, res) => res.sendFile(__dirname + "/Paginas/Administrador.html"));
+app.get("/PropuestasDeCambio", (req, res) => res.sendFile(__dirname + ""));
+
+//CRUD
+app.get("/CRUDPeliculas", (req, res) => res.sendFile(__dirname + "/Paginas/CRUDPeliculas.html"));
+app.get("/CRUDActores", (req, res) => res.sendFile(__dirname + "/Paginas/CRUDActores.html"));
+app.get("/CRUDDirectores", (req, res) => res.sendFile(__dirname + "/Paginas/CRUDDirectores.html"));
+app.get("/CRUDUsuarios", (req, res) => res.sendFile(__dirname + "/Paginas/CRUDUsuarios.html"));
+app.get("/CRUDPaises", (req, res) => res.sendFile(__dirname + "/Paginas/CRUDPaises.html"));
+
+//Borjas 
 app.get("/Nosotros", (req, res) => res.sendFile(__dirname + "/Paginas/Nosotros.html"));
 app.get("/QueEsFF", (req, res) => res.sendFile(__dirname + "/Paginas/QueEsFF.html"));
+
+
+
+<<<<<<< HEAD
+
+=======
+app.get("/Nosotros", (req, res) => res.sendFile(__dirname + "/Paginas/Nosotros.html"));
+app.get("/QueEsFF", (req, res) => res.sendFile(__dirname + "/Paginas/QueEsFF.html"));
+>>>>>>> d1a7da7ef64623b6e87fcd7c8f2449610fa0397c
 
  
 

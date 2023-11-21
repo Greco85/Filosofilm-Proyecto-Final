@@ -6,20 +6,29 @@ import {getActor , createNewActor, getActorbyid, deleteActor, UpdateActorbyID,
         getAviso, createNewAviso, getAvisobyid, deleteAviso, UpdateAvisobyID,
         getError, createNewError, getErrorbyid, deleteError, UpdateErrorbyID,
         getPelicula, createNewPelicula, getPeliculabyid, deletePelicula, UpdatePeliculabyID
-,  getUsuarioByCorreo, getUsuarioByTel, getUsuarioByNickname, getUsuarioByContraseña, LoginUsuario} from '../Controladores/TodosLosControladores.js'
+,  getUsuarioByCorreo, getUsuarioByTel, getUsuarioByNickname, getUsuarioByContraseña, LoginUsuario, 
+ObtenerPerfilUsuario, getPaises, getPaisesIDbyNombre, getNombrePaisesbyID, postPaises, deletePais,getRoles, UpdateUsuarioRol} from '../Controladores/TodosLosControladores.js'
 
 const router = Router()
  
         
-//Controladores Usuario
+//ROLESSS
+router.get('/Roles', getRoles);
 
+
+//Controladores Usuario
 router.get('/Usuario', getUsuarios);
+
+//PERFIL DEL USUARIO
+router.get('/Perfil/:Niaaaaackname', ObtenerPerfilUsuario );
+
 
 //USANDO PARA REGISTRAR USUARIOS
 router.post('/Usuario', createNewUsuario);
 router.get('/Usuario/:ID', getUsuariobyid );
 router.delete('/Usuario/:ID', deleteUsuario);
 router.put('/Usuario/:ID', UpdateUsuariobyID);
+router.put('/Usuario/Cambiar/:ID', UpdateUsuarioRol )
 
 //COMPROBACION PARA EL LOGIN
 router.post('/Usuario/Verificacion/Correo/:Correo_Electronico', LoginUsuario);
@@ -69,10 +78,16 @@ router.put('/Aviso/:ID', UpdateAvisobyID);
 
 //Controladores Pelicula
 router.get('/Pelicula', getPelicula);
+router.put('/Pelicula/:ID', UpdatePeliculabyID)
 router.post('/Pelicula', createNewPelicula);
 router.get('/Pelicula/:ID', getPeliculabyid );
 router.delete('/Pelicula/:ID', deletePelicula);
-router.put('/Pelicula/:ID', UpdatePeliculabyID);
 
+
+router.get('/Pais_Origen', getPaises);
+router.post('/Pais_Origen', postPaises);
+router.get('/Pais_Origen/:Nombre', getPaisesIDbyNombre);
+router.get('/Pais_Origen/ID/:ID', getNombrePaisesbyID);
+router.delete('/Pais_Origen/ID/:ID', deletePais);
 
 export default router;

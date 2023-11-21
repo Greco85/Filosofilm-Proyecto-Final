@@ -20,7 +20,10 @@ export const queries = {
     getUsaurioByID: "SELECT * FROM [DIAGRAMA].[dbo].[Usuario] WHERE ID_Usuario = @ID",
     deleteUsuario: 'DELETE FROM [DIAGRAMA].[dbo].[Usuario] WHERE ID_Usuario = @ID',
     UpdateUsuario: 'UPDATE [DIAGRAMA].[dbo].[Usuario] SET Nickname = @Nickname, ID_Rol = @ID_Rol, Correo_Electronico = @Correo_Electronico, Contraseña = @Contraseña, Nombre = @Nombre, Apellido = @Apellido, Foto_Perfil = @Foto_Perfil, Fecha_Registro = @Fecha_Registro, Fecha_Nacimiento = @Fecha_Nacimiento, Sexo = @Sexo, Telefono = @Telefono, Descripcion = @Descripcion WHERE ID_Usuario = @ID;',
+    UpdateRolUsuario: 'UPDATE [DIAGRAMA].[dbo].[Usuario] SET ID_Rol = @ID_Rol WHERE ID_Usuario = @ID;',
 
+    //PERFIL DEL USUARIO LOGGEADO
+    getPerfilUsuarioLog: "SELECT * FROM [DIAGRAMA].[dbo].[Usuario] WHERE Nickname = @Nickname",
 
     //COMPROBACIONES DE EMAIL, NICKNAME Y TELEFONO
     getUsaurioByemail: "SELECT * FROM [DIAGRAMA].[dbo].[Usuario] WHERE Correo_Electronico = @Correo_Electronico",
@@ -62,5 +65,16 @@ export const queries = {
       getPeliculaByID: 'SELECT * FROM [DIAGRAMA].[dbo].[Pelicula] WHERE ID_Pelicula = @ID',
       deletePelicula: 'DELETE FROM [DIAGRAMA].[dbo].[Pelicula] WHERE ID_Pelicula = @ID',
       UpdatePelicula: 'UPDATE [DIAGRAMA].[dbo].[Pelicula] SET Titulo = @Titulo, Sinopsis = @Sinopsis, Fecha_Lanzamiento = @Fecha_Lanzamiento, Duracion = @Duracion, Presupuesto = @Presupuesto, imagen = @imagen, Recaudacion = @Recaudacion, ID_Pais_Origen = @ID_Pais_Origen WHERE ID_Pelicula = @ID;' ,
+
+
+      //Obtener el PAIS
+      getAllPaises: 'SELECT * FROM [DIAGRAMA].[dbo].[Pais_Origen]',
+      getIDPaisbyNombre: "SELECT ID_Pais FROM [DIAGRAMA].[dbo].[Pais_Origen] WHERE Nombre = @Nombre;",
+      getNombrePaisesbyID: "SELECT * FROM [DIAGRAMA].[dbo].[Pais_Origen] WHERE ID_Pais = @ID;",
+      createNewPais: 'INSERT INTO Pais_Origen (Nombre, Pais_Imagen) VALUES (@Nombre,@Pais_Imagen)',
+      deletePais: 'DELETE FROM [DIAGRAMA].[dbo].[Pais_Origen] WHERE ID_Pais = @ID',
+
+      //ROLESS
+      getAllPaises: 'SELECT * FROM [DIAGRAMA].[dbo].[Rol]',
 
 }
