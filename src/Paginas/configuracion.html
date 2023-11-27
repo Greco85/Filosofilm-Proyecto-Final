@@ -8,53 +8,76 @@
     <link rel="stylesheet" href="css/configuracion.css">
 </head>
 <body>
-    <div class="prin">
-    <h1>Mi configuración</h1>
-    <div class="cont">
-         <button class="boton-con-fondo"></button>
-                <p id="r" class="centrar">Rol</p>
-            </div>
-            <br/>
-    
-            <form id="configForm">
-                <p>Información de la cuenta</p>
-                <label for="nombreVisualizacion">Nombre de Visualización:</label>
-                <input type="text" id="nombreVisualizacion" name="nombreVisualizacion" placeholder="" required>
-            
-                <label for="nombreUsuario">Nueva Contraseña:</label>
-                <input type="text" id="nuevaContrasena" name="nuevaUsuario" placeholder="" required>
-            
-                <label for="Contraseña">Confirmar Contraseña:</label>
-                <input type="password" id="Contraseña" name="Contraseña" placeholder="" required>
 
-                <label for="telefono">Confirmar Contraseña:</label>
-                <input type="tel" id="telefono" name="telefono" placeholder="" required>
+<div class="bg-secondary">
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+              <a class="nav-link" href="/Inicio"><strong>Inicio</strong></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/Perfil" id="nombreUsuario"><strong>@Usuario</strong></a>
+            </li>
+            <li class="nav-item">
+                <a id="cerrarSesionLink" class="nav-link"><strong>Cerrar Sesion</strong></a>
+            </li>
+        </ul>
+    </div>
 
-                <form action="/guardar" method="post">
-                <label for="campoTexto">Descripción (máx. 200 caracteres)</label>
-                <input type="text" id="campoTexto" name="campoTexto" maxlength="200" placeholder="Introduzca una descripción.." required >
-                <button type="submit">Guardar</button>
-                <br/><br/>
 
-                <p>Personal</p>
-                <label>Fecha de nacimiento:<input type="date" name="nacimiento"></label>
 
-                <p>Genero:</p>
-                <label class="gen">
-                    <input type="radio" name="gender" value="male"> Hombre
-                  </label>
-              
-                  <label class="gen">
-                    <input type="radio" name="gender" value="female"> Mujer
-                  </label>
-            
-             <br/><br/>
 
-                <button type="button" onclick="guardarConfiguracion()">Guardar Configuración</button>
-              </form>
 
+
+
+
+  <div class="container mt-5">
+    <h1 class="text-center bg-secondary">Mi configuración</h1>
+    <form>
+        <div class="mb-3">
+            <label for="nombreVisualizacion" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombreVisualizacion" name="nombreVisualizacion" required>
         </div>
-        
+        <div class="mb-3">
+          <label for="ApellidosVisualizacion" class="form-label">Apellidos</label>
+          <input type="text" class="form-control" id="ApellidosVisualizacion" name="ApellidosVisualizacion" required>
+      </div>
+        <div class="mb-3">
+            <label for="nuevaContrasena" class="form-label">Nueva Contraseña</label>
+            <input type="text" class="form-control" id="nuevaContrasena" name="nuevaContrasena" required>
+        </div>
+        <div class="mb-3">
+            <label for="Contraseña" class="form-label">Confirmar Contraseña</label>
+            <input type="text" class="form-control" id="Contraseña" name="Contraseña" required>
+        </div>
+        <div class="mb-3">
+            <label for="telefono" class="form-label">Telefono</label>
+            <input type="tel" class="form-control" id="telefono" name="telefono" required>
+        </div>
+        <div class="mb-3">
+            <label for="campoTexto" class="form-label">Descripción (máx. 200 caracteres)</label>
+            <input type="text" class="form-control" id="campoTexto" name="campoTexto" maxlength="200" required>
+        </div>
+        <div class="mb-3">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="male" value="male">
+                <label class="form-check-label" for="male">Hombre</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                <label class="form-check-label" for="female">Mujer</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gender" id="Otro" value="Otro">
+              <label class="form-check-label" for="Otro">Otro</label>
+          </div>
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </form>
+</div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="js/conf.js"></script>
 </body>

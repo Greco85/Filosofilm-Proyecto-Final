@@ -51,9 +51,7 @@ app.get("/PeliculaDetalles-:ID_Pelicula", Metodoss.SoloLoggeado, (req, res) => {
     res.sendFile(__dirname + "/Paginas/InicioPelicula.html");
 });
 
-
-
-app.get("/Exploracion",Metodoss.SoloLoggeado , (req, res) => res.sendFile(__dirname + "/Paginas/ExplorarPeliculas.html"));
+app.get("/Configuracion",Metodoss.SoloLoggeado, (req, res) => res.sendFile(__dirname + "/Paginas/configuracion.html"));
 
 
 //ADMINISTRADOR Y MODERADOR
