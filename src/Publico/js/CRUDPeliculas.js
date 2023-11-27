@@ -1,18 +1,102 @@
 $(document).ready(function() {
-    // Código para obtener la lista de países
+
+    const listaGeneros = [];
+    const listaClasificaciones = [];
+    const listaActores = [];
+    const listaDirectores = []; 
+
+    // Función genérica para realizar solicitudes AJAX
+function fetchData(url, selectElement, optionValue, optionText) {
     $.ajax({
-        url: 'http://localhost:3000/Pais_Origen',
+        url: url,
         method: 'GET',
-        success: function(response) {
-            const selectPais = $('#selectPais');
-            response.forEach(function(pais) {
-                selectPais.append(`<option value="${pais.Nombre}">${pais.Nombre}</option>`);
+        success: function(data) {
+            const select = $(selectElement);
+            data.forEach(function(item) {
+                select.append(`<option value="${item[optionValue]}">${item[optionText]}</option>`);
             });
         },
-        error: function(xhr, status, error) {
-            console.error(error);
+        error: function() {
+            console.error(`Error al obtener datos desde ${url}.`);
         }
     });
+}
+
+// Llamadas a las funciones para obtener datos
+fetchData('http://localhost:3000/Pais_Origen', '#selectPais', 'Nombre', 'Nombre');
+fetchData('http://localhost:3000/Genero', '#Genero', 'Genero', 'Genero');
+fetchData('http://localhost:3000/Clasificacion', '#Clasificacion', 'Clasificacion', 'Clasificacion');
+fetchData('http://localhost:3000/Actor', '#Actor', 'Nombre', 'Nombre');
+fetchData('http://localhost:3000/Director', '#Director', 'Nombre', 'Nombre');
+    
+    $('#agregarGenero').on('click', function() {
+        const generoSeleccionado = $('#Genero').val(); // Obtener el género seleccionado
+        event.preventDefault();
+        // Verificar si el género ya ha sido seleccionado
+        if (listaGeneros.includes(generoSeleccionado)) {
+            window.alert("Este genero ya fue seleccionado")
+            return;
+        }
+
+        listaGeneros.push(generoSeleccionado); // Agregar el género a la lista
+
+        // Mostrar la lista de géneros seleccionados
+        const listaGenerosHTML = listaGeneros.map(genero => `<span>${genero}</span>`).join(', ');
+        $('#listaGeneros').html(`<p>Géneros seleccionados: ${listaGenerosHTML}</p>`);
+    });
+
+    $('#agregarClasificacion').on('click', function() {
+        const clasificacionSeleccionada = $('#Clasificacion').val(); 
+        event.preventDefault(); 
+        // Verificar si la clasificación ya ha sido seleccionada
+        if (listaClasificaciones.includes(clasificacionSeleccionada)) {
+            console.log('Esta clasificación ya ha sido seleccionada');
+            return; // Evitar agregar una clasificación duplicada
+        }
+
+        listaClasificaciones.push(clasificacionSeleccionada); // Agregar la clasificación a la lista
+
+        // Mostrar la lista de clasificaciones seleccionadas
+        const listaClasificacionesHTML = listaClasificaciones.map(clasificacion => `<span>${clasificacion}</span>`).join(', ');
+        $('#listaClasificaciones').html(`<p>Clasificaciones seleccionadas: ${listaClasificacionesHTML}</p>`);
+    });
+    // Agregar un actor y su personaje al hacer clic en el botón "Agregar"
+    $('#agregarActor').on('click', function() {
+        const actorSeleccionado = $('#Actor').val(); // Obtener el actor seleccionado
+        const personaje = prompt(`¿Qué personaje interpreta ${actorSeleccionado}?`); // Pedir al usuario el personaje
+        event.preventDefault();
+        // Verificar si el actor ya ha sido seleccionado
+        if (listaActores.some(actor => actor.nombre == actorSeleccionado)) {
+            console.log('¡Este actor ya ha sido seleccionado!');
+            return; // Evitar agregar un actor duplicado
+        }
+
+        // Agregar el actor y su personaje a la lista
+        listaActores.push({ nombre: actorSeleccionado, personaje: personaje });
+
+        // Mostrar la lista de actores seleccionados
+        const listaActoresHTML = listaActores.map(actor => `<p>${actor.nombre} interpreta a ${actor.personaje}</p>`).join('');
+        $('#listaActores').html(`<div><strong>Actores seleccionados:</strong>${listaActoresHTML}</div>`);
+    });
+    // Agregar un director al hacer clic en el botón "Agregar"
+    $('#agregarDirector').on('click', function() {
+        event.preventDefault();
+        const directorSeleccionado = $('#Director').val(); // Obtener el director seleccionado
+
+        // Verificar si el director ya ha sido seleccionado
+        if (listaDirectores.includes(directorSeleccionado)) {
+            console.log('¡Este director ya ha sido seleccionado!');
+            return; // Evitar agregar un director duplicado
+        }
+
+        // Agregar el director a la lista
+        listaDirectores.push(directorSeleccionado);
+
+        // Mostrar la lista de directores seleccionados
+        const listaDirectoresHTML = listaDirectores.map(director => `<p>${director}</p>`).join('');
+        $('#listaDirectores').html(`<div><strong>Directores seleccionados:</strong>${listaDirectoresHTML}</div>`);
+    });
+    obtenerPeliculas();
 
     function obtenerPeliculas() {
         $('#formAgregarPelicula').submit(function(event) {
@@ -27,9 +111,8 @@ $(document).ready(function() {
             const recaudacion = $('#recaudacion').val();
             const paisOrigen = $('#selectPais').val();
             const imagenURL = `./img/${titulo}.jpg`; 
-    
-            //AJAX PARA OBTENER EL ID DEL PAIS
-            $.ajax({
+            
+            $.ajax({    //AJAX PARA OBTENER EL ID DEL PAIS
                 url: 'http://localhost:3000/Pais_Origen/' + paisOrigen,
                 method: 'GET',
                 success: function(response) {
@@ -57,6 +140,7 @@ $(document).ready(function() {
                         },
                         error: function(xhr, status, error) {
                             console.error('Error al agregar la película:', error);
+                            // Manejar el error de agregar la película
                         }
                     });
                 },
@@ -86,11 +170,12 @@ $(document).ready(function() {
                     const idPelicula = $('<h5>').addClass('card-subtitle text-center mb-2').text('ID: ' + pelicula.ID_Pelicula);
                     const enlacesContainer = $('<div>').addClass('d-flex flex-column align-items-center');
                     const LeerEnlace = $('<a>').addClass('leer-pelicula btn btn-primary mb-2').attr('href', '#').data('pelicula-id', pelicula.ID_Pelicula).text('Leer');
+                    const IngresarDatos = $('<a>').addClass('ingresar-datos btn btn-primary mb-2').attr('href', '#').data('pelicula-id', pelicula.ID_Pelicula).text('Ingresar Datos');
                     const EditarEnlace = $('<a>').addClass('editar-pelicula btn btn-primary mb-2').attr('href', '#').data('pelicula-id', pelicula.ID_Pelicula).text('Editar');
                     const eliminarEnlace = $('<a>').addClass('eliminar-pelicula btn btn-danger').attr('href', '#').data('pelicula-id', pelicula.ID_Pelicula).text('Eliminar');
                 
                     // Agregar los enlaces al contenedor
-                    enlacesContainer.append(LeerEnlace).append(EditarEnlace).append(eliminarEnlace);
+                    enlacesContainer.append(LeerEnlace).append(IngresarDatos).append(EditarEnlace).append(eliminarEnlace);
                     divCardBody.append(titulo).append(idPelicula).append(enlacesContainer);
                     divCard.append(imagen).append(divCardBody); 
                     divCol.append(divCard);
@@ -98,6 +183,77 @@ $(document).ready(function() {
                 });
     
                     listaPeliculas.append(row); // Agrega la fila con todas las películas
+                    
+                    $('.ingresar-datos').on('click', function(event) {
+                        event.preventDefault(); // Prevenir el comportamiento predeterminado del enlace
+                        const peliculaID = $(this).data('pelicula-id');
+                        $('#modalEditarPelicula').modal('show');
+
+                        $('.GuardarCambios').on('click', function(event) {
+                            event.preventDefault();
+                            const peliculaID = $(this).data('pelicula-id');
+                            console.log('ID de la película:', peliculaID);
+                    
+                            //GENERO
+                            console.log(listaGeneros)
+                            
+                            function obtenerDetallesGeneros() {
+                                listaGeneros.forEach(function(genero) {
+                                    $.ajax({
+                                        url: `http://localhost:3000/Genero/${genero}`,
+                                        method: 'GET',
+                                        success: function(response) {
+                                            
+                                            const datosPeliculaGenero = {
+                                                ID_Pelicula: peliculaID,
+                                                ID_Genero: response.ID_Genero
+                                            };   
+
+                                            $.ajax({
+                                                url: 'http://localhost:3000/Pelicula-Genero',
+                                                method: 'POST',
+                                                contentType: 'application/json',
+                                                data: JSON.stringify(datosPeliculaGenero),
+                                                success: function(response) {
+                                                    console.log('Se ha agregado la relación película-género:', response);
+                                                    // Manejar la respuesta del servidor si es necesario
+                                                },
+                                                error: function(xhr, status, error) {
+                                                    console.error('Error al agregar la relación película-género:', error);
+                                                    // Manejar el error si la solicitud no se realiza correctamente
+                                                }
+                                            });
+
+                                        },
+                                        error: function(xhr, status, error) {
+                                            console.error(`Error al obtener detalles del género ${genero}:`, error);
+                                            // Manejar el error si la solicitud no se realiza correctamente
+                                        }
+                                    });
+                                });
+                            }
+                            
+                            
+                            obtenerDetallesGeneros();
+                    
+                            //CLASIFICACION
+                            console.log(listaClasificaciones)
+                            //ACTORES
+                            console.log(listaActores)
+
+                            //DIRECTORES
+                            console.log(listaDirectores)
+                    
+                            
+                        });
+
+
+
+
+
+
+                    });
+
                     $('.leer-pelicula').click(function(event) {
                         event.preventDefault();
                         const peliculaID = $(this).data('pelicula-id');
@@ -265,9 +421,6 @@ $('#formEditarPelicula').submit(function(event) {
             }
         });
     }
-
-    // Llamar a la función para obtener y mostrar las películas al cargar la página
-    obtenerPeliculas();
 
 });
 

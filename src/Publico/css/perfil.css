@@ -60,5 +60,23 @@ h3{
     }
 }
 
+li a{
+    color: #333;
+    margin: 20px 25px;
+    font-size: 20px;
+}
 
+a:hover, h1:hover{
+    color: rgb(219, 200, 23);
+}
+
+.bgactivo{
+    background-color: yellow;
+    color: black;
+}
+.bgactivo a:hover{
+    color: black;
+    font-weight: 700;
+
+}
 

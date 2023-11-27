@@ -36,9 +36,7 @@ li{
     display: inline-block;
 }
 
-.nav-links a:hover{
-    color: rgb(219, 200, 23);
-}
+
 
 #logo{
     height: 4.5em;
@@ -136,17 +134,21 @@ h3{
 .estrellas::before {
     content: "★★★★★";
     letter-spacing: 3px;
-    background: linear-gradient(90deg, gold var(--calificacion), #ddd var(--calificacion));
+    background: linear-gradient(90deg, gold calc(var(--calificacion) * 20%), #ddd calc(var(--calificacion) * 20%));
     -webkit-background-clip: text;
     color: transparent;
     display: inline-block;
 }
 
-.estrellas[data-calificacion="1"]::before { --calificacion: 20%; }
-.estrellas[data-calificacion="2"]::before { --calificacion: 40%; }
-.estrellas[data-calificacion="3"]::before { --calificacion: 60%; }
-.estrellas[data-calificacion="4"]::before { --calificacion: 80%; }
-.estrellas[data-calificacion="5"]::before { --calificacion: 100%; }
+.estrellas[data-calificacion="1"]::before { --calificacion: 1; }
+.estrellas[data-calificacion="1.5"]::before { --calificacion: 1.5; }
+.estrellas[data-calificacion="2"]::before { --calificacion: 2; }
+.estrellas[data-calificacion="2.5"]::before { --calificacion: 2.5; }
+.estrellas[data-calificacion="3"]::before { --calificacion: 3; }
+.estrellas[data-calificacion="3.5"]::before { --calificacion: 3.5; }
+.estrellas[data-calificacion="4"]::before { --calificacion: 4; }
+.estrellas[data-calificacion="4.5"]::before { --calificacion: 4.5; }
+.estrellas[data-calificacion="5"]::before { --calificacion: 5; }
 
 .Iconos2{
     width: 90%;
@@ -223,3 +225,13 @@ hr{
   .Likes {
     margin-top: 10px;
   }
+
+  li a{
+    color: #333;
+    margin: 20px 25px;
+    font-size: 20px;
+}
+
+a:hover, h1:hover{
+    color: rgb(219, 200, 23);
+}

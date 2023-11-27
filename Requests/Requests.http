@@ -8,6 +8,152 @@
 
 @Paises = http://localhost:3000/Pais_Origen
 
+@ActorPelicula = http://localhost:3000/Pelicula-Actor
+
+@DirectorPelicula = http://localhost:3000/Pelicula-Director
+
+@Clasificacion = http://localhost:3000/Pelicula-Clasificacion
+
+@Genero = http://localhost:3000/Pelicula-Genero
+
+@Like = http://localhost:3000/Like
+
+### JALA
+GET {{Like}}
+
+### JALA
+GET {{Like}}/10
+
+### JALA
+POST http://localhost:3000/Like/10
+Content-Type: application/json 
+
+{
+    "FechaLike": "2005-03-03",
+    "ID_Usuario": 22,
+    "ID_Reseña": 10
+}
+
+### JALA
+DELETE {{Like}}/:ID_Resena/:ID_Usuario
+
+
+### JALA
+GET {{Genero}} 
+
+### JALA
+POST {{Genero}} 
+Content-Type: application/json 
+
+{
+    "ID_Pelicula": 3843,
+    "ID_Genero": 1
+    
+}
+
+### JALA
+PUT {{Genero}}/1/3843
+Content-Type: application/json 
+
+{
+    "ID_Genero": 1,
+    "ID_Pelicula": 3843,
+    "Nuevo_ID_Genero": 2,
+    "Nuevo_ID_Pelicula": 3843
+}
+
+
+
+### JALA
+DELETE {{Genero}}/2/3843
+
+### JALA
+GET {{Clasificacion}} 
+
+### JALA
+POST {{Clasificacion}} 
+Content-Type: application/json 
+
+{
+    "ID_Clasificacion": 5,
+    "ID_Pelicula": 3843
+}
+
+### JALA
+PUT {{Clasificacion}}/5/3843
+Content-Type: application/json 
+
+{
+    "ID_Clasificacion": 5,
+    "ID_Pelicula": 3843,
+    "Nuevo_ID_Clasificacion": 3,
+    "Nuevo_ID_Pelicula": 3843
+}
+
+
+
+### JALA
+DELETE {{Clasificacion}}/3/3846
+
+
+### JALA
+GET {{DirectorPelicula}} 
+
+### JALA
+POST {{DirectorPelicula}} 
+Content-Type: application/json 
+
+{
+    "ID_Director": 1008,
+    "ID_Pelicula": 3843
+}
+
+### JALA
+PUT {{DirectorPelicula}}/1041/3843
+Content-Type: application/json 
+
+{
+    "ID_Director": 1041,
+    "ID_Pelicula": 3843,
+    "Nuevo_ID_Director": 1041,
+    "Nuevo_ID_Pelicula": 3846
+}
+
+
+
+### JALA
+DELETE {{DirectorPelicula}}/1008/3846
+
+### JALA
+GET {{ActorPelicula}} 
+
+### JALA
+POST {{ActorPelicula}} 
+Content-Type: application/json 
+
+{
+    "ID_Actor": 1008,
+    "ID_Pelicula": 3846,
+    "Personaje": "ALGO RANDOM"
+}
+
+### JALA
+PUT {{ActorPelicula}}/1008/3846
+Content-Type: application/json 
+
+{
+    "ID_Actor": 1008,
+    "ID_Pelicula": 3846,
+    "Personaje": "QN SABE SI ACABO",
+    "Nuevo_ID_Actor": 1008,
+    "Nuevo_ID_Pelicula": 3846
+
+}
+
+### JALA
+DELETE {{ActorPelicula}}/1008/1
+
+
 ###
 GET {{Paises}}
 

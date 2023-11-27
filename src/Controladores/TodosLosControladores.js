@@ -4,6 +4,273 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+export const  getAllPeliculaGenero = async(req, res) => {
+    try {
+        const pool = await getConnection(); 
+        const result = await  pool.request().query(queries.getAllPeliculaGenero)
+        res.json(result.recordset)
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+};
+
+
+export const postPeliculaGenero = async (req, res) => {
+    const {ID_Pelicula, ID_Genero} = req.body;
+    console.log(ID_Pelicula, ID_Genero);
+    if (ID_Genero == null || ID_Pelicula == null) {
+        return res.status(400).json({ msg: 'Por favor completa todos los campos'});
+    }
+    
+    try {
+        const pool = await getConnection();
+        const result = await  pool.request()
+        .input("ID_Genero", sql.Int, ID_Genero)
+        .input("ID_Pelicula", sql.Int, ID_Pelicula)
+        .query(queries.postPeliculaGenero) //Nombre que queramos
+        console.log(result);
+        res.json({ID_Pelicula, ID_Genero}); // Objeto JSON como respuesta
+    
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+};
+
+
+
+
+
+export const putPeliculaGenero = async (req, res) => {
+    const {ID_Pelicula, ID_Genero, Nuevo_ID_Genero, Nuevo_ID_Pelicula } = req.body;
+    
+    if (ID_Pelicula == null || ID_Genero == null || Nuevo_ID_Genero == null || Nuevo_ID_Pelicula == null) {
+        return res.status(400).json({ msg: 'Bad request. Por favor, llena todos los campos' });
+    }
+
+    try {
+        const pool = await getConnection();
+        await pool
+            .request()
+            .input("ID_Genero", sql.Int, ID_Genero)
+            .input("ID_Pelicula", sql.Int, ID_Pelicula)
+            .input('Nuevo_ID_Genero', sql.Int, Nuevo_ID_Genero) 
+            .input('Nuevo_ID_Pelicula', sql.Int, Nuevo_ID_Pelicula)
+            .query(queries.UpdatePeliculaGenero);
+
+        res.json({ ID_Genero: Nuevo_ID_Genero, ID_Pelicula: Nuevo_ID_Pelicula});
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+
+
+export const deletePeliculaGenero = async (req, res) => {
+    const {ID_Pelicula, ID_Genero} = req.params;
+    const pool = await getConnection();
+    await pool.request().input('ID_Genero', ID_Genero).input('ID_Pelicula', ID_Pelicula).query(queries.deletePeliculaGenero);
+
+    res.sendStatus(204);
+};
+
+
+
+export const DarLike = async (req, res) => {
+    const { FechaLike, ID_Usuario } = req.body;
+    const { ID } = req.params;
+
+    if (FechaLike == null || ID_Usuario == null || ID == null) {
+        return res.status(400).json({ msg: 'Bad request. Por favor, llena todos los campos' });
+    }
+
+    try {
+        const pool = await getConnection();
+        await pool
+            .request()
+            .input("FechaLike", sql.DateTime, FechaLike)
+            .input("ID_Usuario", sql.Int, ID_Usuario)
+            .input('ID', sql.Int, ID) // Changed to use ID_Reseña from req.body
+            .query(queries.DarLike);
+
+        res.json({ FechaLike, ID_Usuario, ID });
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+
+
+export const QuitarLike = async (req, res) => {
+    const {ID_Pelicula, ID_Genero} = req.params;
+    const pool = await getConnection();
+    await pool.request().input('ID_Genero', ID_Genero).input('ID_Pelicula', ID_Pelicula).query(queries.QuitarLike);
+
+    res.sendStatus(204);
+};
+
+export const TraerLikes = async (req, res) => {
+    try {
+        const { ID } = req.params;
+        const pool = await getConnection();
+        const result = await pool
+            .request()
+            .input('ID', ID)
+            .query(queries.TraerLikes);
+
+        res.json(result.recordset); // Retorna todos los likes de la reseña
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+export const  TodosLosLikes = async(req, res) => {
+    try {
+        const pool = await getConnection(); 
+        const result = await  pool.request().query(queries.TodosLosLikes)
+        res.json(result.recordset)
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+};
+
+
+
+
+export const  getAllPeliculaClasificacion = async(req, res) => {
+    try {
+        const pool = await getConnection(); 
+        const result = await  pool.request().query(queries.getAllPeliculaClasificacion)
+        res.json(result.recordset)
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+};
+
+export const  getAllClasificacion = async(req, res) => {
+    try {
+        const pool = await getConnection(); 
+        const result = await  pool.request().query(queries.getAllClasificacion)
+        res.json(result.recordset)
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+};
+
+export const  PromediarEstrellas = async(req, res) => {
+    const { ID_Pelicula } = req.params;
+
+    try {
+        const pool = await getConnection();
+        const result = await pool
+            .request()
+            .input('ID_Pelicula', ID_Pelicula)
+            .query(queries.PromediarEstrellas);
+
+        // Devolver el resultado del promedio de estrellas como JSON
+        res.json(result.recordset);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+export const  getAllGenero = async(req, res) => {
+    try {
+        const pool = await getConnection(); 
+        const result = await  pool.request().query(queries.getAllGenero)
+        res.json(result.recordset)
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+};
+
+export const  getGenerosbyNombre = async(req, res) => {
+    
+    const {Genero} = req.params;
+     
+    try {
+        const pool = await getConnection(); 
+        const result = await  pool.request().input('Genero', sql.VarChar, Genero).query(queries.getIDGenerobyNombre)
+        res.json(result.recordset)
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+};
+
+
+
+
+export const postPeliculaClasificacion = async (req, res) => {
+    const {ID_Clasificacion, ID_Pelicula} = req.body;
+    console.log(ID_Clasificacion, ID_Pelicula);
+    if (ID_Clasificacion == null || ID_Pelicula == null) {
+        return res.status(400).json({ msg: 'Por favor completa todos los campos'});
+    }
+    
+    try {
+        const pool = await getConnection();
+        const result = await  pool.request()
+        .input("ID_Clasificacion", sql.Int, ID_Clasificacion)
+        .input("ID_Pelicula", sql.Int, ID_Pelicula)
+        .query(queries.postPeliculaClasificacion) //Nombre que queramos
+        console.log(result);
+        res.json({ID_Clasificacion, ID_Pelicula}); // Objeto JSON como respuesta
+    
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+};
+
+
+
+
+
+export const putPeliculaClasificacion = async (req, res) => {
+    const { ID_Clasificacion, ID_Pelicula, Nuevo_ID_Clasificacion, Nuevo_ID_Pelicula } = req.body;
+    
+    if (ID_Clasificacion == null || ID_Pelicula == null || Nuevo_ID_Clasificacion == null || Nuevo_ID_Pelicula == null) {
+        return res.status(400).json({ msg: 'Bad request. Por favor, llena todos los campos' });
+    }
+
+    try {
+        const pool = await getConnection();
+        await pool
+            .request()
+            .input("ID_Clasificacion", sql.Int, ID_Clasificacion)
+            .input("ID_Pelicula", sql.Int, ID_Pelicula)
+            .input('Nuevo_ID_Clasificacion', sql.Int, Nuevo_ID_Clasificacion) // Nuevo valor para ID_Actor
+            .input('Nuevo_ID_Pelicula', sql.Int, Nuevo_ID_Pelicula) // Nuevo valor para ID_Pelicula
+            .query(queries.UpdatePeliculaClasificacion);
+
+        res.json({ ID_Clasificacion: Nuevo_ID_Clasificacion, ID_Pelicula: Nuevo_ID_Pelicula });
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+
+
+export const deletePeliculaClasificacion = async (req, res) => {
+    const {ID_Clasificacion, ID_Pelicula} = req.params;
+    const pool = await getConnection();
+    await pool.request().input('ID_Clasificacion', ID_Clasificacion).input('ID_Pelicula', ID_Pelicula).query(queries.deletePeliculaClasificacion);
+
+    res.sendStatus(204);
+};
+
+
+
+
+
+
+
 export const  getActor = async(req, res) => {
     try {
         const pool = await getConnection(); 
@@ -50,6 +317,8 @@ export const getActorbyid = async (req, res) => {
     res.send(result.recordset[0])
 };
 
+
+
 export const deleteActor = async (req, res) => {
     const {ID} = req.params;
     const pool = await getConnection();
@@ -94,6 +363,40 @@ export const  getDirectors = async(req, res) => {
     }
 };
 
+export const  getAllActorinthemovie = async(req, res) => {
+    const {ID_Pelicula} = req.params;
+    
+    try {
+        const pool = await getConnection(); 
+        const result = await pool.request().input('ID_Pelicula', ID_Pelicula).query(queries.getAllActorinthemovie)
+        res.json(result.recordset)
+        
+   
+   
+
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+};
+
+export const  getAllDirectorinthemovie = async(req, res) => {
+    const {ID_Pelicula} = req.params;
+    
+    try {
+        const pool = await getConnection(); 
+        const result = await pool.request().input('ID_Pelicula', ID_Pelicula).query(queries.getAllDirectorinthemovie)
+        res.json(result.recordset)
+        
+   
+   
+
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+};
+getAllDirectorinthemovie
 
 export const createNewDirector = async (req, res) => {
     const {Nombre, Fecha_Nacimiento, Pais_Nacimiento, Biografia, Foto_Director} = req.body;
@@ -258,7 +561,7 @@ export const LoginUsuario = async (req, res) => {
         const result = await request
             .input('Correo_Electronico', sql.VarChar, Correo_Electronico)
             .input('Contraseña', sql.VarChar, Contraseña)
-            .query('SELECT * FROM Usuario WHERE Correo_Electronico = @Correo_Electronico AND Contraseña = @Contraseña');
+    .query('SELECT * FROM Usuario WHERE Correo_Electronico = @Correo_Electronico AND Contraseña = @Contraseña');
 
         if (result.recordset.length > 0) { //Si hay algo entonces
             const Datos = result.recordset[0];
@@ -268,7 +571,6 @@ export const LoginUsuario = async (req, res) => {
                 ID_Usuario: Datos.ID_Usuario, // Suponiendo que tengas un ID de usuario
                 ID_Rol: Datos.ID_Rol,
                 Nickname: Datos.Nickname // Si tienes información de si es admin
-                // ...otros datos que desees incluir
               
             };
 
@@ -456,6 +758,13 @@ export const getReseñabyid = async (req, res) => {
     const result = await pool.request().input('ID', ID).query(queries.getResenaByID);
 
     res.send(result.recordset[0])
+};
+
+export const getTodasReseñabyid = async (req, res) => {
+    const {ID_Usuario} = req.params;
+    const pool = await getConnection();
+    const result = await pool.request().input('ID_Usuario', ID_Usuario).query(queries.getTodasResenaByID);
+    res.send(result.recordset)
 };
 
 export const deleteReseña = async (req, res) => {
@@ -701,6 +1010,16 @@ export const getPeliculabyid = async (req, res) => {
     res.send(result.recordset[0])
 };
 
+export const getAllReseñasPorPelicula = async (req, res) => {
+    const {ID_Pelicula} = req.params;
+    const pool = await getConnection();
+    const result = await pool.request().input('ID_Pelicula', ID_Pelicula).query(queries.getAllReseñasPorPelicula);
+
+    res.json(result.recordset)
+};
+
+
+
 export const deletePelicula = async (req, res) => {
     const {ID} = req.params;
     const pool = await getConnection();
@@ -748,6 +1067,174 @@ export const  getPaises = async(req, res) => {
         res.send(error.message)
     }
 };
+
+
+
+
+export const getPeliculaxTitulo = async (req, res) => {
+        const {Titulo} = req.params;
+        const pool = await getConnection();
+        const result = await pool.request().input('Titulo', Titulo).query(queries.getpeliculaxtitulo);
+    
+        res.send(result.recordset[0])
+    };
+
+
+
+export const  getAllPeliculaActor = async(req, res) => {
+    try {
+        const pool = await getConnection(); 
+        const result = await  pool.request().query(queries.getAllPeliculaActor)
+        res.json(result.recordset)
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+};
+
+
+export const postPeliculaActor = async (req, res) => {
+    const {ID_Actor, ID_Pelicula, Personaje} = req.body;
+    console.log(ID_Actor, ID_Pelicula, Personaje);
+    if (ID_Actor == null || ID_Pelicula == null || Personaje == null) {
+        return res.status(400).json({ msg: 'Por favor completa los siguientes campos: ' + missingFields.join(', ') });
+    }
+    
+    try {
+        const pool = await getConnection();
+        const result = await  pool.request()
+        .input("ID_Actor", sql.Int, ID_Actor)
+        .input("ID_Pelicula", sql.Int, ID_Pelicula)
+        .input("Personaje", sql.NVarChar, Personaje)
+        .query(queries.postPeliculaActor) //Nombre que queramos
+        console.log(result);
+        res.json({ID_Actor, ID_Pelicula, Personaje}); // Objeto JSON como respuesta
+    
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+};
+
+
+
+
+
+export const putPeliculaActor = async (req, res) => {
+    const { ID_Actor, ID_Pelicula, Personaje, Nuevo_ID_Actor, Nuevo_ID_Pelicula } = req.body;
+    
+    if (ID_Actor == null || ID_Pelicula == null || Personaje == null || Nuevo_ID_Actor == null || Nuevo_ID_Pelicula == null) {
+        return res.status(400).json({ msg: 'Bad request. Por favor, llena todos los campos' });
+    }
+
+    try {
+        const pool = await getConnection();
+        await pool
+            .request()
+            .input("ID_Actor", sql.Int, ID_Actor)
+            .input("ID_Pelicula", sql.Int, ID_Pelicula)
+            .input("Personaje", sql.NVarChar, Personaje)
+            .input('Nuevo_ID_Actor', sql.Int, Nuevo_ID_Actor) // Nuevo valor para ID_Actor
+            .input('Nuevo_ID_Pelicula', sql.Int, Nuevo_ID_Pelicula) // Nuevo valor para ID_Pelicula
+            .query(queries.UpdatePeliculaActor);
+
+        res.json({ ID_Actor: Nuevo_ID_Actor, ID_Pelicula: Nuevo_ID_Pelicula, Personaje });
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+
+
+
+
+
+export const deletePeliculaActor = async (req, res) => {
+    const {ID_Actor, ID_Pelicula} = req.params;
+    const pool = await getConnection();
+    await pool.request().input('ID_Actor', ID_Actor).input('ID_Pelicula', ID_Pelicula).query(queries.deletePeliculaActor);
+
+    res.sendStatus(204);
+};
+
+
+export const  getAllPeliculaDirector  = async(req, res) => {
+    try {
+        const pool = await getConnection(); 
+        const result = await  pool.request().query(queries.getAllPeliculaDirector )
+        res.json(result.recordset)
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+};
+
+
+export const postPeliculaDirector  = async (req, res) => {
+    const {ID_Director , ID_Pelicula} = req.body;
+    if (ID_Director == null || ID_Pelicula == null) {
+        return res.status(400).json({ msg: 'Por favor completa todos los campos'});
+    }
+    
+    try {
+        const pool = await getConnection();
+        const result = await  pool.request()
+        .input("ID_Director", sql.Int, ID_Director)
+        .input("ID_Pelicula", sql.Int, ID_Pelicula)
+        .query(queries.postPeliculaDirector) //Nombre que queramos
+        console.log(result);
+        res.json({ID_Director, ID_Pelicula}); // Objeto JSON como respuesta
+    
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+};
+
+
+
+
+
+export const putPeliculaDirector = async (req, res) => {
+    const { ID_Director, ID_Pelicula } = req.params; // Accediendo a los parámetros de la URL
+    const { Nuevo_ID_Director, Nuevo_ID_Pelicula } = req.body; // Obteniendo nuevos datos del cuerpo de la solicitud
+
+    if (ID_Director == null || ID_Pelicula == null) {
+        return res.status(400).json({ msg: 'Bad request. Por favor, llena todos los campos' });
+    }
+
+    try {
+        const pool = await getConnection();
+        const result = await pool
+            .request()
+            .input('ID_Director', sql.Int, ID_Director)
+            .input('ID_Pelicula', sql.Int, ID_Pelicula)
+            .input('Nuevo_ID_Director', sql.Int, Nuevo_ID_Director) // Nuevo valor para ID_Director
+            .input('Nuevo_ID_Pelicula', sql.Int, Nuevo_ID_Pelicula) // Nuevo valor para ID_Pelicula
+            .query(queries.UpdatePeliculaDirector);
+
+        res.json({ ID_Director, ID_Pelicula, Nuevo_ID_Director, Nuevo_ID_Pelicula });
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+``
+
+
+
+
+
+
+export const deletePeliculaDirector = async (req, res) => {
+    const {ID_Director, ID_Pelicula} = req.params;
+    const pool = await getConnection();
+    await pool.request().input('ID_Director', ID_Director).input('ID_Pelicula', ID_Pelicula).query(queries.deletePeliculaDirector);
+
+    res.sendStatus(204);
+};
+
+
+
 
 export const  getPaisesIDbyNombre = async(req, res) => {
     

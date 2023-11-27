@@ -14,44 +14,25 @@
 
 <body>
   
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
+    <div class="bg-secondary">
 
-        <div class="navbar-brand">
-            <a href="#">
-                <img id="logo" src="img/logo.png" alt="Logo">
-            </a>
-        </div>
+        <ul class="nav justify-content-end">
+  
+            <li class="nav-item">
+              <a class="nav-link" href="/Inicio"><strong>Inicio</strong></a>
+            </li>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Explorar Películas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Equipo</a>
-                </li>
-            </ul>
-
-            <ul class="navbar-nav">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img class="Iconos" src="img/IconoConfig.png" alt="Configuración">
-                    </a>
-                    <a href="/Perfil">Cerrar Sesión<a></a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#" id="cerrarSesion">Configuración</a></li>
-                        </a><li><button></button><a class="dropdown-item" href="/">Cerrar Sesión</a></li>
-                    </ul>
-                    
-                </li>
-            </ul>
-        </div>
-    </nav>
+              <li class="nav-item">
+                <a class="nav-link" href="/Perfil" id="nombreUsuario"><strong>@Usuario</strong></a>
+            </li>
+            
+            <li class="nav-item">
+                <a id="cerrarSesionLink" class="nav-link"><strong>Cerrar Sesion</strong></a>
+              </li>
+  
+        </ul>
+  
+    </div>
 
   <!--FIN DE LA NAVBAR-->
 

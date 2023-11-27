@@ -45,6 +45,7 @@ export const queries = {
      deleteResena: 'DELETE FROM [DIAGRAMA].[dbo].[Reseña] WHERE ID_Reseña = @ID',
      UpdateResena: 'UPDATE [DIAGRAMA].[dbo].[Reseña] SET Contenido = @Contenido, Fecha_Publicacion = @Fecha_Publicacion, Calificacion = @Calificacion, ID_Usuario = @ID_Usuario, ID_Pelicula = @ID_Pelicula WHERE ID_Reseña = @ID;',
 
+     getTodasResenaByID: 'SELECT * FROM [DIAGRAMA].[dbo].[Reseña] WHERE ID_Usuario = @ID_Usuario',
      //AVISO
      getAllAviso: 'SELECT * FROM [DIAGRAMA].[dbo].[Aviso]',
      createNewAviso: 'INSERT INTO Aviso (Mensaje, ID_Usuario_Receptor, ID_Moderador, Estatus) VALUES (@Mensaje,@ID_Usuario_Receptor,@ID_Moderador,@Estatus)',
@@ -65,7 +66,7 @@ export const queries = {
       getPeliculaByID: 'SELECT * FROM [DIAGRAMA].[dbo].[Pelicula] WHERE ID_Pelicula = @ID',
       deletePelicula: 'DELETE FROM [DIAGRAMA].[dbo].[Pelicula] WHERE ID_Pelicula = @ID',
       UpdatePelicula: 'UPDATE [DIAGRAMA].[dbo].[Pelicula] SET Titulo = @Titulo, Sinopsis = @Sinopsis, Fecha_Lanzamiento = @Fecha_Lanzamiento, Duracion = @Duracion, Presupuesto = @Presupuesto, imagen = @imagen, Recaudacion = @Recaudacion, ID_Pais_Origen = @ID_Pais_Origen WHERE ID_Pelicula = @ID;' ,
-
+      getpeliculaxtitulo: 'SELECT * FROM [DIAGRAMA].[dbo].[Pelicula] WHERE Titulo = @Titulo',
 
       //Obtener el PAIS
       getAllPaises: 'SELECT * FROM [DIAGRAMA].[dbo].[Pais_Origen]',
@@ -74,7 +75,52 @@ export const queries = {
       createNewPais: 'INSERT INTO Pais_Origen (Nombre, Pais_Imagen) VALUES (@Nombre,@Pais_Imagen)',
       deletePais: 'DELETE FROM [DIAGRAMA].[dbo].[Pais_Origen] WHERE ID_Pais = @ID',
 
+
+      getIDGenerobyNombre: "SELECT ID_Genero FROM [DIAGRAMA].[dbo].[Genero] WHERE Genero = @Genero;",
+
+
+
       //ROLESS
       getAllRoles: 'SELECT * FROM [DIAGRAMA].[dbo].[Rol]',
 
-}
+
+      getAllReseñasPorPelicula: 'SELECT * FROM [DIAGRAMA].[dbo].[Reseña] WHERE ID_Pelicula = @ID_Pelicula',
+
+      //ACTOR-PELICULA
+      getAllPeliculaActor: 'SELECT * FROM [DIAGRAMA].[dbo].[Actor_Pelicula]',
+      postPeliculaActor: "INSERT INTO Actor_Pelicula (ID_Actor, ID_Pelicula, Personaje) VALUES (@ID_Actor,@ID_Pelicula, @Personaje)",
+      deletePeliculaActor: 'DELETE FROM [DIAGRAMA].[dbo].[Actor_Pelicula] WHERE ID_Pelicula = @ID_Pelicula AND ID_Actor = @ID_Actor',
+      UpdatePeliculaActor: 'UPDATE [DIAGRAMA].[dbo].[Actor_Pelicula] SET ID_Actor = @ID_Actor, ID_Pelicula = @ID_Pelicula, Personaje = @Personaje WHERE ID_Pelicula = @ID_Pelicula AND ID_Actor = @ID_Actor',
+
+    //DIRECTOR-PELICULA
+    getAllPeliculaDirector: 'SELECT * FROM [DIAGRAMA].[dbo].[Director_Pelicula]',
+    postPeliculaDirector: 'INSERT INTO Director_Pelicula (ID_Director, ID_Pelicula) VALUES (@ID_Director,@ID_Pelicula)',
+    deletePeliculaDirector: 'DELETE FROM [DIAGRAMA].[dbo].[Director_Pelicula] WHERE ID_Pelicula = @ID_Pelicula AND ID_Director = @ID_Director',
+    UpdatePeliculaDirector: 'UPDATE [DIAGRAMA].[dbo].[Director_Pelicula] SET ID_Director = @Nuevo_ID_Director, ID_Pelicula = @Nuevo_ID_Pelicula WHERE ID_Director = @ID_Director AND ID_Pelicula = @ID_Pelicula',
+
+    //GENERO-PELICULA
+    getAllPeliculaGenero: 'SELECT * FROM [DIAGRAMA].[dbo].[Pelicula_Genero]',
+    postPeliculaGenero: 'INSERT INTO Pelicula_Genero (ID_Pelicula, ID_Genero) VALUES (@ID_Pelicula, @ID_Genero)',
+    deletePeliculaGenero: 'DELETE FROM [DIAGRAMA].[dbo].[Pelicula_Genero] WHERE ID_Pelicula = @ID_Pelicula AND ID_Genero = @ID_Genero',
+    UpdatePeliculaGenero: 'UPDATE [DIAGRAMA].[dbo].[Pelicula_Genero] SET ID_Genero = @Nuevo_ID_Genero, ID_Pelicula = @Nuevo_ID_Pelicula WHERE ID_Genero = @ID_Genero AND ID_Pelicula = @ID_Pelicula',
+
+    //CLASIFICACION-PELICULA
+    getAllPeliculaClasificacion: 'SELECT * FROM [DIAGRAMA].[dbo].[Clasificacion_Pelicula]',
+    postPeliculaClasificacion: 'INSERT INTO Clasificacion_Pelicula (ID_Clasificacion, ID_Pelicula) VALUES (@ID_Clasificacion,@ID_Pelicula)',
+    deletePeliculaClasificacion: 'DELETE FROM [DIAGRAMA].[dbo].[Clasificacion_Pelicula] WHERE ID_Pelicula = @ID_Pelicula AND ID_Clasificacion = @ID_Clasificacion',
+    UpdatePeliculaClasificacion: 'UPDATE [DIAGRAMA].[dbo].[Clasificacion_Pelicula] SET ID_Clasificacion = @Nuevo_ID_Clasificacion, ID_Pelicula = @Nuevo_ID_Pelicula WHERE ID_Clasificacion = @ID_Clasificacion AND ID_Pelicula = @ID_Pelicula',
+
+    //
+    getAllClasificacion: 'SELECT * FROM [DIAGRAMA].[dbo].[Clasificacion]',
+    getAllGenero: 'SELECT * FROM [DIAGRAMA].[dbo].[Genero]',
+
+
+    getAllActorinthemovie: 'SELECT * FROM [DIAGRAMA].[dbo].[Actor_Pelicula] WHERE ID_Pelicula = @ID_Pelicula',
+    getAllDirectorinthemovie: 'SELECT * FROM [DIAGRAMA].[dbo].[Director_Pelicula] WHERE ID_Pelicula = @ID_Pelicula',
+
+    PromediarEstrellas: 'SELECT AVG(Calificacion) AS PromedioEstrellas FROM Reseña WHERE ID_Pelicula = @ID_Pelicula;',
+
+    DarLike: 'INSERT INTO [DIAGRAMA].[dbo].[Like] (FechaLike, ID_Usuario, ID_Reseña) VALUES (@FechaLike, @ID_Usuario, @ID_Reseña)',
+    TodosLosLikes:'SELECT * FROM [DIAGRAMA].[dbo].[Like]',
+    TraerLikes: 'SELECT * FROM [DIAGRAMA].[dbo].[Like] WHERE ID_Reseña = @ID',
+}   

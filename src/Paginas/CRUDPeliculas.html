@@ -41,8 +41,7 @@
                     <!-- AQUI SALDRAN LAS OPCIONES -->
                 </select>
             </div> 
-
-
+            
             <div class="form-group">
                 <button type="submit" class="btn btn-primary mr-2" id="addMovieBtn">Agregar</button>
                 <button type="button" class="btn btn-warning mr-2" id="updateMovieBtn" style="display: none;">Actualizar</button>
@@ -98,6 +97,11 @@
                         <label for="PaisModalEditar">País de Origen:</label>
                         <select class="form-control" id="PaisModalEditar"></select>
                     </div>
+                    
+
+
+
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -161,13 +165,71 @@
     </div>
 </div>
 
+<div class="modal fade" id="modalEditarPelicula" tabindex="-1" aria-labelledby="modalEditarPeliculaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="modalEditarPeliculaLabel">Editar Película</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                    <!-- Contenido del formulario -->
+                    <div class="form-group">
+                      <label for="Genero">Género:</label>
+                      <select class="form-control" id="Genero">
+                          <!-- Opciones de geeeneros -->
+                      </select>
+                      <button id="agregarGenero" class="btn btn-primary mt-2">Agregar</button>
+                  </div>
+                  <div id="listaGeneros"></div>
+          
+          
+                  <div class="form-group">
+                      <label for="Clasificacion">Clasificación:</label>
+                      <select class="form-control" id="Clasificacion">
+                          <!-- Opciones de clasificación -->
+                      </select>
+                      <button id="agregarClasificacion" class="btn btn-primary mt-2">Agregar</button>
+                  </div>
+                  <div id="listaClasificaciones"></div>
+          
+          
+          
+                  <div class="form-group">
+                      <label for="Actor">Actor:</label>
+                      <select class="form-control" id="Actor">
+                          <!-- Opciones de actores -->
+                      </select>
+                      <button id="agregarActor" class="btn btn-primary mt-2">Agregar</button>
+                  </div>
+                  <div id="listaActores"></div>
+          
+          
+                  <div class="form-group">
+                      <label for="Director">Director:</label>
+                      <select class="form-control" id="Director">
+                          <!-- Opciones de directores -->
+                      </select>
+                      <button id="agregarDirector" class="btn btn-primary mt-2">Agregar</button>
+                  </div>
+                  <div id="listaDirectores"></div>
+          
+                  <button type="submit" class="btn btn-primary GuardarCambios">Guardar cambios</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="d-flex justify-content-center align-items-center">
     <a href="/Admin" class="btn btn-primary mb-3">Ir a Pantalla Admin</a>
 </div>
 
 
     <!-- jQuery and Bootstrap JS --> 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="js/CRUDPeliculas.js"></script>
 </body>

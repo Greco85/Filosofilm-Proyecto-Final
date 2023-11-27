@@ -65,7 +65,7 @@ li{
 
 #Karol{
     margin: 30px 10px;
-    background: yellow;
+    background: yellow; 
     padding-top: 15px;
     border-radius: 15px;
 }
@@ -110,4 +110,14 @@ p{
 /*--------------------------------------------------------------*/
 
 /*Este va en el acordion, para que tenga algo de espacio y no se vea muy sofocado dentro del div */
+
+li a{
+    color: #333;
+    margin: 20px 25px;
+    font-size: 20px;
+}
+
+a:hover, h1:hover{
+    color: rgb(219, 200, 23);
+}
 

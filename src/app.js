@@ -1,11 +1,10 @@
 //Para configurar la aplicacion de express
-import jsonwebtoken from "jsonwebtoken";
 import express from 'express'; // Importa el framework Express
 import config from './config'; // Importa el archivo de config para obtener las variables de entorno
 import Rutas from './Rutas/TodasLasRutas.js'; // Importa todas las rutas de la aplicación CHECA
 import {Metodos as Metodoss} from './Middlewares/Autorizaciones.js';
 import cookieParser from 'cookie-parser';
-import {ObtenerPerfilUsuario} from './Controladores/TodosLosControladores.js'
+
 
 
 
@@ -20,36 +19,55 @@ app.use(express.urlencoded({ extended: false }));
 app.use(Rutas); 
 
 //RUTAS PARA TODAS LAS PAGINAS
+
+//SIN TENER INICIAR SESION
 app.get("/",Metodoss.redireccionInicio,(req, res) => res.sendFile(__dirname + "/Paginas/index.html"));
 app.get("/registrarse",  (req, res) => res.sendFile(__dirname + "/Paginas/registrarse.html"));
-app.get("/Inicio", Metodoss.SoloLoggeado, Metodoss.ExtraerID, (req, res) => res.sendFile(__dirname + "/Paginas/InicioDelUsuario.html"));
-app.get("/Perfil", Metodoss.SoloLoggeado, Metodoss.ExtraerID , (req, res) => res.sendFile(__dirname + "/Paginas/perfil.html"));
+app.get("/Nosotros", (req, res) => res.sendFile(__dirname + "/Paginas/Nosotros.html"));
+app.get("/QueEsFF", (req, res) => res.sendFile(__dirname + "/Paginas/QueEsFF.html"));
 
-app.get('/IDusuarioLog', Metodoss.SoloLoggeado, Metodoss.ExtraerID, (req, res) => { //UTIL PARA SACAR EL ID DEL USUARIO
-    res.json({ ID_Usuario: req.ID_Usuario});
+
+//SIN SOLO TENIENDO LA SESION ACTIVA
+app.get("/Inicio", Metodoss.SoloLoggeado, Metodoss.ExtraerID, (req, res) => res.sendFile(__dirname + "/Paginas/InicioDelUsuario.html"));
+app.get("/Perfil",Metodoss.SoloLoggeado, (req, res) => res.sendFile(__dirname + "/Paginas/perfil.html"));
+app.get("/MisLikes",Metodoss.SoloLoggeado, (req, res) => res.sendFile(__dirname + "/Paginas/MisLikes.html"));
+app.get("/MisResenas",Metodoss.SoloLoggeado, (req, res) => res.sendFile(__dirname + "/Paginas/MisResenas.html"));
+app.get("/MiInformacion",Metodoss.SoloLoggeado, (req, res) => res.sendFile(__dirname + "/Paginas/Miinformacion.html"));
+
+app.get('/IDusuarioLog', Metodoss.ExtraerID, (req, res) => { //UTIL PARA SACAR EL ID DEL USUARIO
+    res.json({ ID_Rol: req.ID_Rol,
+    ID_Usuario: req.ID_Usuario,
+    Nickname: req.Nickname});
+});
+
+app.get('/IDPelicula', Metodoss.ExtraerID, (req, res) => { //UTIL PARA SACAR EL ID DE LA PELICULA?????
+    res.json({ ID_Rol: req.ID_Rol,
+    ID_Usuario: req.ID_Usuario});
 });
 
 //Peliculas
-app.get("/PeliculaDetalles",Metodoss.SoloLoggeado , (req, res) => res.sendFile(__dirname + "/Paginas/InicioPelicula.html"));
+app.get("/PeliculaDetalles-:ID_Pelicula", Metodoss.SoloLoggeado, (req, res) => {
+    const ID_Pelicula = req.params.ID_Pelicula;
+    res.sendFile(__dirname + "/Paginas/InicioPelicula.html");
+});
 
 
-//MODERADOR //FALTA DE PROGRAMAR
-app.get("/Moderador", Metodoss.SoloLoggeado, (req, res) => res.sendFile(__dirname + "/Paginas/Moderador.html"));
 
-//ADMINISTRADOR
-app.get("/Admin", Metodoss.SoloLoggeado,(req, res) => res.sendFile(__dirname + "/Paginas/Administrador.html"));
+app.get("/Exploracion",Metodoss.SoloLoggeado , (req, res) => res.sendFile(__dirname + "/Paginas/ExplorarPeliculas.html"));
 
+
+//ADMINISTRADOR Y MODERADOR
+app.get("/Admin",Metodoss.SoloLoggeado,Metodoss.SoloAdmin, (req, res) => res.sendFile(__dirname + "/Paginas/Administrador.html"));
+app.get("/Moderador",Metodoss.SoloLoggeado, Metodoss.SoloModerador, (req, res) => res.sendFile(__dirname + "/Paginas/Moderador.html"));
 
 //CRUD
-app.get("/CRUDPeliculas", Metodoss.SoloLoggeado,(req, res) => res.sendFile(__dirname + "/Paginas/CRUDPeliculas.html"));
-app.get("/CRUDActores",Metodoss.SoloLoggeado, (req, res) => res.sendFile(__dirname + "/Paginas/CRUDActores.html"));
-app.get("/CRUDDirectores", Metodoss.SoloLoggeado,(req, res) => res.sendFile(__dirname + "/Paginas/CRUDDirectores.html"));
-app.get("/CRUDUsuarios", Metodoss.SoloLoggeado,(req, res) => res.sendFile(__dirname + "/Paginas/CRUDUsuarios.html"));
-app.get("/CRUDPaises", Metodoss.SoloLoggeado,(req, res) => res.sendFile(__dirname + "/Paginas/CRUDPaises.html"));
+app.get("/CRUDPeliculas",Metodoss.SoloLoggeado, Metodoss.SoloAdmin,(req, res) => res.sendFile(__dirname + "/Paginas/CRUDPeliculas.html"));
+app.get("/CRUDActores",Metodoss.SoloLoggeado,Metodoss.SoloAdmin, (req, res) => res.sendFile(__dirname + "/Paginas/CRUDActores.html"));
+app.get("/CRUDDirectores", Metodoss.SoloLoggeado,Metodoss.SoloAdmin,(req, res) => res.sendFile(__dirname + "/Paginas/CRUDDirectores.html"));
+app.get("/CRUDUsuarios", Metodoss.SoloLoggeado,Metodoss.SoloAdmin,(req, res) => res.sendFile(__dirname + "/Paginas/CRUDUsuarios.html"));
+app.get("/CRUDPaises",Metodoss.SoloLoggeado, Metodoss.SoloAdmin,(req, res) => res.sendFile(__dirname + "/Paginas/CRUDPaises.html"));
+app.get("/PropuestasDeCambio",Metodoss.SoloLoggeado, Metodoss.SoloAdmin, (req, res) => res.sendFile(__dirname + "/Paginas/Propuestasdecambio.html"));
 
-//Borjas 
-app.get("/Nosotros", (req, res) => res.sendFile(__dirname + "/Paginas/Nosotros.html"));
-app.get("/QueEsFF", (req, res) => res.sendFile(__dirname + "/Paginas/QueEsFF.html"));
 
 //Archivos Estaticos Para que lo de arriba pueda agarrar los js y css etcc
 
