@@ -110,7 +110,7 @@ fetchData('http://localhost:3000/Director', '#Director', 'Nombre', 'Nombre');
             const presupuesto = $('#presupuesto').val();
             const recaudacion = $('#recaudacion').val();
             const paisOrigen = $('#selectPais').val();
-            const imagenURL = `./img/${titulo}.jpg`; 
+            const imagenURL = `img/${titulo}.jpg`; 
             
             $.ajax({    //AJAX PARA OBTENER EL ID DEL PAIS
                 url: 'http://localhost:3000/Pais_Origen/' + paisOrigen,

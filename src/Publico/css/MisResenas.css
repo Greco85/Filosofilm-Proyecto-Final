@@ -1,0 +1,247 @@
+body{
+    background-color: black;
+    margin: 0;
+}
+
+.bgactivo{
+    background-color: yellow;
+    color: black;
+}
+.bgactivo a:hover{
+    color: black;
+    font-weight: 700;
+
+}
+
+/*Esta parte del css controla la navbar */
+
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+    padding-right: 30px;
+    padding: 0px;
+}
+
+.navbar a{
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 15px 20px;
+    text-decoration: none;
+}
+
+.nav-links {
+    margin: 0;
+    font-family: TiemposTextWeb-Regular,Georgia,serif;
+    font-size: 20px;
+}
+
+li{
+    display: inline-block;
+}
+
+
+
+#logo{
+    height: 4.5em;
+    
+}
+
+.Iconos {
+    height: 2em;
+    margin: 0px;
+}
+
+/*--------------------------------------------------------------*/
+
+/*Esta parte controla los textos*/
+
+h1{
+    text-align: center;
+    font-family: 'Lobster', cursive;
+    color: white;
+    font-size: 50px;
+    margin: 30px 0;
+}
+
+p{
+    text-align: justify;
+    margin: 25px;
+    font-family: TiemposTextWeb-Regular,Georgia,serif;
+}
+
+/*--------------------------------------------------------------*/
+
+.imgpelicula{
+    height: 500px;
+    object-fit: cover;
+}
+
+.card-body{
+    height: 100px;
+    object-fit: cover;
+}
+
+h3{
+    font-size: 2em;
+}
+
+/*------------------------------------------------------------------*/
+
+#carouselExampleIndicators1, #carouselExampleIndicators2{
+    height: 580px;  
+}
+
+.carousel-control-prev {
+    
+    border: 1px solid ;
+    border-image: linear-gradient(45deg, red, lime, blue) 1;
+    margin-left: -50px;
+    position: absolute;
+    width: 3em;
+    top: 50%; 
+    transform: translateY(-50%);
+}
+.carousel-control-next {
+    margin-right: -50px;
+    border: 1px solid ;
+    border-image: linear-gradient(45deg, red, lime, blue) 1;
+    position: absolute;
+    width: 3em;
+    top: 50%; 
+    transform: translateY(-50%);
+}
+.carousel-indicators {
+    margin-top: 75px;
+  }
+
+  @media (max-width: 991px) {
+    #carouselExampleIndicators1, #carouselExampleIndicators2, #carouselExampleIndicators3 {
+        height: 1100px; 
+        border: 5px solid;
+    }
+}
+
+@media (max-width: 575px) {
+    #carouselExampleIndicators1, #carouselExampleIndicators2, #carouselExampleIndicators3 {
+        height: 2120px; 
+    }
+}
+
+  
+/*-------------------------------------------------------------------------------------------*/
+
+.estrellas {
+    font-size: 40px;
+}
+
+.estrellas::before {
+    content: "★★★★★";
+    letter-spacing: 3px;
+    background: linear-gradient(90deg, gold calc(var(--calificacion) * 20%), #ddd calc(var(--calificacion) * 20%));
+    -webkit-background-clip: text;
+    color: transparent;
+    display: inline-block;
+}
+
+.estrellas[data-calificacion="1"]::before { --calificacion: 1; }
+.estrellas[data-calificacion="1.5"]::before { --calificacion: 1.5; }
+.estrellas[data-calificacion="2"]::before { --calificacion: 2; }
+.estrellas[data-calificacion="2.5"]::before { --calificacion: 2.5; }
+.estrellas[data-calificacion="3"]::before { --calificacion: 3; }
+.estrellas[data-calificacion="3.5"]::before { --calificacion: 3.5; }
+.estrellas[data-calificacion="4"]::before { --calificacion: 4; }
+.estrellas[data-calificacion="4.5"]::before { --calificacion: 4.5; }
+.estrellas[data-calificacion="5"]::before { --calificacion: 5; }
+
+.Iconos2{
+    width: 90%;
+    margin: auto;
+}
+
+.PeliculaBG{
+    background-color: #1d1c1c;
+}
+
+hr{
+    border: 1px solid ;
+    border-image: linear-gradient(45deg, red, lime, blue) 1;
+}
+
+.BotonResena{
+    width: 100%;
+    border-radius: 0%;
+}
+
+.ImgReparto {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    display: block; 
+    max-height: 200px;
+}
+
+
+.CartaReparto{
+    height: 500px;
+    border: 2px solid;
+
+}
+
+.Reseña{
+    border: 1px solid ;
+    border-image: linear-gradient(45deg, red, lime, blue) 1;
+}
+
+.ContornoReseña {
+    max-width: 900em;
+    border: 1px solid ;
+    border-image: linear-gradient(45deg, red, lime, blue) 1;
+    padding: 20px;
+    margin: 20px auto;
+    background-color: #012f5e; color: white;
+  }
+
+.UsuarioReseña {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.Estrellas {
+    color: #FFD700;
+}
+
+.ImgUsuarioenReseña{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.BotonLike {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .Likes {
+    margin-top: 10px;
+  }
+
+  li a{
+    color: #333;
+    margin: 20px 25px;
+    font-size: 20px;
+}
+
+a:hover, h1:hover{
+    color: rgb(219, 200, 23);
+}
+
+.ImagenPelii{
+    width: 160px;
+    height: 200px;
+        max-width: 150px;
+}
