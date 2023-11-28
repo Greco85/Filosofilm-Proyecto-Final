@@ -4,21 +4,17 @@ import {getActor , createNewActor, getActorbyid, deleteActor, UpdateActorbyID,
         , getUsuarios, createNewUsuario, getTodasReseñabyid,getUsuariobyid, deleteUsuario, UpdateUsuariobyID,
         getReseñas, createNewReseña, getReseñabyid, deleteReseña, UpdateReseñabyID, 
         getAviso, createNewAviso, getAvisobyid, deleteAviso, UpdateAvisobyID,
-        getError, createNewError, getErrorbyid, deleteError, UpdateErrorbyID,
+        getError, createNewError, getErrorbyid, deleteError, UpdateErrorbyID,TotalLikes,
         getPelicula, createNewPelicula, getPeliculabyid, deletePelicula, UpdatePeliculabyID
 ,  getUsuarioByCorreo, getUsuarioByTel, getUsuarioByNickname, getAllPeliculaActor,getUsuarioByContraseña, LoginUsuario, 
-ObtenerPerfilUsuario,getAllReseñasPorPelicula, getPeliculaxTitulo,
+ObtenerPerfilUsuario,getAllReseñasPorPelicula, getPeliculaxTitulo,Visto, Favorito,
  getPaises, deletePeliculaDirector, getPaisesIDbyNombre,putPeliculaDirector,getAllDirectorinthemovie,getAllActorinthemovie, getNombrePaisesbyID,postPeliculaDirector,getAllPeliculaDirector, postPaises, putPeliculaActor, postPeliculaActor, deletePeliculaActor, deletePais,getRoles, UpdateUsuarioRol,
  getAllPeliculaClasificacion,postPeliculaClasificacion,putPeliculaClasificacion,getGenerosbyNombre,deletePeliculaClasificacion,
  getAllPeliculaGenero, postPeliculaGenero,putPeliculaGenero,deletePeliculaGenero,
- getAllGenero, getAllClasificacion , PromediarEstrellas, TodosLosLikes,TraerLikes, DarLike, QuitarLike} from '../Controladores/TodosLosControladores.js'
+ getAllGenero, getAllClasificacion ,QuitarVisto, QuitarFav, PromediarEstrellas,DarVisto, DarFav, TodosLosLikes,TraerVistosDelUsuario,TraerFavDelUsuario, TraerLikes, DarLike, QuitarLike} from '../Controladores/TodosLosControladores.js'
 
 const router = Router()
  
-
-
-
-        
 //ROLESSS
 router.get('/Roles', getRoles);
 
@@ -156,8 +152,22 @@ router.get('/Estrellas/:ID_Pelicula', PromediarEstrellas);
 
 //LIKESSSSSS
 router.get('/Like/:ID', TraerLikes);
-router.get('/Like', TodosLosLikes);
-router.put('/Like/:ID', DarLike);
-router.delete('/Like/:ID/:ID_Usuario', QuitarLike);
+router.get('/Like/Usuario/:ID_Usuario', TodosLosLikes);
+router.post('/Like/:ID', DarLike);
+router.delete('/Like/:ID_Resena/:ID_Usuario', QuitarLike);
+
+router.get("/TotalLikes/:ID_Resena", TotalLikes);
+
+
+//VISTO
+router.get('/Visto/Usuario/:ID_Usuario', TraerVistosDelUsuario);
+router.post('/Visto/:ID', DarVisto);
+router.delete('/Visto/:ID_Pelicula/:ID_Usuario', QuitarVisto);
+
+//FAVORITOS
+router.get('/Favorito/Usuario/:ID_Usuario', TraerFavDelUsuario);
+router.post('/Favorito/:ID_Usuario', DarFav);
+router.delete('/Favorito/:ID_Pelicula/:ID_Usuario', QuitarFav);
+
 
 export default router;

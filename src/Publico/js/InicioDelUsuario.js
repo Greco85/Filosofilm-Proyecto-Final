@@ -4,7 +4,7 @@ $(document).ready(function() {
 const cerrarSesionLink = document.getElementById('cerrarSesionLink');
 
 // Agregar un evento de clic al enlace
-cerrarSesionLink.addEventListener('click', function(e) {
+cerrarSesionLink.addEventListener('click', function(e) { 
   // Eliminar la cookie llamada "jwt"
   document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   window.location.href = "/";
@@ -12,10 +12,19 @@ cerrarSesionLink.addEventListener('click', function(e) {
 
 $.ajax({
     type: 'GET',
-    url: 'http://localhost:3000/IDusuarioLog', // Reemplaza la URL con tu ruta correcta
+    url: 'http://localhost:3000/IDusuarioLog',
     success: function (data) {
         if (data.Nickname) {
             $('#nombreUsuario').html('<strong>@' + data.Nickname + '</strong>');
+            const Rol = data.ID_Rol;
+            if (Rol == 3) {
+                const nuevoLink = $('<li class="nav-item"><a class="nav-link" href="/Moderador"><strong>Moderador</strong></a></li>');
+                $('.nav').prepend(nuevoLink);
+            }
+            if (Rol == 4) {
+                const nuevoLink = $('<li class="nav-item"><a class="nav-link" href="/Admin"><strong>Administrador</strong></a></li>');
+                $('.nav').prepend(nuevoLink);
+            }
         }
     },
     error: function () {

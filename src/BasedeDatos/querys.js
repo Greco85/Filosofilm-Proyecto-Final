@@ -121,6 +121,29 @@ export const queries = {
     PromediarEstrellas: 'SELECT AVG(Calificacion) AS PromedioEstrellas FROM Reseña WHERE ID_Pelicula = @ID_Pelicula;',
 
     DarLike: 'INSERT INTO [DIAGRAMA].[dbo].[Like] (FechaLike, ID_Usuario, ID_Reseña) VALUES (@FechaLike, @ID_Usuario, @ID_Reseña)',
-    TodosLosLikes:'SELECT * FROM [DIAGRAMA].[dbo].[Like]',
-    TraerLikes: 'SELECT * FROM [DIAGRAMA].[dbo].[Like] WHERE ID_Reseña = @ID',
+    TodosLosLikes:'SELECT * FROM [DIAGRAMA].[dbo].[Like] WHERE ID_Usuario = @ID_Usuario',
+    TraerLikes: 'SELECT * FROM [DIAGRAMA].[dbo].[Like] WHERE ID_Reseña = @ID', 
+    QuitarLike: 'DELETE FROM [DIAGRAMA].[dbo].[Like] WHERE ID_Usuario = @ID_Usuario AND ID_Reseña = @ID_Reseña',
+
+    TotalLikes: 'SELECT COUNT(ID_Usuario) AS TotalLikes FROM [DIAGRAMA].[dbo].[Like] WHERE ID_Reseña = @ID_Resena',
+
+
+    DarVisto: 'INSERT INTO [DIAGRAMA].[dbo].[Visto] (ID_Usuario, ID_Pelicula, Fecha_Vista) VALUES (@ID_Usuario, @ID_Pelicula, @Fecha_Vista)',
+    TraerVistosDelUsuario:'SELECT * FROM [DIAGRAMA].[dbo].[Visto] WHERE ID_Usuario = @ID_Usuario',
+    QuitarVisto: 'DELETE FROM [DIAGRAMA].[dbo].[Visto] WHERE ID_Usuario = @ID_Usuario AND ID_Pelicula = @ID_Pelicula',
+
+
+    DarFavorito: 'INSERT INTO [DIAGRAMA].[dbo].[Favorito] (ID_Usuario, ID_Pelicula, Fecha_Favorito) VALUES (@ID_Usuario, @ID_Pelicula, @Fecha_Favorito)',
+    TraerFavoritosDelUsuario:'SELECT * FROM [DIAGRAMA].[dbo].[Favorito] WHERE ID_Usuario = @ID_Usuario',
+    QuitarFavorito: 'DELETE FROM [DIAGRAMA].[dbo].[Favorito] WHERE ID_Usuario = @ID_Usuario AND ID_Pelicula = @ID_Pelicula',
+
+
+    
+
+
+
+
+
+
+
 }   

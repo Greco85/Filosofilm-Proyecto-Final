@@ -77,6 +77,129 @@ export const deletePeliculaGenero = async (req, res) => {
 
 
 
+export const DarVisto = async (req, res) => {
+    const { ID_Usuario, ID_Pelicula ,Fecha_Vista } = req.body;
+
+    if (ID_Usuario == null || ID_Pelicula == null || Fecha_Vista == null) {
+        return res.status(400).json({ msg: 'Bad request. Por favor, llena todos los campos' });
+    }
+
+    try {
+        const pool = await getConnection();
+        await pool
+            .request()
+            .input("Fecha_Vista", sql.DateTime, Fecha_Vista)
+            .input("ID_Usuario", sql.Int, ID_Usuario)
+            .input('ID_Pelicula', sql.Int, ID_Pelicula) // Changed to use ID_Reseña from req.body
+            .query(queries.DarVisto);
+
+        res.json({ Fecha_Vista, ID_Usuario, ID_Pelicula });
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+
+
+export const QuitarVisto = async (req, res) => {
+    try {
+        const {ID_Pelicula, ID_Usuario} = req.params;
+        const pool = await getConnection();
+        const result = await pool.request()
+            .input('ID_Usuario', ID_Usuario)
+            .input('ID_Pelicula', ID_Pelicula)
+            .query(queries.QuitarVisto);
+
+        
+        if (result.rowsAffected[0] > 0) {
+            res.sendStatus(204); 
+        } else {
+            res.status(404).send("El like no se encontró o no se pudo eliminar.");
+        }
+    } catch (error) {
+        console.error("Error al eliminar el like:", error);
+        res.status(500).send("Error al intentar eliminar el like.");
+    }
+};
+
+
+export const  TraerVistosDelUsuario = async(req, res) => {
+    try {
+        const { ID_Usuario } = req.params;
+        const pool = await getConnection();
+        const result = await pool
+            .request()
+            .input('ID_Usuario', ID_Usuario)
+            .query(queries.TraerVistosDelUsuario);
+
+        res.json(result.recordset);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+
+export const DarFav = async (req, res) => {
+    const { Fecha_Favorito, ID_Pelicula } = req.body;
+    const { ID_Usuario } = req.params;
+    if (ID_Usuario == null || ID_Pelicula == null || Fecha_Favorito == null) {
+        return res.status(400).json({ msg: 'Bad request. Por favor, llena todos los campos' });
+    }
+
+    try {
+        const pool = await getConnection();
+        await pool
+            .request()
+            .input("Fecha_Favorito", sql.DateTime, Fecha_Favorito)
+            .input("ID_Usuario", sql.Int, ID_Usuario)
+            .input('ID_Pelicula', sql.Int, ID_Pelicula) // Changed to use ID_Reseña from req.body
+            .query(queries.DarFavorito);
+
+        res.json({ Fecha_Favorito, ID_Usuario, ID_Pelicula });
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+
+
+export const QuitarFav = async (req, res) => {
+    try {
+        const {ID_Pelicula, ID_Usuario} = req.params;
+        const pool = await getConnection();
+        const result = await pool.request()
+            .input('ID_Usuario', ID_Usuario)
+            .input('ID_Pelicula', ID_Pelicula)
+            .query(queries.QuitarFavorito);
+
+        if (result.rowsAffected[0] > 0) {
+            res.sendStatus(204); 
+        } else {
+            res.status(404).send("El like no se encontró o no se pudo eliminar.");
+        }
+    } catch (error) {
+        console.error("Error al eliminar el like:", error);
+        res.status(500).send("Error al intentar eliminar el like.");
+    }
+};
+
+export const TraerFavDelUsuario = async (req, res) => {
+    try {
+        const { ID_Usuario } = req.params;
+        const pool = await getConnection();
+        const result = await pool
+            .request()
+            .input('ID_Usuario', ID_Usuario)
+            .query(queries.TraerFavoritosDelUsuario);
+
+        res.json(result.recordset); // Retorna todos los likes de la reseña
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+
+
 export const DarLike = async (req, res) => {
     const { FechaLike, ID_Usuario } = req.body;
     const { ID } = req.params;
@@ -91,7 +214,7 @@ export const DarLike = async (req, res) => {
             .request()
             .input("FechaLike", sql.DateTime, FechaLike)
             .input("ID_Usuario", sql.Int, ID_Usuario)
-            .input('ID', sql.Int, ID) // Changed to use ID_Reseña from req.body
+            .input('ID_Reseña', sql.Int, ID) // Changed to use ID_Reseña from req.body
             .query(queries.DarLike);
 
         res.json({ FechaLike, ID_Usuario, ID });
@@ -103,11 +226,24 @@ export const DarLike = async (req, res) => {
 
 
 export const QuitarLike = async (req, res) => {
-    const {ID_Pelicula, ID_Genero} = req.params;
-    const pool = await getConnection();
-    await pool.request().input('ID_Genero', ID_Genero).input('ID_Pelicula', ID_Pelicula).query(queries.QuitarLike);
+    try {
+        const {ID_Resena, ID_Usuario} = req.params;
+        const pool = await getConnection();
+        const result = await pool.request()
+            .input('ID_Usuario', ID_Usuario)
+            .input('ID_Reseña', ID_Resena)
+            .query(queries.QuitarLike);
 
-    res.sendStatus(204);
+        // Verificar si se eliminó el like correctamente
+        if (result.rowsAffected[0] > 0) {
+            res.sendStatus(204); // Indicar éxito (registro eliminado)
+        } else {
+            res.status(404).send("El like no se encontró o no se pudo eliminar.");
+        }
+    } catch (error) {
+        console.error("Error al eliminar el like:", error);
+        res.status(500).send("Error al intentar eliminar el like.");
+    }
 };
 
 export const TraerLikes = async (req, res) => {
@@ -125,14 +261,34 @@ export const TraerLikes = async (req, res) => {
     }
 };
 
+export const TotalLikes = async (req, res) => {
+    try {
+        const { ID_Resena } = req.params;
+        const pool = await getConnection();
+        
+        const result = await pool.request()
+            .input('ID_Resena', ID_Resena)
+            .query(queries.TotalLikes);
+        
+        const TotalLikes = result.recordset[0].TotalLikes;
+        res.json({ TotalLikes });
+    } catch (error) {
+        res.status(500).send('Error al obtener el total de likes: ' + error.message);
+    }
+};
+
 export const  TodosLosLikes = async(req, res) => {
     try {
-        const pool = await getConnection(); 
-        const result = await  pool.request().query(queries.TodosLosLikes)
-        res.json(result.recordset)
+        const { ID_Usuario } = req.params;
+        const pool = await getConnection();
+        const result = await pool
+            .request()
+            .input('ID_Usuario', ID_Usuario)
+            .query(queries.TodosLosLikes);
+
+        res.json(result.recordset);
     } catch (error) {
-        res.status(500)
-        res.send(error.message)
+        res.status(500).send(error.message);
     }
 };
 

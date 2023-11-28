@@ -18,24 +18,71 @@
 
 @Like = http://localhost:3000/Like
 
-### JALA
-GET {{Like}}
+@Visto = http://localhost:3000/Visto
+
+@Favorito = http://localhost:3000/Favorito
+
+
+### CHECAR TODAS LAS PELIS FAVORITAS QUE TIENE UN USUARIO
+GET {{Favorito}}/Usuario/1
 
 ### JALA
-GET {{Like}}/10
+POST {{Favorito}}/1
+Content-Type: application/json 
 
-### JALA
-POST http://localhost:3000/Like/10
+{
+    "ID_Usuario": 1,
+    "ID_Pelicula": 1,
+    "Fecha_Favorito": "2005-03-03"
+}
+
+### JALA /:ID_Resena/:ID_Usuario
+DELETE {{Favorito}}/1/1
+
+### CHECAR TODAS LOS LIKES A RESEÑAS QUE TIENE UN USUARIO
+GET {{Like}}/Usuario/1031
+
+### JAL
+POST http://localhost:3000/Like/16
 Content-Type: application/json 
 
 {
     "FechaLike": "2005-03-03",
-    "ID_Usuario": 22,
-    "ID_Reseña": 10
+    "ID_Usuario": 1031,
+    "ID_Reseña": 16
 }
 
+### JALA /:ID_Resena/:ID_Usuario
+DELETE {{Like}}/10/1
+### VER TODOS LAS PELICULAS VISTAS DE TAL USUARIO
+
+
+
+
+
+GET {{Visto}}/Usuario/1
+
 ### JALA
-DELETE {{Like}}/:ID_Resena/:ID_Usuario
+POST {{Visto}}/1
+Content-Type: application/json 
+
+{
+    "ID_Usuario": 1,
+    "ID_Pelicula": 3842,
+    "Fecha_Vista": "2005-03-03"
+}
+
+### JALA /:ID_Resena/:ID_Usuario
+DELETE {{Visto}}/1/1
+
+
+
+
+
+
+
+### PUES QUITAS ESO QUE YA LA VISTE /:ID_Pelicula/:ID_Usuario
+DELETE {{Visto}}/10/1
 
 
 ### JALA

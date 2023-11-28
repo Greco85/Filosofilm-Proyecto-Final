@@ -1,26 +1,249 @@
 $(document).ready(function() {
 
+    
 
     $.ajax({
         type: 'GET',
-        url: 'http://localhost:3000/IDusuarioLog', // Reemplaza la URL con tu ruta correcta
+        url: 'http://localhost:3000/IDusuarioLog',
         success: function (data) {
-            if (data.Nickname) {
-                $('#nombreUsuario').html('<strong>@' + data.Nickname + '</strong>');
-                $('h3.reseñas').text($('h3.reseñas').text() + data.Nickname);
-            }
+            
+                if (data.Nickname) {
+                    $('#nombreUsuario').html('<strong>@' + data.Nickname + '</strong>');
+                    $('h3.reseñas').text($('h3.reseñas').text() + data.Nickname);
+                    const Rol = data.ID_Rol;
+                    if (Rol == 3) {
+                        const nuevoLink = $('<li class="nav-item"><a class="nav-link" href="/Moderador"><strong>Moderador</strong></a></li>');
+                        $('.nav').prepend(nuevoLink);
+                    }
+                    if (Rol == 4) {
+                        const nuevoLink = $('<li class="nav-item"><a class="nav-link" href="/Admin"><strong>Administrador</strong></a></li>');
+                        $('.nav').prepend(nuevoLink);
+                    }
+                    if (Rol == 2) {
+                        const nuevoLink = $('<li class="nav-item"><a class="nav-link" id="Error"><strong>NOTIFICAR ERROR</strong></a></li>');
+                        $('.nav').prepend(nuevoLink);
+                    }
+                }
         },
         error: function () {
             console.error('Error al obtener el nombre del usuario');
         }
     });
 
-
     // Obtener el ID_Pelicula de la URL
     const url = window.location.pathname; // Obtiene la ruta de la URL
     const partes = url.split('-'); // Divide la ruta por el guion (-)
     let ID_Pelicula = partes[1]; // Toma la segunda parte como el ID_Pelicula
     console.log('ID de la película:', ID_Pelicula);
+
+
+//IMPORTANTE REPASAR ESO DSPS
+
+
+    $(document).on('click', '#Error', function() {
+        $('#errorModal').modal('show');
+        
+    });
+
+    
+    // Evento de clic en el botón de enviar dentro del modal
+    $('#enviarError').on('click', function() {
+        const mensaje = $('#mensajeError').val();
+        
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:3000/IDusuarioLog', // Reemplaza la URL con tu ruta correcta
+            success: function (data) {
+                
+                const datos = {
+                    "Mensaje": mensaje,
+                    "ID_Experto": data.ID_Usuario,
+                    "ID_Pelicula": ID_Pelicula,
+                    "Estatus": 0
+                };
+                
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://localhost:3000/Error',
+                    data: JSON.stringify(datos), 
+                    contentType: 'application/json', 
+                    success: function(response) {
+        
+                        console.log('Solicitud POST exitosa:');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error en la solicitud POST:', status, error);
+                    }
+                });
+                
+                $('#errorModal').modal('hide');   
+            },
+            error: function () {
+                console.error('Error al obtener el nombre del usuario');
+            }
+        });
+
+        
+    });
+
+
+
+
+
+
+
+
+
+
+    $('#Favoritos').on('click', function() {
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:3000/IDusuarioLog',
+            success: function (data) {
+                function obtenerFechaActual() {
+                    const fechaActual = new Date();
+                    return fechaActual.toISOString();
+                }
+    
+                const datosFavorito = {
+                    ID_Usuario: data.ID_Usuario,
+                    ID_Pelicula: ID_Pelicula,
+                    Fecha_Favorito: obtenerFechaActual()
+                };
+    
+                $.ajax({
+                    type: 'POST',
+                    url: `http://localhost:3000/Favorito/${data.ID_Usuario}`,
+                    contentType: 'application/json',
+                    data: JSON.stringify(datosFavorito),
+                    success: function(response) {
+                        window.alert('Película agregada a favoritos');
+                    },
+                    error: function(error) {
+                        // En caso de error, se intenta eliminar la película de favoritos
+                        $.ajax({
+                            type: 'DELETE',
+                            url: `http://localhost:3000/Favorito/${ID_Pelicula}/${data.ID_Usuario}`,
+                            success: function(response) {
+                                window.alert('Película eliminada de favoritos');
+                            },
+                            error: function(error) {
+                                console.error('Error al eliminar película de favoritos:', error);
+                            }
+                        });
+                    }
+                });
+            },
+            error: function () {
+                console.error('Error al obtener el nombre del usuario');
+            }
+        });
+    });
+
+
+    $('#Visto').on('click', function() {
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:3000/IDusuarioLog',
+            success: function (data) {
+                function obtenerFechaActual() {
+                    const fechaActual = new Date();
+                    return fechaActual.toISOString();
+                }
+    
+                const datosVisto = {
+                    ID_Usuario: data.ID_Usuario,
+                    ID_Pelicula: ID_Pelicula,
+                    Fecha_Vista: obtenerFechaActual()
+                };
+    
+                $.ajax({
+                    type: 'POST',
+                    url: `http://localhost:3000/Visto/${data.ID_Usuario}`,
+                    contentType: 'application/json',
+                    data: JSON.stringify(datosVisto),
+                    success: function(response) {
+                        window.alert('Película marcada como vista');
+                    },
+                    error: function(error) {
+                        $.ajax({
+                            type: 'DELETE',
+                            url: `http://localhost:3000/Visto/${ID_Pelicula}/${data.ID_Usuario}`,
+                            success: function(response) {
+                                window.alert('Visto eliminado');
+                            },
+                            error: function(error) {
+                                console.error('Error al eliminar el marcado como visto:', error);
+                            }
+                        });
+                    }
+                });
+            },
+            error: function () {
+                console.error('Error al obtener el nombre del usuario');
+            }
+        });
+    });
+    
+
+
+
+
+
+
+
+
+
+
+    $('#ContenedorReseñas').on('click', '.BotonLike', function() {
+        const ID_Reseña = $(this).data('id');
+        const fechaHoraActual = new Date().toISOString();
+
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:3000/IDusuarioLog', 
+            success: function (data) {
+                const likeData = {
+                    ID_Usuario: data.ID_Usuario,
+                    ID_Reseña: ID_Reseña,
+                    FechaLike: fechaHoraActual
+                };
+                console.log(likeData)
+            
+                $.ajax({
+                    type: 'POST',
+                    url: `http://localhost:3000/Like/${ID_Reseña}`,
+                    contentType: 'application/json',
+                    data: JSON.stringify(likeData),
+                    success: function(response) {
+                        $(`.BotonLike${ID_Reseña}`).removeClass('clase-color-azul').addClass('clase-color-verde');
+                        window.alert("Like Dado")
+                    },
+                    error: function(error) {
+
+                        $.ajax({
+                            url: `http://localhost:3000/Like/${ID_Reseña}/${data.ID_Usuario}`,
+                            method: 'DELETE',
+                            success: function(response) {
+                                $(`.BotonLike${ID_Reseña}`).removeClass('clase-color-verde').addClass('clase-color-azul');
+                                window.alert("Like Eliminado")
+                            },
+                            error: function(error) {
+                            }
+                        });
+                    }
+                });
+            },
+            error: function () {
+                console.error('Error al obtener el nombre del usuario');
+            }
+        });
+
+        
+
+    });
+
+
 
     $.ajax({
         url: 'http://localhost:3000/Estrellas/' + ID_Pelicula,
@@ -238,8 +461,6 @@ $(document).ready(function() {
         // Función para generar el HTML de las reseñas
         function generarResenasHTML(resenas) {
 
-           // HAZ UN AJAX A LA RUTA "http://localhost:3000/Usuario/" ID_Usuario y consulta su Nickname
-            
             const contenedorResenas = $('#contenedorResenas');
             console.log("APOCO SI TILIN")
             resenas.forEach((resena) => {
@@ -249,48 +470,65 @@ $(document).ready(function() {
                     method: 'GET',
                     success: function(usuario) {
                        console.log(usuario.Nickname)
-                        const nuevaResena = `
-                <div class="container Reseña">
-                <div class="row">
-                  <div class="col-md-6 offset-md-3 d-flex align-items-center">
-                    <div class="ContornoReseña">
-                      <!-- Primera Fila -->
-                      <div class="d-flex align-items-center">
+
+                       
+                       $.ajax({
+                        type: 'GET',
+                        url: 'http://localhost:3000/TotalLikes/' + resena.ID_Reseña, 
+                        success: function(response) {
+                            console.log('Total de Likes:', response.TotalLikes, resena.ID_Reseña);
+                            
+                            const nuevaResena = `
+    <div class="container Reseña">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 d-flex align-items-center">
+                <div class="ContornoReseña">
+                    <!-- Primera Fila -->
+                    <div class="d-flex align-items-center">
                         <div>
                             <img src="img/Piper_Rubio.jpg" alt="${usuario.Nickname}" class="ImgUsuarioenReseña border border-2 border-white">
                         </div>
                         <div class="UsuarioReseña ms-2">
-                            <a href="">@${usuario.Nickname}</a> <!-- DESPUES PONER AQUI LA RUTA DE LA PERSONA -->
+                            <a href="">@${usuario.Nickname}</a>
                         </div>
                         <div class="ml-3 col-lg-3 estrellas text-center" data-calificacion="${resena.Calificacion}">
                             <!-- ESTRELLAS AÚN NO IMPLEMENTADAS -->
                         </div>
                     </div>
 
-                      <!-- Segunda Fila -->
-                      <div class="mt-3">
+                    <!-- Segunda Fila -->
+                    <div class="mt-3">
                         <p>
-                        ${resena.Contenido}
+                            ${resena.Contenido}
                         </p>
-                      </div>
+                    </div>
 
-                      <!-- Tercera Fila -->
-                      <div class="d-flex align-items-center justify-content-between mt-3">
+                    <!-- Tercera Fila -->
+                    <div class="d-flex align-items-center justify-content-between mt-3">
                         <div>
-                          <button class="BotonLike">Like</button>
-                          <span class="Likes">10 Likes</span>
+                            <button class=" BotonLike BotonLike${resena.ID_Reseña}" data-id="${resena.ID_Reseña}">Like</button>
+                            <span class="Likes">${response.TotalLikes}  Likes</span>
                         </div>
                         <small class="text-muted">
-                          Publicado el ${resena.Fecha_Publicacion}
+                            Publicado el ${resena.Fecha_Publicacion}
                         </small>
-                      </div>
                     </div>
-                  </div>
                 </div>
-              </div>
-                `;
+            </div>
+        </div>
+    </div>
+`;
 
-                $('#ContenedorReseñas').append(nuevaResena);
+
+$('#ContenedorReseñas').append(nuevaResena);
+                        },
+                        error: function(error) {
+                            console.error('Error al obtener el total de likes:', error);
+                        }
+                    });
+                       
+
+
                     },
                     error: function(err) {
                         console.error('Error al obtener el Nickname del usuario:', err);
@@ -301,7 +539,8 @@ $(document).ready(function() {
                 
             });
         }
-    
+
+       
         // Función para formatear la fecha
         function formatearFecha(fecha) {
             const fechaFormateada = new Date(fecha).toLocaleDateString('es-ES', {

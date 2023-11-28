@@ -1,0 +1,149 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.list-group-item {
+    border-radius: 0;
+}
+
+.mb-5 {
+    margin-bottom: 5rem;
+}
+
+.list-group {
+    margin-bottom: 2rem;
+}
+
+
+.Reseña {
+    margin-bottom: 2rem;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.ContornoReseña {
+    margin-top: 1rem;
+}
+
+.Likes {
+    margin-left: 1rem;
+}
+
+/* Estilos para el contenedor de reseñas */
+#ContenedorReseñas {
+    max-height: 600px; 
+    max-width: 1500px;
+    overflow-y: auto; 
+}
+
+.estrellas {
+    font-size: 40px;
+}
+
+.estrellas::before {
+    content: "★★★★★";
+    letter-spacing: 3px;
+    background: linear-gradient(90deg, gold calc(var(--calificacion) * 20%), #ddd calc(var(--calificacion) * 20%));
+    -webkit-background-clip: text;
+    color: transparent;
+    display: inline-block;
+}
+
+.estrellas[data-calificacion="1"]::before { --calificacion: 1; }
+.estrellas[data-calificacion="1.5"]::before { --calificacion: 1.5; }
+.estrellas[data-calificacion="2"]::before { --calificacion: 2; }
+.estrellas[data-calificacion="2.5"]::before { --calificacion: 2.5; }
+.estrellas[data-calificacion="3"]::before { --calificacion: 3; }
+.estrellas[data-calificacion="3.5"]::before { --calificacion: 3.5; }
+.estrellas[data-calificacion="4"]::before { --calificacion: 4; }
+.estrellas[data-calificacion="4.5"]::before { --calificacion: 4.5; }
+.estrellas[data-calificacion="5"]::before { --calificacion: 5; }
+
+.Iconos2{
+    width: 90%;
+    margin: auto;
+}
+
+.PeliculaBG{
+    background-color: #1d1c1c;
+}
+
+hr{
+    border: 1px solid ;
+    border-image: linear-gradient(45deg, red, lime, blue) 1;
+}
+
+.BotonResena{
+    width: 100%;
+    border-radius: 0%;
+}
+
+.ImgReparto {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    display: block; 
+    max-height: 200px;
+}
+
+
+.CartaReparto{
+    height: 500px;
+    border: 2px solid;
+
+}
+
+.Reseña{
+    border: 1px solid ;
+    border-image: linear-gradient(45deg, red, lime, blue) 1;
+}
+
+.ContornoReseña {
+    max-width: 900em;
+    border: 1px solid ;
+    border-image: linear-gradient(45deg, red, lime, blue) 1;
+    padding: 20px;
+    margin: 20px auto;
+    background-color: #012f5e; color: white;
+  }
+
+.UsuarioReseña {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.Estrellas {
+    color: #FFD700;
+}
+
+.ImgUsuarioenReseña{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+
+  li a{
+    color: #333;
+    margin: 20px 25px;
+    font-size: 20px;
+}
+
+a:hover, h1:hover{
+    color: rgb(219, 200, 23);
+}
+
+.ImagenPelii{
+    width: 120px;
+    height: 200px;
+    max-width: 140px;
+}
+
+#ContenedorPropuestas {
+    max-height: 400px;
+    overflow-y: scroll; 
+  }

@@ -235,3 +235,13 @@ hr{
 a:hover, h1:hover{
     color: rgb(219, 200, 23);
 }
+
+.clase-color-verde {
+    background-color: green;
+   
+}
+
+.clase-color-azul {
+    background-color: rgb(101, 101, 255);
+   
+}
