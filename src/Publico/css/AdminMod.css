@@ -3,7 +3,9 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    background-image: url(../img/fondoLogo.png);
 }
+
 .list-group-item {
     border-radius: 0;
 }

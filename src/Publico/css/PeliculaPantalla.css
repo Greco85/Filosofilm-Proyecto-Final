@@ -11,41 +11,22 @@ body{
 
 /*Esta parte del css controla la navbar */
 
-.navbar {
-    background-color: #333;
-    overflow: hidden;
-    padding-right: 30px;
-    padding: 0px;
-}
-
-.navbar a{
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 15px 20px;
-    text-decoration: none;
-}
-
-.nav-links {
-    margin: 0;
-    font-family: TiemposTextWeb-Regular,Georgia,serif;
+li a{
+    color: rgb(255, 255, 255);
+    margin: 5px 25px 0;
     font-size: 20px;
 }
 
-li{
-    display: inline-block;
+strong:hover{
+    color: rgb(219, 200, 23);
 }
 
-
+#navbg{
+    background-image: url(../img/fondoLogo.png);
+}
 
 #logo{
-    height: 4.5em;
-    
-}
-
-.Iconos {
-    height: 2em;
-    margin: 0px;
+    margin: 5px 0 0 -340px;
 }
 
 /*--------------------------------------------------------------*/

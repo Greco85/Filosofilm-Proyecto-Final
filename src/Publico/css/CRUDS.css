@@ -25,9 +25,9 @@ h1{
 }
 
 .list-group-item:hover {
-    border: 5px;
     background-color: #333;
     color: white;
 }
+
 
 

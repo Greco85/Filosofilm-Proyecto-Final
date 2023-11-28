@@ -1,3 +1,7 @@
+body{
+    background-color: black;
+}
+
 h1{
     text-align: center;
     padding-top: 20px;
@@ -69,7 +73,21 @@ button {
     display: inline-block;
 }
 
-body{
-    background-color: rgb(6, 9, 8);
 
+li a{
+    color: rgb(255, 255, 255);
+    margin: 5px 25px 0;
+    font-size: 20px;
+}
+
+strong:hover{
+    color: rgb(219, 200, 23);
+}
+
+#navbg{
+    background-image: url(../img/fondoLogo.png);
+}
+
+#logo{
+    margin: 5px 0 0 -340px;
 }
