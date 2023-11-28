@@ -362,6 +362,12 @@ $(document).ready(function() {
         }
     });
 
+
+    //GENERO ------------------------------------------------------------------------------------------
+    
+    
+    //CLASIFICACION ------------------------------------------------------------------------------------------
+
     //CODIGO PARA CERRAR SESION
     const cerrarSesionLink = document.getElementById('cerrarSesionLink');
 

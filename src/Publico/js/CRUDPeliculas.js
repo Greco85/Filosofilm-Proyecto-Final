@@ -29,73 +29,6 @@ fetchData('http://localhost:3000/Clasificacion', '#Clasificacion', 'Clasificacio
 fetchData('http://localhost:3000/Actor', '#Actor', 'Nombre', 'Nombre');
 fetchData('http://localhost:3000/Director', '#Director', 'Nombre', 'Nombre');
     
-    $('#agregarGenero').on('click', function() {
-        const generoSeleccionado = $('#Genero').val(); // Obtener el género seleccionado
-        event.preventDefault();
-        // Verificar si el género ya ha sido seleccionado
-        if (listaGeneros.includes(generoSeleccionado)) {
-            window.alert("Este genero ya fue seleccionado")
-            return;
-        }
-
-        listaGeneros.push(generoSeleccionado); // Agregar el género a la lista
-
-        // Mostrar la lista de géneros seleccionados
-        const listaGenerosHTML = listaGeneros.map(genero => `<span>${genero}</span>`).join(', ');
-        $('#listaGeneros').html(`<p>Géneros seleccionados: ${listaGenerosHTML}</p>`);
-    });
-
-    $('#agregarClasificacion').on('click', function() {
-        const clasificacionSeleccionada = $('#Clasificacion').val(); 
-        event.preventDefault(); 
-        // Verificar si la clasificación ya ha sido seleccionada
-        if (listaClasificaciones.includes(clasificacionSeleccionada)) {
-            console.log('Esta clasificación ya ha sido seleccionada');
-            return; // Evitar agregar una clasificación duplicada
-        }
-
-        listaClasificaciones.push(clasificacionSeleccionada); // Agregar la clasificación a la lista
-
-        // Mostrar la lista de clasificaciones seleccionadas
-        const listaClasificacionesHTML = listaClasificaciones.map(clasificacion => `<span>${clasificacion}</span>`).join(', ');
-        $('#listaClasificaciones').html(`<p>Clasificaciones seleccionadas: ${listaClasificacionesHTML}</p>`);
-    });
-    // Agregar un actor y su personaje al hacer clic en el botón "Agregar"
-    $('#agregarActor').on('click', function() {
-        const actorSeleccionado = $('#Actor').val(); // Obtener el actor seleccionado
-        const personaje = prompt(`¿Qué personaje interpreta ${actorSeleccionado}?`); // Pedir al usuario el personaje
-        event.preventDefault();
-        // Verificar si el actor ya ha sido seleccionado
-        if (listaActores.some(actor => actor.nombre == actorSeleccionado)) {
-            console.log('¡Este actor ya ha sido seleccionado!');
-            return; // Evitar agregar un actor duplicado
-        }
-
-        // Agregar el actor y su personaje a la lista
-        listaActores.push({ nombre: actorSeleccionado, personaje: personaje });
-
-        // Mostrar la lista de actores seleccionados
-        const listaActoresHTML = listaActores.map(actor => `<p>${actor.nombre} interpreta a ${actor.personaje}</p>`).join('');
-        $('#listaActores').html(`<div><strong>Actores seleccionados:</strong>${listaActoresHTML}</div>`);
-    });
-    // Agregar un director al hacer clic en el botón "Agregar"
-    $('#agregarDirector').on('click', function() {
-        event.preventDefault();
-        const directorSeleccionado = $('#Director').val(); // Obtener el director seleccionado
-
-        // Verificar si el director ya ha sido seleccionado
-        if (listaDirectores.includes(directorSeleccionado)) {
-            console.log('¡Este director ya ha sido seleccionado!');
-            return; // Evitar agregar un director duplicado
-        }
-
-        // Agregar el director a la lista
-        listaDirectores.push(directorSeleccionado);
-
-        // Mostrar la lista de directores seleccionados
-        const listaDirectoresHTML = listaDirectores.map(director => `<p>${director}</p>`).join('');
-        $('#listaDirectores').html(`<div><strong>Directores seleccionados:</strong>${listaDirectoresHTML}</div>`);
-    });
     obtenerPeliculas();
 
     function obtenerPeliculas() {
@@ -135,8 +68,8 @@ fetchData('http://localhost:3000/Director', '#Director', 'Nombre', 'Nombre');
                         method: 'POST',
                         contentType: 'application/json',
                         data: JSON.stringify(peliculaData),
-                        success: function(response) {
-                            console.log('Película agregada:', response);
+                        success: function(APOCOSIDATA) {
+                            console.log('Película agregada:', APOCOSIDATA);
                         },
                         error: function(xhr, status, error) {
                             console.error('Error al agregar la película:', error);
@@ -186,72 +119,235 @@ fetchData('http://localhost:3000/Director', '#Director', 'Nombre', 'Nombre');
     
                     listaPeliculas.append(row); // Agrega la fila con todas las películas
                     
+                    
+                    
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     $('.ingresar-datos').on('click', function(event) {
                         event.preventDefault(); // Prevenir el comportamiento predeterminado del enlace
                         const peliculaID = $(this).data('pelicula-id');
                         $('#modalEditarPelicula').modal('show');
 
-                        $('.GuardarCambios').on('click', function(event) {
+
+                        $('#agregarGenero').on('click', function() {
+                            const generoSeleccionado = $('#Genero').val(); // Obtener el género seleccionado
                             event.preventDefault();
-                            const peliculaID = $(this).data('pelicula-id');
-                            console.log('ID de la película:', peliculaID);
+                            $.ajax({
+                                type: 'GET',
+                                url: `http://localhost:3000/Genero/${generoSeleccionado}`,
+                                success: function(GeneroID) {
+                                        const idGenero = GeneroID[0].ID_Genero;
+                                        
+                                        const dataGenero = {
+                                            ID_Pelicula: peliculaID,
+                                            ID_Genero: idGenero
+                                        };
+    
+                                        console.log(peliculaID)
+                                        
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: 'http://localhost:3000/Pelicula-Genero',
+                                            contentType: 'application/json',
+                                            data: JSON.stringify(dataGenero),
+                                            success: function(response) {
+                                                window.alert("Se ha agregao")
+                                            },
+                                            error: function(xhr, status, error) {
+                                                window.alert("Ya tiene este genero")
+                                            }
+                                        });
                     
-                            //GENERO
-                            console.log(listaGeneros)
-                            
-                            function obtenerDetallesGeneros() {
-                                listaGeneros.forEach(function(genero) {
-                                    $.ajax({
-                                        url: `http://localhost:3000/Genero/${genero}`,
-                                        method: 'GET',
-                                        success: function(response) {
-                                            
-                                            const datosPeliculaGenero = {
-                                                ID_Pelicula: peliculaID,
-                                                ID_Genero: response.ID_Genero
-                                            };   
-
-                                            $.ajax({
-                                                url: 'http://localhost:3000/Pelicula-Genero',
-                                                method: 'POST',
-                                                contentType: 'application/json',
-                                                data: JSON.stringify(datosPeliculaGenero),
-                                                success: function(response) {
-                                                    console.log('Se ha agregado la relación película-género:', response);
-                                                    // Manejar la respuesta del servidor si es necesario
-                                                },
-                                                error: function(xhr, status, error) {
-                                                    console.error('Error al agregar la relación película-género:', error);
-                                                    // Manejar el error si la solicitud no se realiza correctamente
-                                                }
-                                            });
-
-                                        },
-                                        error: function(xhr, status, error) {
-                                            console.error(`Error al obtener detalles del género ${genero}:`, error);
-                                            // Manejar el error si la solicitud no se realiza correctamente
-                                        }
-                                    });
-                                });
-                            }
-                            
-                            
-                            obtenerDetallesGeneros();
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error('Error al obtener el ID del género:', status, error);
+                                }
+                            });
                     
-                            //CLASIFICACION
-                            console.log(listaClasificaciones)
-                            //ACTORES
-                            console.log(listaActores)
-
-                            //DIRECTORES
-                            console.log(listaDirectores)
                     
+                        });
+
+
+
+                        $('#agregarClasificacion').on('click', function() {
+                            const clasificacionSeleccionada = $('#Clasificacion').val(); 
+                            event.preventDefault(); 
+                            $.ajax({
+                                type: 'GET',
+                                url: `http://localhost:3000/Clasificacion/${clasificacionSeleccionada}`,
+                                success: function(ClasificacionID) {
+                                        const ID_Clasificacion = ClasificacionID[0].ID_Clasificacion;
+                                        
+                                        const dataClasificacion = {
+                                            ID_Pelicula: peliculaID,
+                                            ID_Clasificacion: ID_Clasificacion
+                                        };
+    
+                                        console.log(peliculaID)
+                                        
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: 'http://localhost:3000/Pelicula-Clasificacion',
+                                            contentType: 'application/json',
+                                            data: JSON.stringify(dataClasificacion),
+                                            success: function(response) {
+                                                window.alert("Se ha agregao")
+                                            },
+                                            error: function(xhr, status, error) {
+                                                window.alert("Ya tiene esta Clasificacion")
+                                            }
+                                        });
+                    
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error('Error al obtener el ID del Clasificacion:', status, error);
+                                }
+                            });
+
+                        });
+
+
+                        $('#agregarActor').on('click', function() {
+                            const actorSeleccionado = $('#Actor').val(); 
+                            const personaje = prompt(`¿Qué personaje interpreta ${actorSeleccionado}?`);
+                            event.preventDefault();
+                            
+                            $.ajax({
+                                type: 'GET',
+                                url: `http://localhost:3000/ActorI/${actorSeleccionado}`,
+                                success: function(ActorID) {
+                                        const ID_Actor = ActorID[0].ID_Actor;
+                                        
+                                        const dataActor = {
+                                            ID_Actor: ID_Actor,
+                                            ID_Pelicula: peliculaID,
+                                            Personaje: personaje
+                                        };
+    
+                                        console.log(personaje)
+                                        
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: 'http://localhost:3000/Pelicula-Actor',
+                                            contentType: 'application/json',
+                                            data: JSON.stringify(dataActor),
+                                            success: function(response) {
+                                                window.alert("Se ha agregao")
+                                            },
+                                            error: function(xhr, status, error) {
+                                                window.alert("Ya tiene este actor")
+                                            }
+                                        });
+                    
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error('Error al obtener el ID del actor:', status, error);
+                                }
+                            });
+                        });
+
+                        $('#agregarDirector').on('click', function() {
+                            event.preventDefault();
+                            const directorSeleccionado = $('#Director').val(); // Obtener el director seleccionado
+                            
+                            $.ajax({
+                                type: 'GET',
+                                url: `http://localhost:3000/DirectorI/${directorSeleccionado}`,
+                                success: function(DirectorID) {
+                                        const ID_Director = DirectorID[0].ID_Director;
+                                        
+                                        const dataDire = {
+                                            ID_Director: ID_Director,
+                                            ID_Pelicula: peliculaID,
+                                        };
+    
+                                    
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: 'http://localhost:3000/Pelicula-Director',
+                                            contentType: 'application/json',
+                                            data: JSON.stringify(dataDire),
+                                            success: function(response) {
+                                                window.alert("Se ha agregao")
+                                            },
+                                            error: function(xhr, status, error) {
+                                                window.alert("Ya tiene este Director")
+                                            }
+                                        });
+                    
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error('Error al obtener el ID del Director:', status, error);
+                                }
+                            });
                             
                         });
 
 
 
-
+                        $('.GuardarCambios').on('click', function(event) {
+                            
+                            $('#modalEditarPelicula').modal('hide');
+                            
+                        });
 
 
                     });

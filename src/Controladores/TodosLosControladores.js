@@ -359,6 +359,48 @@ export const  getGenerosbyNombre = async(req, res) => {
     }
 };
 
+export const  getClasificacionbyNombre = async(req, res) => {
+    
+    const {Clasificacion} = req.params;
+     
+    try {
+        const pool = await getConnection(); 
+        const result = await  pool.request().input('Clasificacion', sql.VarChar, Clasificacion).query(queries.getClasificacionbyNombre)
+        res.json(result.recordset)
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+};
+
+export const  getActorbyNombre = async(req, res) => {
+    
+    const {Nombre} = req.params;
+     
+    try {
+        const pool = await getConnection(); 
+        const result = await  pool.request().input('Nombre', sql.VarChar, Nombre).query(queries.getActorbyNombre)
+        res.json(result.recordset)
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+};
+
+
+export const  getDirectorbyNombre = async(req, res) => {
+    
+    const {Nombre} = req.params;
+     
+    try {
+        const pool = await getConnection(); 
+        const result = await  pool.request().input('Nombre', sql.VarChar, Nombre).query(queries.getDirectorbyNombre)
+        res.json(result.recordset)
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+};
 
 
 
@@ -544,15 +586,40 @@ export const  getAllDirectorinthemovie = async(req, res) => {
         const result = await pool.request().input('ID_Pelicula', ID_Pelicula).query(queries.getAllDirectorinthemovie)
         res.json(result.recordset)
         
-   
-   
-
     } catch (error) {
         res.status(500)
         res.send(error.message)
     }
 };
-getAllDirectorinthemovie
+
+export const  getAllGenerointhemovie = async(req, res) => {
+    const {ID_Pelicula} = req.params;
+    
+    try {
+        const pool = await getConnection(); 
+        const result = await pool.request().input('ID_Pelicula', ID_Pelicula).query(queries.getAllGenerointhemovie)
+        res.json(result.recordset)
+        
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+};
+
+export const  getAllClasificacioninthemovie = async(req, res) => {
+    const {ID_Pelicula} = req.params;
+    
+    try {
+        const pool = await getConnection(); 
+        const result = await pool.request().input('ID_Pelicula', ID_Pelicula).query(queries.getAllClasificacioninthemovie)
+        res.json(result.recordset)
+        
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+};
+
 
 export const createNewDirector = async (req, res) => {
     const {Nombre, Fecha_Nacimiento, Pais_Nacimiento, Biografia, Foto_Director} = req.body;
@@ -1253,7 +1320,7 @@ export const postPeliculaActor = async (req, res) => {
     const {ID_Actor, ID_Pelicula, Personaje} = req.body;
     console.log(ID_Actor, ID_Pelicula, Personaje);
     if (ID_Actor == null || ID_Pelicula == null || Personaje == null) {
-        return res.status(400).json({ msg: 'Por favor completa los siguientes campos: ' + missingFields.join(', ') });
+        return res.status(400).json({ msg: 'Por favor completa los todos campos: '});
     }
     
     try {

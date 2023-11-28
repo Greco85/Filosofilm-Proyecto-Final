@@ -3,15 +3,15 @@ import {getActor , createNewActor, getActorbyid, deleteActor, UpdateActorbyID,
         getDirectors, createNewDirector, getDirectorbyid, deleteDirector, UpdateDirectorbyID
         , getUsuarios, createNewUsuario, getTodasReseñabyid,getUsuariobyid, deleteUsuario, UpdateUsuariobyID,
         getReseñas, createNewReseña, getReseñabyid, deleteReseña, UpdateReseñabyID, 
-        getAviso, createNewAviso, getAvisobyid, deleteAviso, UpdateAvisobyID,
+        getAviso, createNewAviso, getAvisobyid, deleteAviso,getAllGenerointhemovie,getAllClasificacioninthemovie, UpdateAvisobyID,
         getError, createNewError, getErrorbyid, deleteError, UpdateErrorbyID,TotalLikes,
-        getPelicula, createNewPelicula, getPeliculabyid, deletePelicula, UpdatePeliculabyID
+        getPelicula, createNewPelicula, getPeliculabyid, deletePelicula, getActorbyNombre, UpdatePeliculabyID
 ,  getUsuarioByCorreo, getUsuarioByTel, getUsuarioByNickname, getAllPeliculaActor,getUsuarioByContraseña, LoginUsuario, 
-ObtenerPerfilUsuario,getAllReseñasPorPelicula, getPeliculaxTitulo,Visto, Favorito,
+ObtenerPerfilUsuario,getAllReseñasPorPelicula, getPeliculaxTitulo,Visto, getClasificacionbyNombre,
  getPaises, deletePeliculaDirector, getPaisesIDbyNombre,putPeliculaDirector,getAllDirectorinthemovie,getAllActorinthemovie, getNombrePaisesbyID,postPeliculaDirector,getAllPeliculaDirector, postPaises, putPeliculaActor, postPeliculaActor, deletePeliculaActor, deletePais,getRoles, UpdateUsuarioRol,
  getAllPeliculaClasificacion,postPeliculaClasificacion,putPeliculaClasificacion,getGenerosbyNombre,deletePeliculaClasificacion,
  getAllPeliculaGenero, postPeliculaGenero,putPeliculaGenero,deletePeliculaGenero,
- getAllGenero, getAllClasificacion ,QuitarVisto, QuitarFav, PromediarEstrellas,DarVisto, DarFav, TodosLosLikes,TraerVistosDelUsuario,TraerFavDelUsuario, TraerLikes, DarLike, QuitarLike} from '../Controladores/TodosLosControladores.js'
+ getAllGenero, getAllClasificacion ,QuitarVisto, QuitarFav, PromediarEstrellas,DarVisto,getDirectorbyNombre, DarFav, TodosLosLikes,TraerVistosDelUsuario,TraerFavDelUsuario, TraerLikes, DarLike, QuitarLike} from '../Controladores/TodosLosControladores.js'
 
 const router = Router()
  
@@ -119,21 +119,21 @@ router.post('/Pelicula-Director', postPeliculaDirector);
 router.put('/Pelicula-Director/:ID_Director/:ID_Pelicula', putPeliculaDirector);
 router.delete('/Pelicula-Director/:ID_Director/:ID_Pelicula', deletePeliculaDirector);
 
-// LIKE : USUARIO - RESEÑA 
 
 
-// FAVORITA : USUARIO - PELICULA 
 
-
-// VISTO: ACTOR - PELICULA 
 
 // CLASIFICACION - PELICULA
+router.get('/Pelicula-Clasificacion/:ID_Pelicula', getAllClasificacioninthemovie);
+
 router.get('/Pelicula-Clasificacion', getAllPeliculaClasificacion);
 router.post('/Pelicula-Clasificacion', postPeliculaClasificacion);
 router.put('/Pelicula-Clasificacion/:ID_Clasificacion/:ID_Pelicula', putPeliculaClasificacion);
 router.delete('/Pelicula-Clasificacion/:ID_Clasificacion/:ID_Pelicula', deletePeliculaClasificacion);
 
 //GENERO - PELICULA
+router.get('/Pelicula-Genero/:ID_Pelicula', getAllGenerointhemovie);
+
 router.get('/Pelicula-Genero', getAllPeliculaGenero);
 router.post('/Pelicula-Genero', postPeliculaGenero);
 router.put('/Pelicula-Genero/:ID_Genero/:ID_Pelicula', putPeliculaGenero);
@@ -141,10 +141,15 @@ router.delete('/Pelicula-Genero/:ID_Genero/:ID_Pelicula', deletePeliculaGenero);
 
 //GENERO 
 router.get('/Genero', getAllGenero);
+router.get('/Genero/ID/:ID_Genero'); //hasta aqui llegue
 router.get('/Genero/:Genero', getGenerosbyNombre);
 
 //Clasificacion
 router.get('/Clasificacion', getAllClasificacion);
+router.get('/Clasificacion/:Clasificacion', getClasificacionbyNombre);
+
+router.get('/ActorI/:Nombre', getActorbyNombre);
+router.get('/DirectorI/:Nombre', getDirectorbyNombre);
 
 //ESTRELLAS
 router.get('/Estrellas/:ID_Pelicula', PromediarEstrellas);

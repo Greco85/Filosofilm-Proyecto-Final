@@ -77,9 +77,9 @@ export const queries = {
 
 
       getIDGenerobyNombre: "SELECT ID_Genero FROM [DIAGRAMA].[dbo].[Genero] WHERE Genero = @Genero;",
-
-
-
+      getClasificacionbyNombre: "SELECT ID_Clasificacion FROM [DIAGRAMA].[dbo].[Clasificacion] WHERE Clasificacion = @Clasificacion;",
+      getActorbyNombre: "SELECT ID_Actor FROM [DIAGRAMA].[dbo].[Actor] WHERE Nombre = @Nombre;",
+      getDirectorbyNombre : "SELECT ID_Director FROM [DIAGRAMA].[dbo].[Director] WHERE Nombre = @Nombre;",
       //ROLESS
       getAllRoles: 'SELECT * FROM [DIAGRAMA].[dbo].[Rol]',
 
@@ -117,6 +117,8 @@ export const queries = {
 
     getAllActorinthemovie: 'SELECT * FROM [DIAGRAMA].[dbo].[Actor_Pelicula] WHERE ID_Pelicula = @ID_Pelicula',
     getAllDirectorinthemovie: 'SELECT * FROM [DIAGRAMA].[dbo].[Director_Pelicula] WHERE ID_Pelicula = @ID_Pelicula',
+    getAllGenerointhemovie: 'SELECT * FROM [DIAGRAMA].[dbo].[Pelicula_Genero] WHERE ID_Pelicula = @ID_Pelicula',
+    getAllClasificacioninthemovie: 'SELECT * FROM [DIAGRAMA].[dbo].[Clasificacion_Pelicula] WHERE ID_Pelicula = @ID_Pelicula',
 
     PromediarEstrellas: 'SELECT AVG(Calificacion) AS PromedioEstrellas FROM Reseña WHERE ID_Pelicula = @ID_Pelicula;',
 
