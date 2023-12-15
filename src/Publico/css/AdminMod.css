@@ -3,7 +3,9 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    background-image: url(../img/fondoLogo.png);
 }
+
 .list-group-item {
     border-radius: 0;
 }
@@ -147,3 +149,5 @@ a:hover, h1:hover{
     max-height: 400px;
     overflow-y: scroll; 
   }
+
+  
