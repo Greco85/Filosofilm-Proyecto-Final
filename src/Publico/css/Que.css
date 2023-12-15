@@ -3,19 +3,20 @@
 body{
     background: black;
     margin: 0;
-    color: rgb(255, 255, 255);
 }
 
 /*Textos*/
 
 h1{
     text-align: center;
+    color: white;
     margin: 20px 0;
     padding: 30px 0 0 0;
     font-family: 'Lobster', cursive;
 }
 
 p{
+    color: white;
     text-align: justify;
     margin: 20px 5px;
     font-family: TiemposTextWeb-Regular,Georgia,serif;
@@ -28,20 +29,47 @@ p{
     text-align: center;
 }
 
+
+
 /*Navbar */
 
-li a strong{
-    color: rgb(255, 255, 255);
-    margin: 5px 25px 0;
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+    padding-right: 30px;
+}
+
+.navbar a{
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 15px 20px;
+    text-decoration: none;
+}
+
+.Filosofilm {
+    float: left;
+    font-size: 45px;
+    font-family: 'Pacifico', cursive, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.nav-links {
+    margin: 0;
+    font-family: TiemposTextWeb-Regular,Georgia,serif;
     font-size: 20px;
 }
 
-a:hover, h1:hover, strong:hover{
+li{
+    display: inline-block;
+}
+
+.nav-links a:hover{
     color: rgb(219, 200, 23);
 }
 
-#navbg{
-    background-image: url(../img/fondoLogo.png);
+#logo{
+    width: 250px;
+    height: auto;
 }
 
 .Integrantes{
@@ -50,7 +78,7 @@ a:hover, h1:hover, strong:hover{
 }
 
 #SobreLogo{
-    background-image: url(../img/fondoLogo.png);
+    background: #333;
     border-radius: 35px;
 }
 
@@ -58,17 +86,13 @@ a:hover, h1:hover, strong:hover{
     width: 100%;
 }
 
-#cine{
-
-    width: 100%;
-    border-style: double;
-    border-radius: 3px;
-    border-width: 5px;
-    border-color: rgb(219, 200, 23);
+li a{
+    color: #333;
+    margin: 20px 25px;
+    font-size: 20px;
 }
 
-
-
-
-
+a:hover, h1:hover{
+    color: rgb(219, 200, 23);
+}
 
